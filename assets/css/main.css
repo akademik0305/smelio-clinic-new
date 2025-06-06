@@ -38,15 +38,14 @@
 
 /* custom themes */
 @theme {
-  /* colors */
-  --color-main: #FEED01;
-  --color-navbar-bg: #171717;
-  --color-bg: #212121;
-  --color-bg-soft: #303030;
-  --color-text: #F5F5F5;
-  --color-subtext: #AAAAAA;
+  --color-main: #FF6900;
+    --color-navbar-bg: #FFFFFF;
+    --color-bg: #F8F8F8;
+    --color-bg-soft: #EFEFEF;
+    --color-text: #2a2a2a;
+    --color-subtext: #666666;
   --color-accent: #FEED01;
-  --color-border: #2C2C2C;
+  --color-border: #DDDDDD;
 
 
   /* fonts */
@@ -166,18 +165,18 @@ input {
 }
 
 
-/* custom swiper paginationa */
-.swiper-pagination {
-  background-color: blue;
+/* swiper custom styles */
+swiper-container::part(pagination) {
+  /* bottom: 0px; */
+}
+swiper-container::part(bullet) {
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-main);
 }
 
-.swiper-pagination-bullet {
-  width: 20px;
-  height: 20px;
-  font-size: 28px;
-  background-color: red;
-}
-
-.swiper-pagination-bullet-active {
+swiper-container::part(bullet-active) {
+  width: 12px;
+  height: 12px;
   background-color: var(--color-main);
 }

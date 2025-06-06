@@ -45,7 +45,13 @@ onMounted(() => {
 		<div class="container">
 			<div class="py-4 flex items-center justify-between">
 				<h2>
-					<NuxtLink to="/" class="text-white">Logo</NuxtLink>
+					<NuxtLink to="/" class="block w-40 h-auto">
+						<img
+							src="~/assets/images/logo/logo.png"
+							alt="logo"
+							class="w-full h-full object-cover"
+						/>
+					</NuxtLink>
 				</h2>
 				<div class="flex items-center gap-3">
 					<NuxtLink
@@ -57,7 +63,7 @@ onMounted(() => {
 							class="text-2xl w-6 text-text group-hover:text-main"
 						/>
 						<span
-							class="flex items-center justify-center bg-main rounded-full p-0.5 absolute top-0 right-0 text-bg text-xs w-5 h-5"
+							class="flex items-center justify-center bg-orange-500 rounded-full p-0.5 absolute top-0 right-0 text-bg text-xs w-5 h-5"
 							>12</span
 						>
 					</NuxtLink>
@@ -70,7 +76,7 @@ onMounted(() => {
 							class="text-2xl w-6 text-text group-hover:text-main"
 						/>
 						<span
-							class="flex items-center justify-center bg-main rounded-full p-0.5 absolute top-0 right-0 text-bg text-xs w-5 h-5"
+							class="flex items-center justify-center bg-orange-500 rounded-full p-0.5 absolute top-0 right-0 text-bg text-xs w-5 h-5"
 							>12</span
 						>
 					</NuxtLink>

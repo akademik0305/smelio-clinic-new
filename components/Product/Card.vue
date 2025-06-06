@@ -8,10 +8,10 @@ const props = defineProps({
 </script>
 <template>
 	<div
-		class="relative rounded-xl overflow-hidden shadow-md border border-gray-700"
+		class="relative rounded-xl overflow-hidden shadow-md border border-border"
 	>
 		<button
-			class="absolute top-3 right-3 cursor-pointer flex items-center justify-center bg-navbar-bg rounded-xl p-2"
+			class="absolute top-3 right-3 cursor-pointer flex items-center justify-center p-1"
 		>
 			<UIcon
 				v-if="props.product.id % 2"
@@ -35,11 +35,11 @@ const props = defineProps({
 			<footer class="mt-4 flex items-center gap-4">
 				<div
 					v-if="props.product.id % 2"
-					class="flex items-center justify-between gap-3"
+					class="w-full flex items-center justify-between gap-3"
 				>
 					<NuxtLink
 						to="/cart"
-						class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-1.5 px-4 cursor-pointer group hover:bg-bg-soft hover:border-main transition-colors"
+						class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-1.5 px-4 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
 					>
 						<UIcon
 							name="proicons:cart"
@@ -69,7 +69,7 @@ const props = defineProps({
 
 				<button
 					v-else
-					class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-6 cursor-pointer group hover:bg-bg-soft hover:border-main transition-colors"
+					class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-6 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
 				>
 					<!-- @click="cartStore.addToCart(props.product)" -->
 					<UIcon
