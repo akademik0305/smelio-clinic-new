@@ -102,7 +102,7 @@ onUnmounted(() => {
 
 				<div class="flex items-center gap-3">
 					<NuxtLink
-						to="/cart"
+						to="/wishlist"
 						class="flex items-center justify-center gap-2 w-full py-1.5 px-2 cursor-pointer hover:border-main transition-colors relative"
 					>
 						<UIcon
