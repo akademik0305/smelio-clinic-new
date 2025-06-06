@@ -21,13 +21,17 @@ const props = defineProps({
 			<UIcon v-else name="mdi:heart" class="text-2xl text-main" />
 		</button>
 
-		<div class="w-full h-auto">
-			<img src="~/assets/images/png/image.png" alt="product" />
-		</div>
+		<NuxtLink :to="`/products/${props.product.id}`" class="w-full h-auto p-4 flex items-center justify-center">
+			<img
+				src="~/assets/images/png/category.png"
+				alt="product"
+				class="w-full h-full object-contain"
+			/>
+		</NuxtLink>
 		<div class="p-4">
-			<h3 class="text-md text-text">
+			<NuxtLink :to="`/products/${props.product.id}`"  class="text-md text-text">
 				Smartfon Honor X8b 8/128GB Midnight Black
-			</h3>
+			</NuxtLink>
 			<div class="mt-4">
 				<p class="text-xl">180 000 so'm</p>
 				<p class="text-sm line-through text-subtext">200 000 so'm</p>

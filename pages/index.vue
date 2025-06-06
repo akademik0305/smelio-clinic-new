@@ -19,21 +19,6 @@
 // const router = useRouter()
 // const localePath = useLocalePath()
 
-//===============================-< fixed navbar and category >-===============================
-//> variables
-const startFixed = 80
-const isFixedNav = ref(false)
-function handleScrool() {
-	const navbarHeight =
-		document.querySelector('#navbar')?.scrollHeight || startFixed
-	if (window.scrollY > navbarHeight) {
-		isFixedNav.value = true
-	} else {
-		isFixedNav.value = false
-	}
-}
-//> functions
-
 //===============================-< categories >-===============================
 //> variables
 const categoriesRef = ref('')
@@ -43,20 +28,20 @@ const categoriesSwiper = useSwiper(categoriesRef, {
 })
 //> functions
 
-//===============================-< on page load >-===============================
+//===============================-< categories >-===============================
 //> variables
+const categoryCardsRef = ref('')
+const categoryCardsSwiper = useSwiper(categoryCardsRef, {
+	slidesPerView: 5.1,
+	spaceBetween: 20,
+	autoplay: {
+		delay: 3000
+	}
+})
 //> functions
-onMounted(() => {
-	window.addEventListener('scroll', handleScrool)
-	// mapStore.getUserPosition()
-	// console.log(mapStore.activeAddress)
-})
-onUnmounted(() => {
-	window.removeEventListener('scroll', handleScrool)
-})
 </script>
 <template>
-	<main class="pb-10 pt-20">
+	<main class="pb-10 pt-0">
 		<section class="py-4 px-2 rounded-b-xl">
 			<div class="container">
 				<!-- search -->
@@ -120,8 +105,29 @@ onUnmounted(() => {
 				<div class="flex items-center justify-between">
 					<h2 class="text-2xl font-semibold">Qaynoq takliflar</h2>
 				</div>
-				<div class="mt-5 grid grid-cols-4 gap-4">
-					<ProductCard v-for="item in 12" :key="item" :product="{ id: item }" />
+				<div class="mt-5 grid grid-cols-4 gap-5">
+					<ProductCard v-for="item in 7" :key="item" :product="{ id: item }" />
+				</div>
+			</div>
+		</section>
+		<!-- hot products -->
+
+		<!-- hot products -->
+		<section class="pb-12">
+			<div class="container">
+				<div class="flex items-center justify-between">
+					<h2 class="text-2xl font-semibold">Ommabop kategoriyalar</h2>
+				</div>
+				<div class="mt-5">
+					<swiper-container
+						ref="categoryCardsRef"
+						:init="false"
+						class=""
+					>
+						<swiper-slide v-for="(slide, idx) in 12" :key="idx">
+							<CategoryCard :product="{id: slide}" />
+						</swiper-slide>
+					</swiper-container>
 				</div>
 			</div>
 		</section>
@@ -133,7 +139,7 @@ onUnmounted(() => {
 				<div class="flex items-center justify-between">
 					<h2 class="text-2xl font-semibold">Ommabop</h2>
 				</div>
-				<div class="mt-5 grid grid-cols-4 gap-4">
+				<div class="mt-5 grid grid-cols-4 gap-5">
 					<ProductCard v-for="item in 6" :key="item" :product="{ id: item }" />
 				</div>
 			</div>
