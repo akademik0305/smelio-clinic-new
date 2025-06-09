@@ -39,7 +39,7 @@
 /* custom themes */
 @theme {
   --color-main: #FFB300;
-    --color-navbar-bg: #FFFFFF;
+  --color-navbar-bg: #FFFFFF;
     --color-bg: #F8F8F8;
     --color-bg-soft: #EFEFEF;
     --color-text: #2a2a2a;
@@ -89,15 +89,17 @@ input {
 }
 
 /* transition */
-.drawer-enter-active,
-.drawer-leave-active {
-  transition: all 0.5s ease;
-  bottom: 0;
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.3s linear;
+  /* top: 0; */
+  opacity: 1;
 }
 
-.drawer-enter-from,
-.drawer-leave-to {
-  bottom: -100%;
+.modal-enter-from,
+.modal-leave-to {
+  top: -100px;
+  opacity: 0;
 }
 
 /* container */
@@ -169,18 +171,21 @@ swiper-container::part(wrapper) {
   /* margin: -10px; */
   padding: 10px;
 }
+
 swiper-container::part(pagination) {
   /* bottom: 0px; */
 }
 
 swiper-container::part(bullet) {
-  width: 10px;
+  width: 16px;
     height: 10px;
-  background-color: var(--color-main);
+  background-color: var(--color-text);
+    border-radius: 10px;
 }
 
 swiper-container::part(bullet-active) {
-  width: 10px;
+  width: 20px;
     height: 10px;
   background-color: var(--color-main);
+  border-radius: 10px;
 }

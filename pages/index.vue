@@ -42,19 +42,12 @@ const categoryCardsSwiper = useSwiper(categoryCardsRef, {
 </script>
 <template>
 	<main class="pb-10 pt-0">
-		<section class="py-4 px-2 rounded-b-xl">
-			<div class="container">
-				<!-- search -->
-				<BaseSearch />
-			</div>
-			<!-- search -->
-		</section>
-
+		
 		<!-- banner -->
 		<section class="mt-3 pb-12">
 			<div class="container">
 				<ClientOnly>
-					<swiper-container :init="true" :pagination="{ clickable: true }">
+					<swiper-container :init="true" :space-between="20" :pagination="{ clickable: true }">
 						<swiper-slide v-for="(slide, idx) in 4" :key="idx">
 							<div class="h-[550px]">
 								<img
@@ -77,7 +70,7 @@ const categoryCardsSwiper = useSwiper(categoryCardsRef, {
 						<swiper-container
 							ref="categoriesRef"
 							:init="false"
-							class="h-12 overflow-hidden"
+							class="h-auto overflow-hidden"
 						>
 							<swiper-slide v-for="(slide, idx) in 12" :key="idx">
 								<div
@@ -112,7 +105,7 @@ const categoryCardsSwiper = useSwiper(categoryCardsRef, {
 		</section>
 		<!-- hot products -->
 
-		<!-- hot products -->
+		<!-- categories cards -->
 		<section class="pb-12">
 			<div class="container">
 				<div class="flex items-center justify-between">
@@ -131,7 +124,7 @@ const categoryCardsSwiper = useSwiper(categoryCardsRef, {
 				</div>
 			</div>
 		</section>
-		<!-- hot products -->
+		<!-- categories cards -->
 
 		<!-- hot products -->
 		<section class="pb-12">

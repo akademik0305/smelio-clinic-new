@@ -23,6 +23,7 @@
     "axios": "^1.8.4",
     "dotenv": "^16.5.0",
     "eslint": "^9.0.0",
+    "maska": "^3.1.1",
     "nuxt": "^3.16.2",
     "nuxt-mapbox": "1.6.3",
     "nuxt-swiper": "2.0.0",
@@ -31,7 +32,8 @@
     "tailwindcss": "^4.1.1",
     "typescript": "^5.6.3",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "zod": "^3.25.56"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "devDependencies": {

@@ -35,7 +35,6 @@ const headerHeight = computed(() => {
 		/>
 		<!-- overlay -->
 		<Transition name="drawer">
-			<!-- :class="[props.isOpen ? 'bottom-0' : '-bottom-full']" -->
 			<div
 				v-if="isOpen"
 				class="absolute bottom-0 left-0 h-[95svh] w-full bg-white rounded-t-3xl overflow-visible transition-all duration-700"
@@ -68,5 +67,3 @@ const headerHeight = computed(() => {
 		</Transition>
 	</div>
 </template>
-
-<style lang="css" scoped></style>
