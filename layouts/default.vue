@@ -1,7 +1,10 @@
 <script lang="ts" setup></script>
 <template>
-	<div class="wrapper">
+	<div class="wrapper flex flex-col min-h-screen">
 		<BaseNavbar />
-		<NuxtPage />
+		<div class="flex-1">
+			<NuxtPage />
+		</div>
+		<UiFooter />
 	</div>
 </template>

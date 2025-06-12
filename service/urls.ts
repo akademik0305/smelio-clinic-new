@@ -1,28 +1,20 @@
 
 export default {
-  // restaurants
-  getRestaurants() { return `/restaurant/index` },
-  getOneRestaurant(restaurant_id: number) { return `/restaurant/view?id=${restaurant_id}` },
-  getCategories() { return `/restaurant-category/index` },
+  // auth
+  sendPhone() { return `/auth-manager/register/phone` },
+  verifyCode() { return `/auth-manager/register/verify` },
+  signUp() { return `/auth-manager/register/sign-up` },
+
+  // home page
+  getBanners() { return `/data/banners` },
+
+  // categories
+  getAllCategories() { return `/product/all-categories` },
+  getHomeCategories() { return `/product/home-categories` },
+  getCategoryProducts(category_id: number) { return `/product/category-product/?category_id=${category_id}` },
 
   // products
-  getProducts(restaurant_id: number) { return `/product/index?restaurant_id=${restaurant_id}` },
-  getProductCategory(restaurant_id: number) { return `/product/index?restaurant_id=${restaurant_id}` },
-
-  // addresses
-  getAddresses() { return '/delivery-address/index' },
-  getAddressTypes() { return '/delivery-address/address-types' },
-  createAddress() { return '/delivery-address/create' },
-  updateAddress(address_id: number) { return `/delivery-address/update?id=${address_id}` },
-  changeActiveAddress(address_id: number) { return `/delivery-address/change?id=${address_id}` },
-  deleteAddress(address_id: number) { return `/delivery-address/delete?id=${address_id}` },
-
-  // orders
-  createOrder() { return `/order/create` },
-  checkPromocode() { return `/order/check-promo-code` },
-  orderHistory() { return `/order/order-history` },
-  orderDetail(order_id: number) { return `/order/order-detail?id=${order_id}` },
-  cancelOrder(order_id: number) { return `/order/order-cancel?id=${order_id}` },
-  getSimilerProducts() { return `/order/might-be-interesting` }
-
+  productDetail(product_id: number) { return `/product/product-detail?id=${product_id}` },
+  addToWishlist(product_id: number) { return `/product-save/save-or-remove?product_id=${product_id}` },
+  search(key: string) { return `/product/search?key=${key}` },
 };

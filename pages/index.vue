@@ -3,8 +3,8 @@
 // types
 // import type { TRestaurant, TRestaurantsData } from '~/types/api.types'
 // // service
-// import Service from '~/service/Service'
-// import urls from '~/service/urls'
+import Service from '~/service/Service'
+import urls from '~/service/urls'
 // import { useCartStore } from '~/store/cart.store'
 // import { useMapStore } from '~/store/map.store'
 // import { useStore } from '~/store/useful.store'
@@ -14,14 +14,14 @@
 // const cartStore = useCartStore()
 
 // //> utils
-// const { t, locale } = useI18n()
-// const token = useToken()
+const { locale } = useI18n()
+const token = useToken()
 // const router = useRouter()
 // const localePath = useLocalePath()
 
 //===============================-< categories >-===============================
 //> variables
-const categoriesRef = ref('')
+const categoriesRef = ref(null)
 const categoriesSwiper = useSwiper(categoriesRef, {
 	slidesPerView: 6,
 	spaceBetween: 20,
@@ -30,32 +30,68 @@ const categoriesSwiper = useSwiper(categoriesRef, {
 
 //===============================-< categories >-===============================
 //> variables
-const categoryCardsRef = ref('')
+const categoryCardsRef = ref(null)
 const categoryCardsSwiper = useSwiper(categoryCardsRef, {
 	slidesPerView: 5.1,
 	spaceBetween: 20,
 	autoplay: {
-		delay: 3000
-	}
+		delay: 3000,
+	},
 })
 //> functions
+
+//===============================-< get  banner >-===============================
+//> variables
+const banners = ref()
+//> functions
+async function getBanners() {
+	const res = await Service.get(
+		urls.getBanners(),
+		locale.value,
+		null
+	)
+
+	banners.value = res.data
+}
+
+getBanners()
+
+//===============================-< get categories >-===============================
+//> variables
+const categories = ref()
+//> functions
+async function getCategories() {
+	const res = await Service.get(
+		urls.getHomeCategories(),
+		locale.value,
+		null
+	)
+
+	categories.value = res.data
+}
+
+getCategories()
+
 </script>
 <template>
-	<main class="pb-10 pt-0">
-		
+	<main class="">
 		<!-- banner -->
-		<section class="mt-3 pb-12">
+		<section class="mt-3 pb-8">
 			<div class="container">
 				<ClientOnly>
-					<swiper-container :init="true" :space-between="20" :pagination="{ clickable: true }">
-						<swiper-slide v-for="(slide, idx) in 4" :key="idx">
-							<div class="h-[550px]">
+					<swiper-container
+						:init="true"
+						:space-between="20"
+						:pagination="{ clickable: true }"
+					>
+						<swiper-slide v-for="(slide, idx) in banners" :key="idx">
+							<a :href="slide.url" target="_blank" class="block h-[450px]">
 								<img
 									class="w-full h-full object-cover rounded-xl"
-									src="~/assets/images/jpg/fake.jpg"
+									:src="slide.imageUrl"
 									alt="kfc"
 								/>
-							</div>
+							</a>
 						</swiper-slide>
 					</swiper-container>
 				</ClientOnly>
@@ -63,16 +99,16 @@ const categoryCardsSwiper = useSwiper(categoryCardsRef, {
 		</section>
 		<!-- banner -->
 		<!-- categories -->
-		<section class="pb-12">
+		<!-- <section class="pb-8">
 			<div class="container">
 				<ClientOnly>
 					<div>
 						<swiper-container
 							ref="categoriesRef"
-							:init="false"
+							:init="true"
 							class="h-auto overflow-hidden"
 						>
-							<swiper-slide v-for="(slide, idx) in 12" :key="idx">
+							<swiper-slide v-for="(slide, idx) in 8" :key="idx">
 								<div
 									class="flex items-center gap-2 bg-bg-soft rounded-xl px-6 py-2.5 shadow-md hover:bg-main transition-colors cursor-pointer group"
 								>
@@ -89,16 +125,16 @@ const categoryCardsSwiper = useSwiper(categoryCardsRef, {
 					</div>
 				</ClientOnly>
 			</div>
-		</section>
+		</section> -->
 		<!-- categories -->
 
 		<!-- hot products -->
-		<section class="pb-12">
+		<section class="pb-8">
 			<div class="container">
 				<div class="flex items-center justify-between">
 					<h2 class="text-2xl font-semibold">Qaynoq takliflar</h2>
 				</div>
-				<div class="mt-5 grid grid-cols-4 gap-5">
+				<div class="mt-4 grid grid-cols-5 gap-5">
 					<ProductCard v-for="item in 7" :key="item" :product="{ id: item }" />
 				</div>
 			</div>
@@ -106,19 +142,15 @@ const categoryCardsSwiper = useSwiper(categoryCardsRef, {
 		<!-- hot products -->
 
 		<!-- categories cards -->
-		<section class="pb-12">
+		<section class="pb-8">
 			<div class="container">
 				<div class="flex items-center justify-between">
 					<h2 class="text-2xl font-semibold">Ommabop kategoriyalar</h2>
 				</div>
-				<div class="mt-5">
-					<swiper-container
-						ref="categoryCardsRef"
-						:init="false"
-						class=""
-					>
-						<swiper-slide v-for="(slide, idx) in 12" :key="idx">
-							<CategoryCard :product="{id: slide}" />
+				<div class="mt-4">
+					<swiper-container ref="categoryCardsRef" :init="true" class="">
+						<swiper-slide v-for="(slide, idx) in categories" :key="idx">
+							<CategoryCard :category="slide " />
 						</swiper-slide>
 					</swiper-container>
 				</div>
@@ -127,12 +159,12 @@ const categoryCardsSwiper = useSwiper(categoryCardsRef, {
 		<!-- categories cards -->
 
 		<!-- hot products -->
-		<section class="pb-12">
+		<section class="pb-8">
 			<div class="container">
 				<div class="flex items-center justify-between">
 					<h2 class="text-2xl font-semibold">Ommabop</h2>
 				</div>
-				<div class="mt-5 grid grid-cols-4 gap-5">
+				<div class="mt-4 grid grid-cols-5 gap-5">
 					<ProductCard v-for="item in 6" :key="item" :product="{ id: item }" />
 				</div>
 			</div>

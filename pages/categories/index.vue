@@ -1,5 +1,19 @@
 <script setup>
-console.log('categories')
+//===============================-< imports >-===============================
+import Service from '~/service/Service'
+import urls from '~/service/urls'
+const { locale } = useI18n()
+//===============================-< get categories >-===============================
+//> variables
+const categories = ref()
+//> functions
+async function getCategories() {
+	const res = await Service.get(urls.getAllCategories(), locale.value, null)
+
+	categories.value = res.data
+}
+
+getCategories()
 </script>
 <template>
 	<main class="py-6">
@@ -18,28 +32,7 @@ console.log('categories')
 		<section class="mt-8">
 			<div class="container">
 				<div class="mt-6 grid grid-cols-5 gap-5">
-					<NuxtLink
-						v-for="item in 8"
-						:key="item"
-						:to="`/categories/${item}`"
-						class="rounded-xl overflow-hidden shadow-md border border-border group"
-					>
-						<div class="w-full h-auto p-4 flex items-center justify-center">
-							<img
-								src="~/assets/images/png/category.png"
-								alt="category"
-								class="w-full max-w-40 h-full object-contain group-hover:scale-110 transition-transform duration-300"
-							/>
-						</div>
-
-						<div class="p-4">
-							<h3
-								class="font-medium text-text text-xl text-center group-hover:text-main transition-colors"
-							>
-								Мыши для геймеров
-							</h3>
-						</div>
-					</NuxtLink>
+					<CategoryCard v-for="category in categories" :key="category.id" :category="category" />
 				</div>
 			</div>
 		</section>

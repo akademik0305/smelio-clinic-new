@@ -1,0 +1,65 @@
+<template>
+	<!-- footer -->
+	<footer class="footer border-t border-border bg-navbar-bg py-8">
+		<div class="container">
+			<div class="flex items-start justify-between gap-6">
+				<div class="flex flex-col gap-3 w-1/2">
+					<NuxtLink to="/" class="block w-40 h-auto">
+						<img
+							src="~/assets/images/logo/logo.png"
+							alt="logo"
+							class="w-full h-full object-cover"
+						/>
+					</NuxtLink>
+					<p class="font-inter text-gray-600">
+						Reklama markazimiz sizning biznesingizni keng auditoriyaga
+						yetkazadi. Sifatli dizayn, zamonaviy yondashuv va samarali reklama
+						echimlarini taklif qilamiz.
+					</p>
+				</div>
+				<div class="flex flex-col gap-3">
+					<h4>Connect With Us</h4>
+					<div class="flex items-center gap-2">
+						<a href="">
+							<UIcon
+								name="hugeicons:instagram"
+								class="text-xl text-gray-500 hover:text-main transition"
+							/>
+						</a>
+						<a href="">
+							<UIcon
+								name="circum:facebook"
+								class="text-xl text-gray-500 hover:text-main transition"
+							/>
+						</a>
+						<a href="">
+							<UIcon
+								name="hugeicons:telegram"
+								class="text-xl text-gray-500 hover:text-main transition"
+							/>
+						</a>
+					</div>
+					<a
+						href="mailto:contact@mawido.com"
+						class="text-gray-500 font-inter hover:text-main transition-all"
+						>Email: contact@mawido.com</a
+					>
+					<a
+						href="phone:+974 4000 1234"
+						class="text-gray-500 font-inter hover:text-main transition-all"
+						>Phone: +974 4000 1234</a
+					>
+				</div>
+			</div>
+
+			<div
+				class="border-t border-t-gray-200 mt-6 pt-6 text-center font-inter text-gray-600 text-sm"
+			>
+				© {{ new Date().getFullYear() }} .Barcha huquqlar himoyalangan.
+				Tovarlarning ko'rsatilgan qiymati va ularni sotib olish shartlari joriy
+				sanaga amal qiladi
+			</div>
+		</div>
+	</footer>
+	<!-- footer -->
+</template>

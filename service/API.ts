@@ -6,7 +6,7 @@ const createAxiosInstance = (): AxiosInstance => {
   // const baseUrl = config.public.apiBaseUrl;
 
   return axios.create({
-    baseURL: 'https://delivery.lidertaxi.uz/api/delivery'
+    baseURL: 'http://api.markazi.uz/api'
   });
 };
 
