@@ -1,6 +1,6 @@
 export const useToken = () =>
   useState("token", () =>
-    useCookie("auth_token", {
+    useCookie("rm_token", {
       maxAge: 99999999,
     })
   );

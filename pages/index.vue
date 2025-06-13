@@ -20,22 +20,36 @@ const token = useToken()
 // const localePath = useLocalePath()
 
 //===============================-< categories >-===============================
-//> variables
-const categoriesRef = ref(null)
-const categoriesSwiper = useSwiper(categoriesRef, {
-	slidesPerView: 6,
-	spaceBetween: 20,
-})
+// //> variables
+// const categoriesRef = ref(null)
+// const categoriesSwiper = useSwiper(categoriesRef, {
+// 	slidesPerView: 6,
+// 	spaceBetween: 20,
+// })
 //> functions
 
 //===============================-< categories >-===============================
 //> variables
 const categoryCardsRef = ref(null)
 const categoryCardsSwiper = useSwiper(categoryCardsRef, {
-	slidesPerView: 5.1,
+	slidesPerView: 5.2,
 	spaceBetween: 20,
 	autoplay: {
 		delay: 3000,
+	},
+})
+//> functions
+
+//===============================-< banners swiper >-===============================
+//> variables
+const bannersRef = ref(null)
+const bannersSwiper = useSwiper(bannersRef, {
+	spaceBetween: 20,
+	autoplay: {
+		delay: 3000,
+	},
+	pagination: {
+		clickable: true,
 	},
 })
 //> functions
@@ -45,11 +59,7 @@ const categoryCardsSwiper = useSwiper(categoryCardsRef, {
 const banners = ref()
 //> functions
 async function getBanners() {
-	const res = await Service.get(
-		urls.getBanners(),
-		locale.value,
-		null
-	)
+	const res = await Service.get(urls.getBanners(), locale.value, null)
 
 	banners.value = res.data
 }
@@ -61,17 +71,12 @@ getBanners()
 const categories = ref()
 //> functions
 async function getCategories() {
-	const res = await Service.get(
-		urls.getHomeCategories(),
-		locale.value,
-		null
-	)
+	const res = await Service.get(urls.getHomeCategories(), locale.value, null)
 
 	categories.value = res.data
 }
 
 getCategories()
-
 </script>
 <template>
 	<main class="">
@@ -79,25 +84,65 @@ getCategories()
 		<section class="mt-3 pb-8">
 			<div class="container">
 				<ClientOnly>
-					<swiper-container
-						:init="true"
-						:space-between="20"
-						:pagination="{ clickable: true }"
-					>
-						<swiper-slide v-for="(slide, idx) in banners" :key="idx">
-							<a :href="slide.url" target="_blank" class="block h-[450px]">
-								<img
-									class="w-full h-full object-cover rounded-xl"
-									:src="slide.imageUrl"
-									alt="kfc"
-								/>
-							</a>
-						</swiper-slide>
-					</swiper-container>
+					<div class="relative">
+						<swiper-container ref="bannersRef" :init="true">
+							<swiper-slide v-for="(slide, idx) in banners" :key="idx">
+								<a :href="slide.url" target="_blank" class="block h-[450px]">
+									<img
+										class="w-full h-full object-cover rounded-xl"
+										:src="slide.imageUrl"
+										alt="kfc"
+									/>
+								</a>
+							</swiper-slide>
+						</swiper-container>
+						<button
+							class="absolute top-1/2 -translate-y-1/2 -left-5 w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center p-2 z-10"
+							@click="bannersSwiper.prev()"
+						>
+							<UIcon name="tabler:chevron-left" class="text-2xl" />
+						</button>
+						<button
+							class="absolute top-1/2 -translate-y-1/2 -right-5 w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center p-2 z-10"
+							@click="bannersSwiper.next()"
+						>
+							<UIcon name="tabler:chevron-right" class="text-2xl" />
+						</button>
+					</div>
 				</ClientOnly>
 			</div>
 		</section>
 		<!-- banner -->
+
+		<!-- categories cards -->
+		<section class="pb-8">
+			<div class="container">
+				<div class="flex items-center justify-between">
+					<h2 class="text-2xl font-semibold">Ommabop kategoriyalar</h2>
+				</div>
+				<div class="mt-4 relative">
+					<swiper-container ref="categoryCardsRef" :init="true" class="">
+						<swiper-slide v-for="(slide, idx) in categories" :key="idx">
+							<CategoryCard :category="slide" />
+						</swiper-slide>
+					</swiper-container>
+					<button
+						class="absolute top-1/2 -translate-y-1/2 -left-5 w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center p-2 z-10"
+						@click="categoryCardsSwiper.prev()"
+					>
+						<UIcon name="tabler:chevron-left" class="text-2xl" />
+					</button>
+					<button
+						class="absolute top-1/2 -translate-y-1/2 -right-5 w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center p-2 z-10"
+						@click="categoryCardsSwiper.next()"
+					>
+						<UIcon name="tabler:chevron-right" class="text-2xl" />
+					</button>
+				</div>
+			</div>
+		</section>
+		<!-- categories cards -->
+
 		<!-- categories -->
 		<!-- <section class="pb-8">
 			<div class="container">
@@ -140,23 +185,6 @@ getCategories()
 			</div>
 		</section>
 		<!-- hot products -->
-
-		<!-- categories cards -->
-		<section class="pb-8">
-			<div class="container">
-				<div class="flex items-center justify-between">
-					<h2 class="text-2xl font-semibold">Ommabop kategoriyalar</h2>
-				</div>
-				<div class="mt-4">
-					<swiper-container ref="categoryCardsRef" :init="true" class="">
-						<swiper-slide v-for="(slide, idx) in categories" :key="idx">
-							<CategoryCard :category="slide " />
-						</swiper-slide>
-					</swiper-container>
-				</div>
-			</div>
-		</section>
-		<!-- categories cards -->
 
 		<!-- hot products -->
 		<section class="pb-8">

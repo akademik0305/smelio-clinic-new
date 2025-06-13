@@ -1,14 +1,18 @@
 <script setup lang="ts">
+import { useAuthStore } from '~/store/auth.store'
+import type { TUser } from '../../types/auth.type'
+
 //===============================-< imports >-===============================
 // import { useRouter } from 'vue-router'
 // const router = useRouter()
 
 //utils
 // const token = useToken()
-
-// ===================== multi language =============================
-// variables
 const { locale, setLocale } = useI18n()
+const router = useRouter();
+const localePath = useLocalePath();
+// store
+const authStore = useAuthStore()
 // const localePath = useLocalePath()
 
 // get data
@@ -54,7 +58,11 @@ function handleScrool() {
 //> variables
 const isOpenLogin = ref(false)
 const openLogin = () => {
-	isOpenLogin.value = true
+	if(authStore.user?.firstname) {
+		router.push(localePath('/profile'))
+	} else {
+		isOpenLogin.value = true
+	}
 }
 
 const closeLogin = () => {
@@ -62,8 +70,10 @@ const closeLogin = () => {
 }
 
 //> functions
-function submitLogin(){
-	closeLogin();
+function submitLogin(user_data: TUser) {
+	authStore.user = { ...user_data, auth_key: '' }
+
+	closeLogin()
 }
 //===============================-< on page load >-===============================
 //> variables
@@ -152,9 +162,9 @@ onUnmounted(() => {
 								name="proicons:person"
 								class="text-2xl w-6 text-text group-hover:text-main transition-colors"
 							/>
-							<span class="text-text group-hover:text-main transition-colors"
-								>Kirish</span
-							>
+							<span class="text-text group-hover:text-main transition-colors whitespace-nowrap">{{
+								authStore.user?.firstname ? authStore.user?.firstname : 'Kirish'
+							}}</span>
 						</button>
 						<USelect
 							v-model="currentLang"
@@ -177,7 +187,9 @@ onUnmounted(() => {
 		<BaseModal :is-open="isOpenLogin" @close="closeLogin">
 			<template #header>
 				<div class="">
-					<h5 class="font-semibold text-xl">Kirish yoki ro'yxatdan o'tish</h5>
+					<h5 class="font-semibold text-xl text-center">
+						Kirish yoki ro'yxatdan o'tish
+					</h5>
 				</div>
 			</template>
 			<AuthLogin @success="submitLogin" />

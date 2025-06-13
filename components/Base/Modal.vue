@@ -30,7 +30,7 @@ const emit = defineEmits(['close'])
 				v-if="props.isOpen"
 				class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-screen max-h-max w-full max-w-md bg-white overflow-visible transition-all duration-700 rounded-2xl"
 			>
-				<div class="p-6 pb-0 rounded-t-2xl">
+				<div class="p-6 pt-10 pb-0 rounded-t-2xl">
 					<slot name="header" />
 					<button
 						class="absolute top-3 right-3 w-7.5 h-7.5 flex items-center justify-center rounded-full bg-bg-soft cursor-pointer"
@@ -42,7 +42,7 @@ const emit = defineEmits(['close'])
 						/>
 					</button>
 				</div>
-				<div class="p-6 overflow-y-auto">
+				<div class="p-8 overflow-y-auto">
 					<slot />
 				</div>
 			</div>

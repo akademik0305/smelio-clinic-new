@@ -40,7 +40,7 @@
 @theme {
   --color-main: #FFB300;
   --color-navbar-bg: #FFFFFF;
-    --color-bg: #F8F8F8;
+  --color-bg: #F8F8F8;
     --color-bg-soft: #EFEFEF;
     --color-text: #2a2a2a;
     --color-subtext: #666666;
@@ -84,6 +84,9 @@ body {
 
 }
 
+button {
+  cursor: pointer;
+}
 input {
   outline: none;
 }
@@ -92,7 +95,6 @@ input {
 .modal-enter-active,
 .modal-leave-active {
   transition: all 0.3s linear;
-  /* top: 0; */
   opacity: 1;
 }
 
@@ -178,14 +180,14 @@ swiper-container::part(pagination) {
 
 swiper-container::part(bullet) {
   width: 16px;
-    height: 10px;
+  height: 10px;
   background-color: var(--color-text);
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
 swiper-container::part(bullet-active) {
   width: 20px;
-    height: 10px;
+  height: 10px;
   background-color: var(--color-main);
   border-radius: 10px;
 }

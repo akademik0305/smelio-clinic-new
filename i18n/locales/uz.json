@@ -1,5 +1,9 @@
 {
   "hi": "Hello",
   "search": "Qidiruv",
-  "sum": "UZS"
+  "sum": "UZS",
+  "personal_info": "Shaxsiy malumotlar",
+  "orders": "Buyurmalar",
+  "personal_cabinet": "Shaxsiy kabinet",
+  "edit": "Tahrirlash"
 }

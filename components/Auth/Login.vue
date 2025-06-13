@@ -1,6 +1,14 @@
 <script lang="ts" setup>
+//===============================-< imports >-===============================
+//> variables
+//> functions
 import * as z from 'zod'
-import type { FormSubmitEvent } from '@nuxt/ui'
+// import type { FormSubmitEvent } from '@nuxt/ui'
+// utils
+import Service from '~/service/Service'
+import urls from '~/service/urls'
+const { locale } = useI18n()
+const token = useToken()
 
 // emits
 const emits = defineEmits(['success'])
@@ -20,11 +28,21 @@ const state = reactive<Partial<Schema>>({
 	phone: '+998',
 })
 
-// function
-async function onSubmit(event: FormSubmitEvent<Schema>) {
-	console.log(state.phone?.length, event)
-	formType.value = 'code'
-	// emits('success')
+// function event: FormSubmitEvent<Schema>
+async function onSubmit() {
+	const formdata = new FormData()
+	const unMaskedPhone = state.phone?.replace(/\D/g, '')
+	formdata.append('phone', unMaskedPhone ?? '')
+	const res = await Service.post(
+		urls.sendPhone(),
+		locale.value,
+		formdata,
+		token.value
+	)
+
+	if (res.status === 200) {
+		formType.value = 'code'
+	}
 }
 
 //===============================-< submit code >-===============================
@@ -32,7 +50,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 const schemaCode = z.object({
 	code: z
 		.array(z.string(), { required_error: 'Kodni kiriting' })
-		.length(5, { message: 'Kod aniq 5 belgidan iborat bo‘lishi kerak' }),
+		.length(4, { message: 'Kod 4 belgidan iborat bo‘lishi kerak' }),
 })
 
 type SchemaCode = z.output<typeof schemaCode>
@@ -40,11 +58,36 @@ const stateCode = reactive<Partial<SchemaCode>>({
 	code: undefined,
 })
 
+const codeForm = useTemplateRef('codeForm')
 //> functions
-async function onSubmitCode(event: FormSubmitEvent<SchemaCode>) {
-	console.log(stateCode.code?.length, event)
-	// emits('success')
-	// formType.value = 'name'
+async function onSubmitCode() {
+	const formdata = new FormData()
+	const unMaskedPhone = state.phone?.replace(/\D/g, '')
+	formdata.append('phone', unMaskedPhone ?? '')
+	formdata.append('code', stateCode.code?.join('') ?? '')
+	const res = await Service.post(
+		urls.verifyCode(),
+		locale.value,
+		formdata,
+		token.value
+	)
+
+	console.log(res)
+	if (res.status === 200) {
+		if (!res.data) {
+			formType.value = 'name'
+		} else {
+			emits('success', res.data)
+		}
+	} else {
+		console.log('code error')
+		codeForm.value?.setErrors([
+			{
+				name: 'code',
+				message: "Tasdiqlash kodi noto'g'ri",
+			},
+		])
+	}
 }
 
 //===============================-< submit user data >-===============================
@@ -53,26 +96,39 @@ const schemaUser = z.object({
 	firstname: z
 		.string({ required_error: 'Telefon raqamini kiriting' })
 		.min(3, 'Telefon raqamini to`g`ri kiriting'),
-	lastname: z
-		.string({ required_error: 'Telefon raqamini kiriting' })
+	lastname: z.string({ required_error: 'Telefon raqamini kiriting' }),
 })
 
 type SchemaUser = z.output<typeof schemaUser>
 const stateUser = reactive<Partial<SchemaUser>>({
-	firstname: "",
-	lastname: "",
+	firstname: '',
+	lastname: '',
 })
 
 //> functions
-async function onSubmitUser(event: FormSubmitEvent<SchemaUser>) {
-	console.log(stateCode.code?.length, event)
-	// emits('success')
-	// formType.value = 'name'
+async function onSubmitUser() {
+	const formdata = new FormData()
+	const unMaskedPhone = state.phone?.replace(/\D/g, '')
+	formdata.append('phone', unMaskedPhone ?? '')
+	formdata.append('code', stateCode.code?.join('') ?? '')
+	formdata.append('firstname', stateUser.firstname ?? '')
+	formdata.append('lastname', stateUser.lastname ?? '')
+	const res = await Service.post(
+		urls.signUp(),
+		locale.value,
+		formdata,
+		token.value
+	)
+
+	console.log(res)
+	if (res.status === 200) {
+		emits('success', res.data)
+	}
 }
 </script>
 
 <template>
-	<div>
+	<div class="">
 		<!-- phone -->
 		<UForm
 			v-if="formType === 'phone'"
@@ -102,6 +158,7 @@ async function onSubmitUser(event: FormSubmitEvent<SchemaUser>) {
 		<!-- code -->
 		<UForm
 			v-if="formType === 'code'"
+			ref="codeForm"
 			:schema="schemaCode"
 			:state="stateCode"
 			class="space-y-6"
@@ -109,13 +166,14 @@ async function onSubmitUser(event: FormSubmitEvent<SchemaUser>) {
 		>
 			<UFormField
 				name="code"
-				label="Raqamga kod yuborildi"
+				label="Yuborilgan kodni kiriting"
 				class="text-center justify-center"
 			>
-				<p class="my-2 font-medium text-text text-lg">+998 33 312 31 23</p>
+				<p class="my-2 font-medium text-text text-lg">{{ state.phone }}</p>
 				<UPinInput
 					v-model="stateCode.code"
-					size="lg"
+					size="xl"
+					:length="4"
 					class="w-full mx-auto flex justify-center"
 				/>
 			</UFormField>
@@ -131,33 +189,23 @@ async function onSubmitUser(event: FormSubmitEvent<SchemaUser>) {
 		</UForm>
 		<!-- user data -->
 		<UForm
-			v-if="formType === 'code'"
+			v-if="formType === 'name'"
 			:schema="schemaUser"
-			:state="stateCode"
+			:state="stateUser"
 			class="space-y-6"
-			@submit="onSubmitCode"
+			@submit="onSubmitUser"
 		>
-			<UFormField
-				name="code"
-				label="Raqamga kod yuborildi"
-				class="text-center justify-center"
-			>
-				<p class="my-2 font-medium text-text text-lg">+998 33 312 31 23</p>
+			<UFormField name="firstname" label="Ism" class="">
 				<UInput
-					v-model="stateUser.code"
-					size="lg"
+					v-model="stateUser.firstname"
+					size="xl"
 					class="w-full mx-auto flex justify-center"
 				/>
 			</UFormField>
-			<UFormField
-				name="code"
-				label="Raqamga kod yuborildi"
-				class="text-center justify-center"
-			>
-				<p class="my-2 font-medium text-text text-lg">+998 33 312 31 23</p>
+			<UFormField name="lastname" label="Familiya" class="">
 				<UInput
-					v-model="stateUser.code"
-					size="lg"
+					v-model="stateUser.lastname"
+					size="xl"
 					class="w-full mx-auto flex justify-center"
 				/>
 			</UFormField>
