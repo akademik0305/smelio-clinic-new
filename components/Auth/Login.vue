@@ -29,7 +29,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 //===============================-< submit code >-===============================
 //> variables
-//> functions
 const schemaCode = z.object({
 	code: z
 		.array(z.string(), { required_error: 'Kodni kiriting' })
@@ -41,7 +40,31 @@ const stateCode = reactive<Partial<SchemaCode>>({
 	code: undefined,
 })
 
+//> functions
 async function onSubmitCode(event: FormSubmitEvent<SchemaCode>) {
+	console.log(stateCode.code?.length, event)
+	// emits('success')
+	// formType.value = 'name'
+}
+
+//===============================-< submit user data >-===============================
+//> variables
+const schemaUser = z.object({
+	firstname: z
+		.string({ required_error: 'Telefon raqamini kiriting' })
+		.min(3, 'Telefon raqamini to`g`ri kiriting'),
+	lastname: z
+		.string({ required_error: 'Telefon raqamini kiriting' })
+})
+
+type SchemaUser = z.output<typeof schemaUser>
+const stateUser = reactive<Partial<SchemaUser>>({
+	firstname: "",
+	lastname: "",
+})
+
+//> functions
+async function onSubmitUser(event: FormSubmitEvent<SchemaUser>) {
 	console.log(stateCode.code?.length, event)
 	// emits('success')
 	// formType.value = 'name'
@@ -109,7 +132,7 @@ async function onSubmitCode(event: FormSubmitEvent<SchemaCode>) {
 		<!-- user data -->
 		<UForm
 			v-if="formType === 'code'"
-			:schema="schemaCode"
+			:schema="schemaUser"
 			:state="stateCode"
 			class="space-y-6"
 			@submit="onSubmitCode"
@@ -120,8 +143,20 @@ async function onSubmitCode(event: FormSubmitEvent<SchemaCode>) {
 				class="text-center justify-center"
 			>
 				<p class="my-2 font-medium text-text text-lg">+998 33 312 31 23</p>
-				<UPinInput
-					v-model="stateCode.code"
+				<UInput
+					v-model="stateUser.code"
+					size="lg"
+					class="w-full mx-auto flex justify-center"
+				/>
+			</UFormField>
+			<UFormField
+				name="code"
+				label="Raqamga kod yuborildi"
+				class="text-center justify-center"
+			>
+				<p class="my-2 font-medium text-text text-lg">+998 33 312 31 23</p>
+				<UInput
+					v-model="stateUser.code"
 					size="lg"
 					class="w-full mx-auto flex justify-center"
 				/>
