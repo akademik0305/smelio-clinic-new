@@ -106,5 +106,35 @@ async function onSubmitCode(event: FormSubmitEvent<SchemaCode>) {
 				</button>
 			</div>
 		</UForm>
+		<!-- user data -->
+		<UForm
+			v-if="formType === 'code'"
+			:schema="schemaCode"
+			:state="stateCode"
+			class="space-y-6"
+			@submit="onSubmitCode"
+		>
+			<UFormField
+				name="code"
+				label="Raqamga kod yuborildi"
+				class="text-center justify-center"
+			>
+				<p class="my-2 font-medium text-text text-lg">+998 33 312 31 23</p>
+				<UPinInput
+					v-model="stateCode.code"
+					size="lg"
+					class="w-full mx-auto flex justify-center"
+				/>
+			</UFormField>
+
+			<div class="flex">
+				<button
+					type="submit"
+					class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl py-2.5 px-10 cursor-pointer group hover:bg-bg hover:border-main hover:text-text transition-colors text-white w-full"
+				>
+					Davom etish
+				</button>
+			</div>
+		</UForm>
 	</div>
 </template>
