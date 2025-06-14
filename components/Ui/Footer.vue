@@ -1,3 +1,19 @@
+<script setup>
+//===============================-< imports >-===============================
+import Service from '~/service/Service'
+import urls from '~/service/urls'
+const { locale } = useI18n()
+//===============================-< get contact >-===============================
+//> variables
+const contact = ref()
+//> functions
+async function getContact() {
+	const res = await Service.get(urls.getContactInfo(), locale.value, null)
+	contact.value = res.data
+}
+
+getContact()
+</script>
 <template>
 	<!-- footer -->
 	<footer class="footer border-t border-border bg-navbar-bg py-8">
@@ -6,48 +22,52 @@
 				<div class="flex flex-col gap-3 w-1/2">
 					<NuxtLink to="/" class="block w-40 h-auto">
 						<img
-							src="~/assets/images/logo/logo.png"
+							:src="contact?.imageUrlFooter"
 							alt="logo"
 							class="w-full h-full object-cover"
 						/>
 					</NuxtLink>
 					<p class="font-inter text-gray-600">
-						Reklama markazimiz sizning biznesingizni keng auditoriyaga
-						yetkazadi. Sifatli dizayn, zamonaviy yondashuv va samarali reklama
-						echimlarini taklif qilamiz.
+						{{ contact?.description }}
 					</p>
 				</div>
 				<div class="flex flex-col gap-3">
 					<h4>Connect With Us</h4>
 					<div class="flex items-center gap-2">
-						<a href="">
+						<a :href="contact?.instagram_url" target="_blank">
 							<UIcon
 								name="hugeicons:instagram"
 								class="text-xl text-gray-500 hover:text-main transition"
 							/>
 						</a>
-						<a href="">
+						<a :href="contact?.facebook_url" target="_blank">
 							<UIcon
 								name="circum:facebook"
 								class="text-xl text-gray-500 hover:text-main transition"
 							/>
 						</a>
-						<a href="">
+						<a :href="contact?.telegram_url" target="_blank">
 							<UIcon
 								name="hugeicons:telegram"
 								class="text-xl text-gray-500 hover:text-main transition"
 							/>
 						</a>
+						<a :href="contact?.youtube_url" target="_blank">
+							<UIcon
+								name="hugeicons:youtube"
+								class="text-xl text-gray-500 hover:text-main transition"
+							/>
+						</a>
 					</div>
 					<a
-						href="mailto:contact@mawido.com"
+						:href="`mailto:${contact?.email}`"
 						class="text-gray-500 font-inter hover:text-main transition-all"
-						>Email: contact@mawido.com</a
+						>Email: {{ contact?.email }}</a
 					>
 					<a
-						href="phone:+974 4000 1234"
+						:href="`tel:${contact?.phone}`"
 						class="text-gray-500 font-inter hover:text-main transition-all"
-						>Phone: +974 4000 1234</a
+						>Phone: {{ contact?.phone }}</a
 					>
 				</div>
 			</div>

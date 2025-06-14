@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { useAuthStore } from '~/store/auth.store'
 import type { TUser } from '../../types/auth.type'
+import urls from '~/service/urls'
+import Service from '~/service/Service'
 
 //===============================-< imports >-===============================
 // import { useRouter } from 'vue-router'
 // const router = useRouter()
 
 //utils
-// const token = useToken()
+const token = useToken()
 const { locale, setLocale } = useI18n()
-const router = useRouter();
-const localePath = useLocalePath();
+const router = useRouter()
+const localePath = useLocalePath()
 // store
 const authStore = useAuthStore()
 // const localePath = useLocalePath()
@@ -58,7 +60,7 @@ function handleScrool() {
 //> variables
 const isOpenLogin = ref(false)
 const openLogin = () => {
-	if(authStore.user?.firstname) {
+	if (authStore?.user) {
 		router.push(localePath('/profile'))
 	} else {
 		isOpenLogin.value = true
@@ -71,10 +73,23 @@ const closeLogin = () => {
 
 //> functions
 function submitLogin(user_data: TUser) {
+	token.value = user_data.auth_key
 	authStore.user = { ...user_data, auth_key: '' }
 
 	closeLogin()
 }
+
+//===============================-< get contact >-===============================
+//> variables
+const contact = ref()
+//> functions
+async function getContact() {
+	const res = await Service.get(urls.getContactInfo(), locale.value, null)
+	contact.value = res.data
+}
+
+getContact()
+
 //===============================-< on page load >-===============================
 //> variables
 //> functions
@@ -101,7 +116,7 @@ onUnmounted(() => {
 					<div class="flex items-center gap-6">
 						<NuxtLink to="/" class="block w-40 h-auto">
 							<img
-								src="~/assets/images/logo/logo.png"
+								:src="contact?.imageUrlFooter"
 								alt="logo"
 								class="w-full h-full object-cover"
 							/>
@@ -162,9 +177,14 @@ onUnmounted(() => {
 								name="proicons:person"
 								class="text-2xl w-6 text-text group-hover:text-main transition-colors"
 							/>
-							<span class="text-text group-hover:text-main transition-colors whitespace-nowrap">{{
-								authStore.user?.firstname ? authStore.user?.firstname : 'Kirish'
-							}}</span>
+							<span
+								class="text-text group-hover:text-main transition-colors whitespace-nowrap"
+								>{{
+									authStore?.user?.firstname
+										? authStore?.user?.firstname
+										: 'Kirish'
+								}}</span
+							>
 						</button>
 						<USelect
 							v-model="currentLang"

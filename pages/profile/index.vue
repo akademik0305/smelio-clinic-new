@@ -6,9 +6,31 @@ import { useAuthStore } from '~/store/auth.store'
 // utils
 import Service from '~/service/Service'
 import urls from '~/service/urls'
+import type { TUser } from '~/types/auth.type'
 const { locale } = useI18n()
 const token = useToken()
 const authStore = useAuthStore()
+
+//===============================-< get profile >-===============================
+//> variables
+const profile = ref<TUser>()
+//> functions
+async function getProfileInfo() {
+	const res = await Service.get<TUser>(
+		urls.profileInfo(),
+		locale.value,
+		token.value
+	)
+	profile.value = res.data
+
+	if (res.status === 200) {
+		stateUser.firstname = profile.value.firstname || ''
+		stateUser.lastname = profile.value?.lastname || ''
+		stateUser.phone = profile.value?.username
+	}
+}
+
+getProfileInfo()
 
 //===============================-< submit user data >-===============================
 //> variables
@@ -31,13 +53,13 @@ const stateUser = reactive<Partial<SchemaUser>>({
 
 //> functions
 async function onSubmitUser() {
+	console.log('submit')
+
 	const formdata = new FormData()
-	const unMaskedPhone = stateUser.phone?.replace(/\D/g, '')
-	formdata.append('phone', unMaskedPhone ?? '')
 	formdata.append('firstname', stateUser.firstname ?? '')
 	formdata.append('lastname', stateUser.lastname ?? '')
 	const res = await Service.post(
-		urls.signUp(),
+		urls.updateName(),
 		locale.value,
 		formdata,
 		token.value
@@ -46,25 +68,33 @@ async function onSubmitUser() {
 	console.log(res)
 	if (res.status === 200) {
 		console.log('success')
+		getProfileInfo()
 	}
+}
+
+//===============================-< change phone >-===============================
+//> variables
+const isOpenChangePhone = ref(false)
+const openChangePhone = () => {
+	isOpenChangePhone.value = true
+}
+const closeChangePhone = () => {
+	isOpenChangePhone.value = false
+}
+
+//> functions
+function submitChangePhone() {
+	closeChangePhone()
 }
 
 //===============================-< on page load >-===============================
 //> variables
 //> functions
-onMounted(() => {
-	console.log(authStore.user)
-
-	if (authStore.user?.firstname) {
-		stateUser.firstname = authStore.user?.firstname || ''
-		stateUser.lastname = authStore.user?.lastname || ''
-		stateUser.phone = authStore.user?.username
-	}
-})
+onMounted(() => {})
 </script>
 
 <template>
-	<section class="py-10">
+	<main class="py-10">
 		<div class="container max-w-7xl mx-auto px-4 flex-1 flex flex-col">
 			<div
 				class="flex items-start justify-start gap-5 flex-1 flex-col md:flex-row"
@@ -80,12 +110,7 @@ onMounted(() => {
 						{{ $t('personal_info') }}
 					</h3>
 
-					<UForm
-						:schema="schemaUser"
-						:state="stateUser"
-						class="mt-8"
-						@submit="onSubmitUser"
-					>
+					<UForm :schema="schemaUser" :state="stateUser" class="mt-8">
 						<div class="grid grid-cols-2 gap-4">
 							<UFormField name="firstname" label="Ism" class="">
 								<UInput
@@ -101,27 +126,46 @@ onMounted(() => {
 									class="w-full mx-auto flex justify-center"
 								/>
 							</UFormField>
-							<UFormField label="Telefo'n raqam" name="phone">
-								<UInput
-									v-model="stateUser.phone"
-									v-maska="'+998 ## ### ## ##'"
-									class="w-full"
-									size="xl"
-								/>
-							</UFormField>
-
-							<div class="self-end">
-								<button
-									type="submit"
-									class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl w-full text-white py-2.5 px-10 group hover:bg-bg hover:border-main hover:text-main transition-colors"
-								>
-									Saqlash
-								</button>
-							</div>
+							<button
+								type="submit"
+								class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl w-full text-white py-2.5 px-10 group hover:bg-bg hover:border-main hover:text-main transition-colors"
+								@click="onSubmitUser"
+							>
+								Saqlash
+							</button>
+							<button
+								type="button"
+								class="flex items-center justify-center gap-2 bg-white border border-main rounded-xl w-full text-main py-2.5 px-10 group hover:bg-main hover:border-main hover:text-white transition-colors"
+								@click="openChangePhone"
+							>
+								Raqamni o'zgartish
+							</button>
 						</div>
 					</UForm>
 				</div>
 			</div>
 		</div>
-	</section>
+
+		<!--=== modals ===-->
+		<!-- send phone number -->
+
+		<BaseModal
+			v-if="profile?.username"
+			:is-open="isOpenChangePhone"
+			@close="closeChangePhone"
+		>
+			<template #header>
+				<div class="">
+					<h5 class="font-semibold text-xl text-center">
+						Raqamni almashtirish
+					</h5>
+				</div>
+			</template>
+			<AuthChangePhone
+				:phone="profile?.username"
+				@success="submitChangePhone"
+			/>
+		</BaseModal>
+		<!--=== modals ===-->
+	</main>
 </template>

@@ -1,16 +1,21 @@
 <script setup lang="ts">
 //=============================-< imports >-=================================
-// mask for v-calendar
+import { useAuthStore } from '~/store/auth.store'
 const localePath = useLocalePath()
+const authStore = useAuthStore()
 
-// function for get data from backend
-
-// store
-// router
+// utils
+const token = useToken()
+const router = useRouter()
 
 //============================================-< logout >-============================================
 //> variables
 //> functions
+function logOut() {
+	token.value = null
+	authStore.logOut()
+	router.push(localePath('/'))
+}
 </script>
 <template>
 	<div
@@ -24,7 +29,7 @@ const localePath = useLocalePath()
 
 		<NuxtLink
 			:to="localePath('/profile')"
-			class="flex items-center justify-start gap-5 mt-7 font-medium"
+			class="flex items-center justify-start gap-5 mt-7 font-medium hover:text-main transition-colors group"
 		>
 			<UIcon
 				name="proicons:person"
@@ -34,7 +39,7 @@ const localePath = useLocalePath()
 		</NuxtLink>
 		<NuxtLink
 			:to="localePath('/profile/orders')"
-			class="flex items-center justify-start gap-5 mt-7 font-medium"
+			class="flex items-center justify-start gap-5 mt-7 font-medium hover:text-main transition-colors group"
 		>
 			<UIcon
 				name="proicons:cart"
@@ -42,5 +47,15 @@ const localePath = useLocalePath()
 			/>
 			{{ $t('orders') }}
 		</NuxtLink>
+		<button
+			class="flex items-center justify-start gap-5 mt-7 font-medium hover:text-main transition-colors group"
+			@click="logOut"
+		>
+			<UIcon
+				name="material-symbols:logout-rounded"
+				class="text-2xl w-6 text-text group-hover:text-main transition-colors"
+			/>
+			{{ $t('logout') }}
+		</button>
 	</div>
 </template>
