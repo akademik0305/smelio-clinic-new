@@ -6,5 +6,6 @@
   "orders": "Buyurmalar",
   "personal_cabinet": "Shaxsiy kabinet",
   "edit": "Tahrirlash",
-  "logout": "Chiqish"
+  "logout": "Chiqish",
+  "resend_code": "Kodni qayta yuborish"
 }

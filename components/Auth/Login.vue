@@ -42,7 +42,37 @@ async function onSubmit() {
 
 	if (res.status === 200) {
 		formType.value = 'code'
+		startTimer(120)
 	}
+}
+
+//=============================- coutdown -=================================
+//variables
+const isTimeOver = ref(false)
+let timeInSecs: number
+let ticker: ReturnType<typeof setInterval>
+const pretty = ref('02:00')
+
+//functions
+function startTimer(secs: number) {
+	timeInSecs = secs
+	ticker = setInterval(tick, 1000)
+}
+
+function tick() {
+	let secs = timeInSecs
+	if (secs > 0) {
+		timeInSecs--
+	} else {
+		clearInterval(ticker)
+		// startTimer(20); // 4 minutes in seconds
+		isTimeOver.value = true
+	}
+
+	const mins = Math.floor(secs / 60)
+	secs %= 60
+	pretty.value =
+		(mins < 10 ? '0' : '') + mins + ':' + (secs < 10 ? '0' : '') + secs
 }
 
 //===============================-< submit code >-===============================
@@ -177,6 +207,13 @@ async function onSubmitUser() {
 					class="w-full mx-auto flex justify-center"
 				/>
 			</UFormField>
+
+			<div class="flex justify-center mt-5">
+				<button v-if="isTimeOver" class="font-medium" @click="onSubmit">
+					{{ $t('resend_code') }}
+				</button>
+				<p v-else>{{ pretty }}</p>
+			</div>
 
 			<div class="flex">
 				<button

@@ -1,16 +1,40 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+//===============================-< imports >-===============================
+import Service from '~/service/Service'
+import urls from '~/service/urls'
+import type { TProduct } from '~/types/api.types'
+const { locale } = useI18n()
+const route = useRoute()
+const token = useToken()
+//===============================-< get product detail >-===============================
+//> variables
+const product = ref<TProduct>()
+//> functions
+async function getProduct() {
+	const res = await Service.get<TProduct>(
+		urls.productDetail(Number(route.params.id)),
+		locale.value,
+		token.value
+	)
+
+	product.value = res.data
+	console.log(product.value)
+}
+
+getProduct()
+</script>
 <template>
-	<main class="py-6">
+	<main v-if="product" class="py-6">
 		<nav>
 			<div class="container">
 				<h2 class="text-2xl font-semibold">
-					Игровая мышь Razer Basilisk V3 Pro Black
+					{{ product?.name }}
 				</h2>
 				<BaseBreadcump
 					:links="[
 						{ label: 'Asosiy sahifa', url: '/' },
 						{ label: 'Kategoriyalar', url: '/categories' },
-						{ label: 'Игровая мышь Razer Basilisk V3 Pro Black' },
+						{ label: product?.name },
 					]"
 				/>
 			</div>
@@ -29,7 +53,7 @@
 									},
 								}"
 							>
-								<swiper-container
+								<!-- <swiper-container
 									:init="true"
 									:loop="true"
 									:slides-per-view="1"
@@ -43,28 +67,30 @@
 									class="rounded-2xl overflow-hidden border border-border"
 								>
 									<swiper-slide v-for="idx in 10" :key="idx" class="p-4">
-										<a
-											data-fancybox="gallery"
-											class="w-full h-auto flex items-center justify-center"
-											href="~/assets/images/png/category.png"
-										>
-											<img
-												src="~/assets/images/png/category.png"
-												alt="logo"
-												class="w-full h-full max-w-80"
-											/>
-										</a>
-									</swiper-slide>
-								</swiper-container>
+								</swiper-slide>
+									</swiper-container> -->
+								<div
+									class="rounded-2xl overflow-hidden border border-border p-8"
+								>
+									<a
+										data-fancybox="gallery"
+										class="w-full h-auto flex items-center justify-center"
+										:href="product?.imageUrl"
+									>
+										<img
+											:src="product?.imageUrl"
+											:alt="product?.name"
+											class="w-full h-full max-w-80"
+										/>
+									</a>
+								</div>
 							</UiFuncybox>
 						</ClientOnly>
 					</div>
 					<div class="flex-1 flex flex-col">
 						<h4 class="text-xl font-semibold">Mahsulot haqida qisqacha</h4>
 						<p class="mt-2">
-							Частота опроса 1000 Гц Подсветка RGB Тип подключения Беспроводное
-							(Razer HyperSpeed 2.4 GHz), Bluetooth, проводное Сенсор Оптический
-							сенсор Focus Pro 30K Ускорение 90 G Кнопки 11
+							{{ product.description }}
 						</p>
 
 						<div class="mt-6">
@@ -82,30 +108,21 @@
 									/>
 								</NuxtLink>
 								<button
-									class="flex items-center justify-center py-1.5 px-3 rounded-3xl border border-main cursor-pointer hover:bg-main group transition-colors"
+									class="flex items-center justify-center py-1.5 px-4 gap-2 rounded-3xl border border-main cursor-pointer hover:bg-main group transition-colors"
 								>
-									<!-- @click="cartStore.decProductCount(props.product.id)" -->
-									<Icon
-										name="ic:round-minus"
-										class="w-6 h-6 text-2xl text-text group-hover:text-bg"
+									<UIcon
+										name="mynaui:trash"
+										class="text-2xl w-6 text-main group-hover:text-white"
 									/>
-								</button>
-								<p>0</p>
-								<button
-									class="flex items-center justify-center py-1.5 px-3 rounded-3xl border border-main cursor-pointer hover:bg-main group transition-colors"
-								>
-									<!-- @click="cartStore.incProductCount(props.product.id)" -->
-									<Icon
-										name="ic:round-plus"
-										class="w-6 h-6 text-2xl text-text group-hover:text-bg"
-									/>
+									<span class="text-sm text-main group-hover:text-white"
+										>O'chirish</span
+									>
 								</button>
 							</div>
 							<button
 								v-else
 								class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full py-2 px-10 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
 							>
-								<!-- @click="cartStore.addToCart(props.product)" -->
 								<UIcon
 									name="proicons:cart"
 									class="text-2xl w-6 text-bg group-hover:text-main"
@@ -120,7 +137,7 @@
 			</div>
 		</section>
 
-		<section class="mt-8">
+		<!-- <section class="mt-8">
 			<div class="container">
 				<h4 class="text-xl font-semibold">Mahsulot xususiyatlari</h4>
 				<div class="mt-5">
@@ -144,6 +161,6 @@
 					</p>
 				</div>
 			</div>
-		</section>
+		</section> -->
 	</main>
 </template>

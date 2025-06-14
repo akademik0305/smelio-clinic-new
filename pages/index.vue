@@ -5,13 +5,7 @@
 // // service
 import Service from '~/service/Service'
 import urls from '~/service/urls'
-// import { useCartStore } from '~/store/cart.store'
-// import { useMapStore } from '~/store/map.store'
-// import { useStore } from '~/store/useful.store'
-// //> store
-// const store = useStore()
-// const mapStore = useMapStore()
-// const cartStore = useCartStore()
+import type { TSection } from '~/types/api.types'
 
 // //> utils
 const { locale } = useI18n()
@@ -77,6 +71,26 @@ async function getCategories() {
 }
 
 getCategories()
+
+//===============================-< get sections >-===============================
+//> variables
+const sections = ref<TSection[]>()
+
+async function getSections() {
+	const res = await Service.get<TSection[]>(
+		urls.getSections(),
+		locale.value,
+		token.value
+	)
+	sections.value = res.data
+}
+
+getSections()
+// refetch sections
+function refetchSections() {
+	getSections()
+}
+//> functions
 </script>
 <template>
 	<main class="">
@@ -174,26 +188,33 @@ getCategories()
 		<!-- categories -->
 
 		<!-- hot products -->
-		<section class="pb-8">
+		<section
+			v-for="section in sections"
+			v-show="section.products.length"
+			:key="section.id"
+			class="pb-8"
+		>
 			<div class="container">
 				<div class="flex items-center justify-between">
-					<h2 class="text-2xl font-semibold">Qaynoq takliflar</h2>
+					<h2 class="text-2xl font-semibold">{{ section.name }}</h2>
+					<NuxtLink
+						:to="`/sections/${section.id}`"
+						class="flex items-center gap-2 text-text hover:text-main transition-colors group"
+					>
+						Barchasi
+						<UIcon
+							name="uil:arrow-right"
+							class="font-medium text-2xl text-text group-hover:text-main transition-colors"
+						/>
+					</NuxtLink>
 				</div>
 				<div class="mt-4 grid grid-cols-5 gap-5">
-					<ProductCard v-for="item in 7" :key="item" :product="{ id: item }" />
-				</div>
-			</div>
-		</section>
-		<!-- hot products -->
-
-		<!-- hot products -->
-		<section class="pb-8">
-			<div class="container">
-				<div class="flex items-center justify-between">
-					<h2 class="text-2xl font-semibold">Ommabop</h2>
-				</div>
-				<div class="mt-4 grid grid-cols-5 gap-5">
-					<ProductCard v-for="item in 6" :key="item" :product="{ id: item }" />
+					<ProductCard
+						v-for="product in section.products"
+						:key="product.id"
+						:product="product"
+						@success-wishlist="refetchSections"
+					/>
 				</div>
 			</div>
 		</section>

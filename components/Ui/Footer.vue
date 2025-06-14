@@ -34,25 +34,41 @@ getContact()
 				<div class="flex flex-col gap-3">
 					<h4>Connect With Us</h4>
 					<div class="flex items-center gap-2">
-						<a :href="contact?.instagram_url" target="_blank">
+						<a
+							v-if="contact?.instagram_url"
+							:href="contact?.instagram_url"
+							target="_blank"
+						>
 							<UIcon
 								name="hugeicons:instagram"
 								class="text-xl text-gray-500 hover:text-main transition"
 							/>
 						</a>
-						<a :href="contact?.facebook_url" target="_blank">
+						<a
+							v-if="contact?.facebook_url"
+							:href="contact?.facebook_url"
+							target="_blank"
+						>
 							<UIcon
 								name="circum:facebook"
 								class="text-xl text-gray-500 hover:text-main transition"
 							/>
 						</a>
-						<a :href="contact?.telegram_url" target="_blank">
+						<a
+							v-if="contact?.telegram_url"
+							:href="contact?.telegram_url"
+							target="_blank"
+						>
 							<UIcon
 								name="hugeicons:telegram"
 								class="text-xl text-gray-500 hover:text-main transition"
 							/>
 						</a>
-						<a :href="contact?.youtube_url" target="_blank">
+						<a
+							v-if="contact?.youtube_url"
+							:href="contact?.youtube_url"
+							target="_blank"
+						>
 							<UIcon
 								name="hugeicons:youtube"
 								class="text-xl text-gray-500 hover:text-main transition"

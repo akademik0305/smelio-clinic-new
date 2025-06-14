@@ -9,7 +9,6 @@ const categories = ref()
 //> functions
 async function getCategories() {
 	const res = await Service.get(urls.getAllCategories(), locale.value, null)
-
 	categories.value = res.data
 }
 

@@ -1,4 +1,21 @@
-<script lang="ts" setup></script>
+<script setup lang="ts">
+//===============================-< imports >-===============================
+import type { TWishlist } from '~/types/api.types';
+import Service from '~/service/Service'
+import urls from '~/service/urls'
+const { locale } = useI18n()
+const token = useToken();
+//===============================-< get wishlists >-===============================
+//> variables
+const wishlists = ref<TWishlist>()
+//> functions
+async function getWishlists() {
+	const res = await Service.get<TWishlist>(urls.getWishlists(), locale.value, token.value)
+	wishlists.value = res.data
+}
+
+getWishlists()
+</script>
 <template>
 	<main class="py-6">
 		<nav>
@@ -16,7 +33,7 @@
 		<section class="mt-8">
 			<div class="container">
 				<div class="grid grid-cols-4 gap-5">
-					<ProductCard v-for="item in 10" :key="item" :product="{ id: item }" />
+					<ProductCard v-for="product in wishlists" :key="product.id" :product="product" @success-wishlist="getWishlists" />
 				</div>
 			</div>
 		</section>

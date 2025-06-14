@@ -1,15 +1,12 @@
 <script setup lang="ts">
 //===============================-< imports >-===============================
 import * as z from 'zod'
-// store
-import { useAuthStore } from '~/store/auth.store'
 // utils
 import Service from '~/service/Service'
 import urls from '~/service/urls'
 import type { TUser } from '~/types/auth.type'
 const { locale } = useI18n()
 const token = useToken()
-const authStore = useAuthStore()
 
 //===============================-< get profile >-===============================
 //> variables

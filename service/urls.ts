@@ -14,7 +14,7 @@ export default {
 
   // home page
   getBanners() { return `/data/banners` },
-  productSections() { return `/product/site-sections` },
+  getSections() { return `/product/site-sections` },
   getSectionProducts(section_id: number) { return `/product/site-section-detail?siteSectionId=${section_id}` },
 
 
@@ -25,8 +25,11 @@ export default {
 
   // products
   productDetail(product_id: number) { return `/product/product-detail?id=${product_id}` },
-  addToWishlist(product_id: number) { return `/product-save/save-or-remove?product_id=${product_id}` },
   search(key: string) { return `/product/search?key=${key}` },
+
+  // wishlist
+  addToWishlist(product_id: number) { return `/product-save/save-or-remove?product_id=${product_id}` },
+  getWishlists() { return `/product-save/user-saved-products` },
 
   // contact
   getContactInfo() { return `/data/contact-info` },
