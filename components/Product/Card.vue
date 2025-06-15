@@ -16,7 +16,6 @@ const wishlistCount = useWishlistCount()
 const authStore = useAuthStore()
 const cartStore = useCartStore()
 
-
 // props
 const props = defineProps({
 	product: {
@@ -140,17 +139,25 @@ onMounted(() => {
 					</button>
 				</div>
 
-				<button
-					v-else
-					class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-6 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
-					@click="cartStore.addToCart(props.product)"
-				>
-					<UIcon
-						name="proicons:cart"
-						class="text-2xl w-6 text-bg group-hover:text-main"
-					/>
-					<span class="text-sm text-bg group-hover:text-main">Savatga</span>
-				</button>
+				<div v-else class="w-full">
+					<p
+						v-if="!props.product.residue"
+						class="flex items-center justify-center gap-2 bg-gray-400 border border-bg rounded-full w-full py-2 px-6 flex-1"
+					>
+						Mavjud emas
+					</p>
+					<button
+						v-else
+						class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-6 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
+						@click="cartStore.addToCart(props.product)"
+					>
+						<UIcon
+							name="proicons:cart"
+							class="text-2xl w-6 text-bg group-hover:text-main"
+						/>
+						<span class="text-sm text-bg group-hover:text-main">Savatga</span>
+					</button>
+				</div>
 			</footer>
 		</div>
 	</article>

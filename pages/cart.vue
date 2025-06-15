@@ -7,6 +7,7 @@
 // import Service from '~/service/Service'
 // import urls from '~/service/urls'
 // import { useAuthStore } from '~/store/auth.store'
+import { useAuthStore } from '~/store/auth.store'
 import { useCartStore } from '~/store/cart.store'
 // const { locale } = useI18n()
 // const toast = useToast()
@@ -15,6 +16,8 @@ import { useCartStore } from '~/store/cart.store'
 // store
 // const authStore = useAuthStore()
 const cartStore = useCartStore()
+const authStore = useAuthStore()
+const toast = useToast()
 
 //===============================-< get wishlists >-===============================
 //> variables
@@ -53,6 +56,26 @@ const cartStore = useCartStore()
 // 		getWishlists()
 // 	}
 // })
+
+//===============================-< submit order >-===============================
+//> variables
+const isOpenSubmitOrder = ref(false)
+
+const openSubmitOrder = () => {
+	if (authStore.isLogged) {
+		isOpenSubmitOrder.value = true
+	} else {
+		toast.add({
+			title: "Buyurtmani rashmiylashtirish uchun ro'yhatdan o'tishingiz kerak",
+			color: 'error',
+		})
+	}
+}
+
+const closeSubmitOrder = () => {
+	isOpenSubmitOrder.value = false
+}
+//> functions
 </script>
 <template>
 	<main class="py-6">
@@ -158,6 +181,7 @@ const cartStore = useCartStore()
 						</div>
 						<button
 							class="mt-8 flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-6 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
+							@click="openSubmitOrder"
 						>
 							<span class="text-sm text-bg group-hover:text-main"
 								>Rasmiylashtirish</span
@@ -167,5 +191,19 @@ const cartStore = useCartStore()
 				</div>
 			</div>
 		</section>
+
+		<!--=== modals ===-->
+		<!-- send phone number -->
+		<BaseModal :is-open="isOpenSubmitOrder" @close="closeSubmitOrder">
+			<template #header>
+				<div class="">
+					<h5 class="font-semibold text-xl text-center">
+						Buyurtmani rasmiylashtirish
+					</h5>
+				</div>
+			</template>
+			<CartOrder @success="closeSubmitOrder" />
+		</BaseModal>
+		<!--=== modals ===-->
 	</main>
 </template>

@@ -34,4 +34,7 @@ export default {
   // contact
   getContactInfo() { return `/data/contact-info` },
 
+  // orders
+  orderDelivery() { return `/order/delivery` },
+  orderPickup() { return `/order/store-pickup` },
 };
