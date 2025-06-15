@@ -1,4 +1,59 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+//===============================-< imports >-===============================
+// types
+// import type { TWishlist } from '~/types/api.types'
+
+//> utils
+// import Service from '~/service/Service'
+// import urls from '~/service/urls'
+// import { useAuthStore } from '~/store/auth.store'
+import { useCartStore } from '~/store/cart.store'
+// const { locale } = useI18n()
+// const toast = useToast()
+// const token = useToken()
+// const wishlistCount = useWishlistCount()
+// store
+// const authStore = useAuthStore()
+const cartStore = useCartStore()
+
+//===============================-< get wishlists >-===============================
+//> variables
+// const wishlists = ref<TWishlist>()
+//> functions
+
+// //===============================-< add or remove product from wishlist >-===============================
+// //> variables
+// //> functions
+// async function toggleWishlist(product_id: number) {
+// 	if (authStore.isLogged) {
+// 		const res = await Service.get(
+// 			urls.addToWishlist(product_id),
+// 			locale.value,
+// 			token.value
+// 		)
+
+// 		if (res.status === 200) {
+// 			setTimeout(() => {
+// 				getWishlists()
+// 				emits('success-wishlist')
+// 			}, 1000)
+// 		}
+// 	} else {
+// 		toast.add({
+// 			title: "Saqlanganlarga qo'shish uchun ro'yhatdan o'tishiz kerak",
+// 			color: 'error',
+// 		})
+// 	}
+// }
+
+// //===============================-< on load >-===============================
+// //> variables
+// onMounted(() => {
+// 	if (!wishlistCount.value && authStore.isLogged) {
+// 		getWishlists()
+// 	}
+// })
+</script>
 <template>
 	<main class="py-6">
 		<nav>
@@ -12,7 +67,7 @@
 
 		<section class="mt-8">
 			<div class="container">
-				<div class="flex gap-6">
+				<div class="flex items-start gap-6">
 					<div class="shadow-md border border-border rounded-2xl p-6 flex-2">
 						<div class="flex items-center justify-between">
 							<h3 class="font-medium text-xl">Mahsulotlar:</h3>
@@ -22,48 +77,58 @@
 								Tozalash
 							</button>
 						</div>
-						<article class="mt-4 flex items-center gap-6">
+						<article
+							v-for="product in cartStore.cart"
+							:key="product.product_id"
+							class="mt-4 grid grid-cols-6 items-center gap-2"
+						>
 							<div
 								class="w-full max-w-32 h-auto p-4 flex items-center justify-center"
 							>
 								<img
-									src="~/assets/images/png/category.png"
-									alt="product"
+									:src="product.imageUrl"
+									:alt="product.product_name"
 									class="w-full h-full object-contain"
 								/>
 							</div>
-							<div class="flex-1">
+							<div class="col-span-2 line-clamp-2">
 								<NuxtLink :to="`/products/${2}`" class="text-md text-text">
-									Smartfon Honor X8b 8/128GB Midnight Black
+									{{ product.product_name }}
 								</NuxtLink>
 							</div>
+
 							<div class="flex items-center justify-between gap-3">
-								<button
-									class="flex items-center justify-center py-1.5 px-3 rounded-3xl border border-main cursor-pointer hover:bg-main group transition-colors"
-								>
-									<Icon
-										name="ic:round-minus"
-										class="w-6 h-6 text-2xl text-text group-hover:text-bg"
+								<UFormField name="firstname" class="w-20">
+									<UInput
+										v-model="product.quantity"
+										size="lg"
+										class="w-full mx-auto flex justify-center"
+										type="number"
+										@update:model-value="
+											cartStore.handleChangeCount(
+												product.quantity,
+												product.product_id
+											)
+										"
 									/>
-								</button>
-								<p>0</p>
-								<button
-									class="flex items-center justify-center py-1.5 px-3 rounded-3xl border border-main cursor-pointer hover:bg-main group transition-colors"
-								>
-									<Icon
-										name="ic:round-plus"
-										class="w-6 h-6 text-2xl text-text group-hover:text-bg"
-									/>
-								</button>
+								</UFormField>
+							</div>
+							<div class="flex items-center">
+								{{ cartStore.formatCurrency(product.quantity * product.price) }}
 							</div>
 							<div class="flex flex-col items-center justify-center gap-4">
-								<button class="cursor-pointer group">
+								<!-- <button class="cursor-pointer group"
+									@click="toggleWishlist"
+								>
 									<UIcon
 										name="mdi:heart-outline"
 										class="text-2xl w-6 text-text group-hover:text-main"
 									/>
-								</button>
-								<button class="cursor-pointer group">
+								</button> -->
+								<button
+									class="cursor-pointer group"
+									@click="cartStore.removeFromCart(product.product_id)"
+								>
 									<UIcon
 										name="mynaui:trash"
 										class="text-2xl w-6 text-text group-hover:text-red-500"
@@ -72,17 +137,27 @@
 							</div>
 						</article>
 					</div>
-					<div class="shadow-md border border-border rounded-2xl p-6 flex-1 flex flex-col">
-						<div class="flex items-center justify-between py-2 gap-6 border-b border-b-border">
-							<p class="text-subtext">2 dona mahsulot narxi:</p>
-							<p class="font-semibold text-text">8 451 000 so'm</p>
+					<div
+						class="shadow-md border border-border rounded-2xl p-6 flex-1 flex flex-col"
+					>
+						<div
+							class="flex items-center justify-between py-2 gap-6 border-b border-b-border"
+						>
+							<p class="text-subtext">
+								{{ cartStore.productsCount }} dona mahsulot narxi:
+							</p>
+							<p class="font-semibold text-text">{{ cartStore.allPrice }}</p>
 						</div>
-						<div class="mt-2 flex items-center justify-between py-2 gap-6 border-b border-b-border">
+						<div
+							class="mt-2 flex items-center justify-between py-2 gap-6 border-b border-b-border"
+						>
 							<p class="font-semibold text-text text-lg">Jami:</p>
-							<p class="font-semibold text-text text-lg">8 451 000 so'm</p>
+							<p class="font-semibold text-text text-lg">
+								{{ cartStore.allPrice }}
+							</p>
 						</div>
 						<button
-							class="mt-auto flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-6 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
+							class="mt-8 flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-6 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
 						>
 							<span class="text-sm text-bg group-hover:text-main"
 								>Rasmiylashtirish</span

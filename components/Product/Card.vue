@@ -7,11 +7,15 @@ import type { TProduct, TWishlist } from '~/types/api.types'
 import Service from '~/service/Service'
 import urls from '~/service/urls'
 import { useAuthStore } from '~/store/auth.store'
+import { useCartStore } from '~/store/cart.store'
 const { locale } = useI18n()
-const authStore = useAuthStore()
 const toast = useToast()
 const token = useToken()
 const wishlistCount = useWishlistCount()
+// store
+const authStore = useAuthStore()
+const cartStore = useCartStore()
+
 
 // props
 const props = defineProps({
@@ -66,9 +70,9 @@ async function toggleWishlist(product_id: number) {
 //===============================-< on load >-===============================
 //> variables
 onMounted(() => {
-	if(!wishlistCount.value && authStore.isLogged) {
+	if (!wishlistCount.value && authStore.isLogged) {
 		getWishlists()
-	}	
+	}
 })
 </script>
 <template>
@@ -104,11 +108,13 @@ onMounted(() => {
 			</NuxtLink>
 			<div class="mt-4">
 				<p class="text-xl">{{ props.product.priceFormat }}</p>
-				<p class="text-sm line-through text-subtext">{{ props.product.oldPriceFormat }}</p>
+				<p class="text-sm line-through text-subtext">
+					{{ props.product.oldPriceFormat }}
+				</p>
 			</div>
 			<footer class="mt-4 flex items-center gap-4">
 				<div
-					v-if="props.product.id % 2"
+					v-if="cartStore.checkIsExist(props.product.id)"
 					class="w-full flex items-center justify-between gap-3"
 				>
 					<NuxtLink
@@ -121,7 +127,8 @@ onMounted(() => {
 						/>
 					</NuxtLink>
 					<button
-						class="flex items-center justify-center py-1.5 px-4 gap-2 rounded-3xl border border-main cursor-pointer hover:bg-main group transition-colors"
+						class="flex items-center justify-center py-1.5 px-4 gap-2 rounded-3xl border border-main cursor-pointer hover:bg-red-500 group transition-colors"
+						@click="cartStore.removeFromCart(props.product.id)"
 					>
 						<UIcon
 							name="mynaui:trash"
@@ -136,6 +143,7 @@ onMounted(() => {
 				<button
 					v-else
 					class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-6 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
+					@click="cartStore.addToCart(props.product)"
 				>
 					<UIcon
 						name="proicons:cart"

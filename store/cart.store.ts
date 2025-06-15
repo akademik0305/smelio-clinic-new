@@ -1,22 +1,43 @@
 import type { TProduct } from "~/types/api.types";
-import type { TCart } from "~/types/cart.types";
+import type { TCart, TCartProduct } from "~/types/cart.types";
+
 
 export const useCartStore = defineStore("useCartStore", () => {
+  const { t } = useI18n();
+  // cart products
   const cart = ref<TCart>([]);
+
+  // products count
+  const productsCount = computed(() => {
+    let count = 0;
+    cart.value?.forEach((product: TCartProduct) => {
+      count += product.quantity
+    })
+    return count
+  })
+
+  // format currency
+  function formatCurrency(amount: number) {
+    if (typeof amount !== "number") {
+      throw new Error(t("currency.invalidNumber"));
+    }
+    const formatted = amount.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return `${formatted} ${t("sum")}`;
+  }
 
   // all price
   const allPrice = computed(() => {
     let summ = 0
-    cart.value.forEach((product) => {
+    cart.value?.forEach((product: TCartProduct) => {
       summ += product.price * product.quantity
     })
-    return summ
+    return formatCurrency(summ)
   })
 
   // get product count
-  function getProductCount(product_id: number) {
-    const product = cart.value.find((product) => product.product_id === product_id)
-    return product ? product.quantity : false
+  function checkIsExist(product_id: number) {
+    const product = cart.value?.find((product: TCartProduct) => product.product_id === product_id)
+    return !!product
   }
 
   // add to cart
@@ -26,43 +47,70 @@ export const useCartStore = defineStore("useCartStore", () => {
       product_id: product.id,
       product_name: product.name,
       price: product.price,
-      imageUrl: product.images[0]
+      priceFormat: product.priceFormat,
+      imageUrl: product.imageUrl
     })
+    console.log(product.priceFormat);
   }
 
-  // inc product count
-  function incProductCount(product_id: number) {
-    const product = cart.value.find((product) => product.product_id === product_id)
-    if (product) {
-      product.quantity += 1
-    } else {
-      console.log('product not found')
-    }
-  }
-  // dec product count
-  function decProductCount(product_id: number) {
+  function removeFromCart(product_id: number) {
     const productIndex = cart.value.findIndex((product) => product.product_id === product_id)
-    const product = cart.value[productIndex]
-    if (product) {
-      product.quantity -= 1
-      if (product.quantity === 0) {
-        cart.value.splice(productIndex, 1)
-      }
+    if (productIndex >= 0) {
+      cart.value.splice(productIndex, 1)
     } else {
       console.log('product not found')
     }
   }
+
+  function handleChangeCount(value: number, product_id: number) {
+    console.log(value);
+    if (value <= 0) {
+      removeFromCart(product_id)
+    }
+  }
+
+
+
+
+
+  // inc product count
+  // function incProductCount(product_id: number) {
+  //   const product = cart.value.find((product) => product.product_id === product_id)
+  //   if (product) {
+  //     product.quantity += 1
+  //   } else {
+  //     console.log('product not found')
+  //   }
+  // }
+  // // dec product count
+  // function decProductCount(product_id: number) {
+  //   const productIndex = cart.value.findIndex((product) => product.product_id === product_id)
+  //   const product = cart.value[productIndex]
+  //   if (product) {
+  //     product.quantity -= 1
+  //     if (product.quantity === 0) {
+  //       cart.value.splice(productIndex, 1)
+  //     }
+  //   } else {
+  //     console.log('product not found')
+  //   }
+  // }
 
   return {
     cart,
+    productsCount,
     allPrice,
-    getProductCount,
+    checkIsExist,
     addToCart,
-    incProductCount,
-    decProductCount
+    removeFromCart,
+    formatCurrency,
+    handleChangeCount,
+    // incProductCount,
+    // decProductCount
   };
 }, {
   persist: {
     storage: piniaPluginPersistedstate.localStorage(),
+    key: "rm-cart"
   },
 });

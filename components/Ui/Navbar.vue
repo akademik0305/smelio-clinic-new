@@ -3,6 +3,7 @@ import { useAuthStore } from '~/store/auth.store'
 import type { TUser } from '../../types/auth.type'
 import urls from '~/service/urls'
 import Service from '~/service/Service'
+import { useCartStore } from '~/store/cart.store'
 
 //===============================-< imports >-===============================
 // import { useRouter } from 'vue-router'
@@ -13,9 +14,10 @@ const { locale, setLocale } = useI18n()
 const router = useRouter()
 const localePath = useLocalePath()
 const token = useToken()
-const wishlistCount = useWishlistCount();
+const wishlistCount = useWishlistCount()
 // store
 const authStore = useAuthStore()
+const cartStore = useCartStore()
 // const localePath = useLocalePath()
 
 // get data
@@ -77,7 +79,7 @@ function submitLogin(user_data: TUser) {
 	token.value = user_data.auth_key
 	authStore.user = { ...user_data, auth_key: '' }
 	authStore.isLogged = true
-	window.location.reload();
+	window.location.reload()
 	closeLogin()
 }
 
@@ -154,6 +156,7 @@ onUnmounted(() => {
 								class="text-2xl w-6 text-text group-hover:text-main transition-colors"
 							/>
 							<span
+								v-if="wishlistCount"
 								class="flex items-center justify-center bg-main rounded-full p-0.5 absolute top-0 right-0 text-bg text-xs w-5 h-5"
 								>{{ wishlistCount || 0 }}</span
 							>
@@ -167,8 +170,9 @@ onUnmounted(() => {
 								class="text-2xl w-6 text-text group-hover:text-main transition-colors"
 							/>
 							<span
+								v-if="cartStore.productsCount"
 								class="flex items-center justify-center bg-main rounded-full p-0.5 absolute top-0 right-0 text-bg text-xs w-5 h-5"
-								>12</span
+								>{{ cartStore.productsCount || 0 }}</span
 							>
 						</NuxtLink>
 						<button
