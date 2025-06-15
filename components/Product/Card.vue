@@ -66,7 +66,7 @@ async function toggleWishlist(product_id: number) {
 //===============================-< on load >-===============================
 //> variables
 onMounted(() => {
-	if(!wishlistCount.value) {
+	if(!wishlistCount.value && authStore.isLogged) {
 		getWishlists()
 	}	
 })
