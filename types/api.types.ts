@@ -30,6 +30,17 @@ export type TProduct = {
 }
 
 export type TSection = {
+  section: {
+    id: number,
+    name: string,
+    imageUrl: string
+  },
+  dataProvider: {
+    items: TProduct[],
+    _meta: TMeta
+  }
+}
+export type TCategory = {
   category: {
     id: number,
     name: string,

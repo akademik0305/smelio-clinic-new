@@ -15,7 +15,7 @@ export default {
   // home page
   getBanners() { return `/data/banners` },
   getSections() { return `/product/site-sections` },
-  getSectionProducts(section_id: number) { return `/product/site-section-detail?siteSectionId=${section_id}` },
+  getSectionProducts(section_id: number, page: number) { return `/product/site-section-detail?siteSectionId=${section_id}&page=${page}` },
 
 
   // categories
