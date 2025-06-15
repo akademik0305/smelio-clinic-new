@@ -82,12 +82,13 @@ async function onSubmit() {
 		})
 	})
 
-	const res = await Service.post(
-		urls.orderDelivery(),
-		locale.value,
-		data,
-		token.value
-	)
+	let url = urls.orderPickup()
+	if (state.requireAddress === 'true') {
+		url = urls.orderDelivery()
+		data.address = state.address
+	}
+
+	const res = await Service.post(url, locale.value, data, token.value)
 
 	if (res.status === 200) {
 		console.log(res)
