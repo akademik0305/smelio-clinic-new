@@ -1,16 +1,17 @@
 <script lang="ts" setup>
 //===============================-< imports >-===============================
 // types
-import type { TProduct } from '~/types/api.types'
+import type { TProduct, TWishlist } from '~/types/api.types'
 
 //> utils
 import Service from '~/service/Service'
 import urls from '~/service/urls'
 import { useAuthStore } from '~/store/auth.store'
 const { locale } = useI18n()
-const token = useToken()
 const authStore = useAuthStore()
 const toast = useToast()
+const token = useToken()
+const wishlistCount = useWishlistCount()
 
 // props
 const props = defineProps({
@@ -22,6 +23,20 @@ const props = defineProps({
 
 // emits
 const emits = defineEmits(['success-wishlist'])
+
+//===============================-< get wishlists >-===============================
+//> variables
+const wishlists = ref<TWishlist>()
+//> functions
+async function getWishlists() {
+	const res = await Service.get<TWishlist>(
+		urls.getWishlists(),
+		locale.value,
+		token.value
+	)
+	wishlists.value = res.data
+	wishlistCount.value = wishlists.value.length
+}
 
 //===============================-< add or remove product from wishlist >-===============================
 //> variables
@@ -35,7 +50,10 @@ async function toggleWishlist(product_id: number) {
 		)
 
 		if (res.status === 200) {
-			emits('success-wishlist')
+			setTimeout(() => {
+				getWishlists()
+				emits('success-wishlist')
+			}, 1000)
 		}
 	} else {
 		toast.add({
@@ -44,6 +62,14 @@ async function toggleWishlist(product_id: number) {
 		})
 	}
 }
+
+//===============================-< on load >-===============================
+//> variables
+onMounted(() => {
+	if(!wishlistCount.value) {
+		getWishlists()
+	}	
+})
 </script>
 <template>
 	<article
@@ -72,13 +98,13 @@ async function toggleWishlist(product_id: number) {
 				class="w-full h-full max-h-40 object-contain"
 			/>
 		</NuxtLink>
-		<div class="">
+		<div class="mt-4">
 			<NuxtLink :to="`/products/${props.product.id}`" class="text-md text-text">
 				{{ product.name }}
 			</NuxtLink>
 			<div class="mt-4">
-				<p class="text-xl">180 000 so'm</p>
-				<p class="text-sm line-through text-subtext">200 000 so'm</p>
+				<p class="text-xl">{{ props.product.priceFormat }}</p>
+				<p class="text-sm line-through text-subtext">{{ props.product.oldPriceFormat }}</p>
 			</div>
 			<footer class="mt-4 flex items-center gap-4">
 				<div

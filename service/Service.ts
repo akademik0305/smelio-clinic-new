@@ -1,6 +1,7 @@
 import { isAxiosError, type AxiosError } from "axios";
 import type { ApiResponse } from "~/types/api.types";
 import API from "./API";
+import { useAuthStore } from "~/store/auth.store";
 
 
 function isAxiosUnauthorized(err: unknown): boolean {
@@ -14,12 +15,12 @@ function isAxiosUnauthorized(err: unknown): boolean {
 
 
 function fixUnauthorized() {
-  // const token = useToken();
-  localStorage.removeItem("");
-  localStorage.setItem("isLogged", JSON.stringify(false));
-  // token.value = null;
-  // router.push('/')
-  // window.location.href = '/'
+  const router = useRouter()
+  const token = useToken();
+  const authStore = useAuthStore();
+  authStore.logOut();
+  token.value = null
+  router.push('/')
 }
 
 export default {

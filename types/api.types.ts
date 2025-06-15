@@ -30,9 +30,15 @@ export type TProduct = {
 }
 
 export type TSection = {
-  id: number,
-  name: string,
-  products: TProduct[]
+  category: {
+    id: number,
+    name: string,
+    imageUrl: string
+  },
+  dataProvider: {
+    items: TProduct[],
+    _meta: TMeta
+  }
 }
 
 export type TWishlist = TProduct[]

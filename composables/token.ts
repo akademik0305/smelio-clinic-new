@@ -4,3 +4,5 @@ export const useToken = () =>
       maxAge: 99999999,
     })
   );
+
+export const useWishlistCount = () => useState('wishlistCount', () => 0)

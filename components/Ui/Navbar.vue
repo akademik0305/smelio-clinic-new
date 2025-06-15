@@ -3,17 +3,17 @@ import { useAuthStore } from '~/store/auth.store'
 import type { TUser } from '../../types/auth.type'
 import urls from '~/service/urls'
 import Service from '~/service/Service'
-import type { TWishlist } from '~/types/api.types'
 
 //===============================-< imports >-===============================
 // import { useRouter } from 'vue-router'
 // const router = useRouter()
 
 //utils
-const token = useToken()
 const { locale, setLocale } = useI18n()
 const router = useRouter()
 const localePath = useLocalePath()
+const token = useToken()
+const wishlistCount = useWishlistCount();
 // store
 const authStore = useAuthStore()
 // const localePath = useLocalePath()
@@ -77,6 +77,7 @@ function submitLogin(user_data: TUser) {
 	token.value = user_data.auth_key
 	authStore.user = { ...user_data, auth_key: '' }
 	authStore.isLogged = true
+	window.location.reload();
 	closeLogin()
 }
 
@@ -90,17 +91,6 @@ async function getContact() {
 }
 
 getContact()
-
-//===============================-< get wishlists >-===============================
-//> variables
-const wishlists = ref<TWishlist>()
-//> functions
-async function getWishlists() {
-	const res = await Service.get<TWishlist>(urls.getWishlists(), locale.value, token.value)
-	wishlists.value = res.data
-}
-
-getWishlists()
 
 //===============================-< on page load >-===============================
 //> variables
@@ -165,7 +155,7 @@ onUnmounted(() => {
 							/>
 							<span
 								class="flex items-center justify-center bg-main rounded-full p-0.5 absolute top-0 right-0 text-bg text-xs w-5 h-5"
-								>{{ wishlists?.length }}</span
+								>{{ wishlistCount || 0 }}</span
 							>
 						</NuxtLink>
 						<NuxtLink

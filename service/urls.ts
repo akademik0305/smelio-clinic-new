@@ -21,7 +21,7 @@ export default {
   // categories
   getAllCategories() { return `/product/all-categories` },
   getHomeCategories() { return `/product/home-categories` },
-  getCategoryProducts(category_id: number) { return `/product/category-product/?category_id=${category_id}` },
+  getCategoryProducts(category_id: number, page: number) { return `/product/category-product/?category_id=${category_id}&page=${page}` },
 
   // products
   productDetail(product_id: number) { return `/product/product-detail?id=${product_id}` },
