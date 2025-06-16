@@ -25,7 +25,7 @@ export default {
 
   // products
   productDetail(product_id: number) { return `/product/product-detail?id=${product_id}` },
-  search(key: string) { return `/product/search?key=${key}` },
+  search(key: string, page: number) { return `/product/search?key=${key}&page=${page}` },
 
   // wishlist
   addToWishlist(product_id: number) { return `/product-save/save-or-remove?product_id=${product_id}` },

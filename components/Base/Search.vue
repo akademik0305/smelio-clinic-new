@@ -14,6 +14,7 @@ const emit = defineEmits(['change-value'])
 		for="search"
 		class="flex items-center gap-4 bg-bg-soft py-3 px-4 rounded-xl border border-border transition-colors has-focus:border-main"
 	>
+		<!-- // -->
 		<UIcon name="i-lucide-search" class="text-xl" />
 		<input
 			id="search"
@@ -21,7 +22,7 @@ const emit = defineEmits(['change-value'])
 			name="search"
 			class="w-full text-text has"
 			:placeholder="props.placeholder"
-			@input="emit('change-value', $event)"
+			@input="emit('change-value', $event.target)"
 		/>
 	</label>
 </template>

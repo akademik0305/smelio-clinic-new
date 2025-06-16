@@ -15,6 +15,7 @@ const router = useRouter()
 const localePath = useLocalePath()
 const token = useToken()
 const wishlistCount = useWishlistCount()
+const toast = useToast()
 // store
 const authStore = useAuthStore()
 const cartStore = useCartStore()
@@ -94,6 +95,20 @@ async function getContact() {
 
 getContact()
 
+//===============================-< go to wishlist page >-===============================
+//> variables
+//> functions
+function goToWishlist() {
+	if (authStore.isLogged) {
+		router.push(localePath('/wishlist'))
+	} else {
+		toast.add({
+			title: "Saqlanganlarni ko'rish uchun tizimga kirishingiz kerak",
+			color: 'error'
+		})
+	}
+}
+
 //===============================-< on page load >-===============================
 //> variables
 //> functions
@@ -147,9 +162,9 @@ onUnmounted(() => {
 								class="text-2xl w-6 text-text group-hover:text-main transition-colors"
 							/>
 						</NuxtLink>
-						<NuxtLink
-							to="/wishlist"
+						<button
 							class="flex items-center justify-center gap-2 w-full py-1.5 px-2 cursor-pointer hover:border-main transition-colors relative group"
+							@click="goToWishlist"
 						>
 							<UIcon
 								name="mdi:heart-outline"
@@ -160,7 +175,7 @@ onUnmounted(() => {
 								class="flex items-center justify-center bg-main rounded-full p-0.5 absolute top-0 right-0 text-bg text-xs w-5 h-5"
 								>{{ wishlistCount || 0 }}</span
 							>
-						</NuxtLink>
+						</button>
 						<NuxtLink
 							to="/cart"
 							class="relative flex items-center justify-center gap-2 w-full py-1.5 px-2 cursor-pointer hover:border-main transition-colors group"

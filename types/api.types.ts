@@ -53,4 +53,9 @@ export type TCategory = {
   }
 }
 
+export type TSearch = {
+  items: TProduct[],
+  _meta: TMeta
+}
+
 export type TWishlist = TProduct[]

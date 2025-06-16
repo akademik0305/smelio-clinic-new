@@ -5,5 +5,7 @@ export type TCartProduct = {
   price: number,
   priceFormat: string,
   imageUrl: string,
+  residue: number,
+
 }
 export type TCart = TCartProduct[]

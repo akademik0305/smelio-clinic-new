@@ -48,7 +48,8 @@ export const useCartStore = defineStore("useCartStore", () => {
       product_name: product.name,
       price: product.price,
       priceFormat: product.priceFormat,
-      imageUrl: product.imageUrl
+      imageUrl: product.imageUrl,
+      residue: product.residue,
     })
     console.log(product.priceFormat);
   }
@@ -62,11 +63,14 @@ export const useCartStore = defineStore("useCartStore", () => {
     }
   }
 
-  function handleChangeCount(value: number, product_id: number) {
-    console.log(value);
-    if (value <= 0) {
-      removeFromCart(product_id)
+  function handleChangeCount(product: TCartProduct) {
+    if (product.quantity <= 0) {
+      removeFromCart(product.product_id)
     }
+  }
+
+  function clearCart() {
+    cart.value = []
   }
 
 
@@ -100,6 +104,7 @@ export const useCartStore = defineStore("useCartStore", () => {
     cart,
     productsCount,
     allPrice,
+    clearCart,
     checkIsExist,
     addToCart,
     removeFromCart,

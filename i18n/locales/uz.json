@@ -9,5 +9,6 @@
   "logout": "Chiqish",
   "resend_code": "Kodni qayta yuborish",
   "show": "Ko'rsatish",
-  "empty_data_product": "Mahsulotlar topilmadi"
+  "empty_data_product": "Mahsulotlar topilmadi",
+  "empty_cart": "Hozircha savatingizda mahsulotlar mavjud emas"
 }
