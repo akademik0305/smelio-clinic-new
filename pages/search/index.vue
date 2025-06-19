@@ -52,7 +52,7 @@ function changePage(page: number) {
 		<section class="mt-8">
 			<div class="container">
 				<div v-if="products?.items.length && searchValue">
-					<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+					<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5">
 						<ProductCard
 							v-for="product in products.items"
 							:key="product.id"

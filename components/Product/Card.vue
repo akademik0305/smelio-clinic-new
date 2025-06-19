@@ -76,7 +76,7 @@ onMounted(() => {
 </script>
 <template>
 	<article
-		class="relative rounded-xl overflow-hidden shadow-md border border-border p-4"
+		class="relative rounded-xl overflow-hidden shadow-md border border-border p-2 md:p-4 flex flex-col"
 	>
 		<button
 			class="absolute top-3 right-3 cursor-pointer flex items-center justify-center p-1.5 bg-gray-100 rounded-full shadow-sm"
@@ -101,17 +101,17 @@ onMounted(() => {
 				class="w-full max-h-40 min-h-40 object-contain"
 			/>
 		</NuxtLink>
-		<div class="mt-4">
-			<NuxtLink :to="`/products/${props.product.id}`" class="text-md text-text">
+		<div class="mt-4 flex-1 flex flex-col">
+			<NuxtLink :to="`/products/${props.product.id}`" class="text-sm md:text-md text-text">
 				{{ product.name }}
 			</NuxtLink>
-			<div class="mt-4">
-				<p class="text-xl">{{ props.product.priceFormat }}</p>
-				<p class="text-sm line-through text-subtext">
+			<div class="mt-2 md:mt-4 flex-1">
+				<p class="text-sm md:text-xl">{{ props.product.priceFormat }}</p>
+				<p class="text-xs md:text-sm line-through text-subtext">
 					{{ props.product.oldPriceFormat }}
 				</p>
 			</div>
-			<footer class="mt-4 flex items-center gap-4">
+			<footer class="mt-2 md:mt-4 flex items-center gap-4">
 				<div
 					v-if="cartStore.checkIsExist(props.product.id)"
 					class="w-full flex items-center justify-between gap-3"
@@ -133,7 +133,7 @@ onMounted(() => {
 							name="mynaui:trash"
 							class="text-2xl w-6 text-main group-hover:text-white"
 						/>
-						<span class="text-sm text-main group-hover:text-white"
+						<span class="text-sm text-main group-hover:text-white hidden md:block"
 							>O'chirish</span
 						>
 					</button>
@@ -142,13 +142,13 @@ onMounted(() => {
 				<div v-else class="w-full">
 					<p
 						v-if="!props.product.residue"
-						class="flex items-center justify-center gap-2 bg-gray-400 border border-bg rounded-full w-full py-2 px-6 flex-1"
+						class="flex items-center justify-center gap-2 bg-gray-400 border border-bg rounded-full w-full py-2 px-3 md:px-6 flex-1 text-xs md:text-base"
 					>
-						Mavjud emas
+						Tugagan
 					</p>
 					<button
 						v-else
-						class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-6 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
+						class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-3 md:px-6 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
 						@click="cartStore.addToCart(props.product)"
 					>
 						<UIcon

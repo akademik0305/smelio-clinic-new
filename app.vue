@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { useAuthStore } from './store/auth.store'
 
+//===============================-< seo >-===============================
+useSeoMeta({
+	title: 'Reklama Markazi',
+	ogImage: '/icon.png',
+
+})
+
 //===============================-< imports >-===============================
 //> store
 const authStore = useAuthStore()
@@ -16,6 +23,8 @@ onMounted(() => {
 		token.value = null
 	}
 })
+
+
 </script>
 <template>
 	<div>

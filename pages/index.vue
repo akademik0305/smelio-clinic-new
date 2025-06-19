@@ -233,7 +233,7 @@ function refetchSections() {
 					</NuxtLink>
 				</div>
 				<div
-					class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"
+					class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5"
 				>
 					<ProductCard
 						v-for="product in section.products"

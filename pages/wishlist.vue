@@ -32,7 +32,7 @@ getWishlists()
 
 		<section class="mt-8">
 			<div class="container">
-				<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+				<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5">
 					<ProductCard v-for="product in wishlists" :key="product.id" :product="product" @success-wishlist="getWishlists" />
 				</div>
 			</div>

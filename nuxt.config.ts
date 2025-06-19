@@ -10,6 +10,16 @@ export default defineNuxtConfig({
 
   ssr: false,
 
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'icon', type: 'image/png', href: './icon.png'
+        }
+      ]
+    }
+  },
+
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.API_BASE_URL || 'http://localhost:3000',

@@ -15,12 +15,11 @@ function isAxiosUnauthorized(err: unknown): boolean {
 
 
 function fixUnauthorized() {
-  const router = useRouter()
   const token = useToken();
   const authStore = useAuthStore();
   authStore.logOut();
   token.value = null
-  router.push('/')
+  window.location.href = '/'
 }
 
 export default {
