@@ -17,13 +17,13 @@ const props = defineProps({
 			<img
 				:src="category.imageUrl"
 				:alt="category.name"
-				class="w-full h-40 object-cover group-hover:scale-120 transition-transform duration-300"
+				class="w-full h-32 md:h-40 object-cover group-hover:scale-120 transition-transform duration-300"
 			/>
 		</div>
 
 		<div class="mt-5">
 			<h3
-				class="font-medium text-text text-xl text-center group-hover:text-main transition-colors"
+				class="font-medium text-text text-base md:text-xl text-center group-hover:text-main transition-colors line-clamp-1"
 			>
 				{{ category.name }}
 			</h3>

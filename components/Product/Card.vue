@@ -93,12 +93,12 @@ onMounted(() => {
 
 		<NuxtLink
 			:to="`/products/${props.product.id}`"
-			class="w-full h-auto flex items-center justify-center"
+			class="w-full h-auto flex items-center justify-cente rounded-xl overflow-hidden"
 		>
 			<img
 				:src="product.imageUrl"
 				:alt="product.name"
-				class="w-full h-full max-h-40 object-contain"
+				class="w-full max-h-40 min-h-40 object-contain"
 			/>
 		</NuxtLink>
 		<div class="mt-4">

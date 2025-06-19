@@ -131,8 +131,8 @@ onUnmounted(() => {
 			:class="[isFixedNav ? 'fixed top-0 shadow-md ' : 'static']"
 		>
 			<div class="container">
-				<div class="py-4 flex items-center justify-between">
-					<div class="flex items-center gap-6">
+				<div class="py-4 flex items-center justify-between flex-col gap-4 md:flex-row">
+					<div class="flex items-center gap-6 justify-between md:justify-start w-full">
 						<NuxtLink to="/" class="block w-40 h-auto">
 							<img
 								:src="contact?.imageUrlFooter"

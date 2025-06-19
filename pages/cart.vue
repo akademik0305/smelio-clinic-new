@@ -94,9 +94,11 @@ const closeSubmitOrder = () => {
 
 		<section class="mt-8">
 			<div class="container">
-				<div class="flex items-start gap-6">
+				<div class="flex items-start gap-6 flex-col lg:flex-row">
 					<!-- products -->
-					<div class="shadow-md border border-border rounded-2xl p-6 flex-2">
+					<div
+						class="shadow-md border border-border rounded-2xl p-6 flex-2 w-full"
+					>
 						<div class="flex items-center justify-between">
 							<h3 class="font-medium text-xl">Mahsulotlar:</h3>
 							<button
@@ -111,10 +113,10 @@ const closeSubmitOrder = () => {
 							<article
 								v-for="product in cartStore.cart"
 								:key="product.product_id"
-								class="mt-4 grid grid-cols-6 items-center gap-2"
+								class="mt-4 flex items-center gap-4"
 							>
 								<div
-									class="w-full max-w-32 h-auto p-4 flex items-center justify-center"
+									class="w-full max-w-20 md:max-w-32 h-auto flex items-center justify-center rounded-lg overflow-hidden shrink-0"
 								>
 									<img
 										:src="product.imageUrl"
@@ -122,32 +124,41 @@ const closeSubmitOrder = () => {
 										class="w-full h-full object-contain"
 									/>
 								</div>
-								<div class="col-span-2 line-clamp-2">
-									<NuxtLink :to="`/products/${2}`" class="text-md text-text">
-										{{ product.product_name }}
-									</NuxtLink>
-								</div>
-
-								<div class="flex items-center justify-between gap-3">
-									<UFormField name="firstname" class="w-20">
-										<UInput
-											v-model="product.quantity"
-											size="lg"
-											class="w-full mx-auto flex justify-center"
-											type="number"
-											:max="product.residue"
-											:min="0"
-											@update:model-value="cartStore.handleChangeCount(product)"
-										/>
-									</UFormField>
-								</div>
-								<div class="flex items-center">
-									{{
-										cartStore.formatCurrency(product.quantity * product.price)
-									}}
-								</div>
-								<div class="flex flex-col items-center justify-center gap-4">
-									<!-- <button class="cursor-pointer group"
+								<div
+									class="flex-1 flex justify-between flex-col md:flex-row items-start md:items-center gap-2 md:gap-4"
+								>
+									<div class="col-span-2 line-clamp-2">
+										<NuxtLink :to="`/products/${2}`" class="text-md text-text">
+											{{ product.product_name }}
+										</NuxtLink>
+									</div>
+									<div class="flex items-center gap-4">
+										<div class="flex items-center justify-between gap-3">
+											<UFormField name="firstname" class="w-20">
+												<UInput
+													v-model="product.quantity"
+													size="lg"
+													class="w-full mx-auto flex justify-center"
+													type="number"
+													:max="product.residue"
+													:min="0"
+													@update:model-value="
+														cartStore.handleChangeCount(product)
+													"
+												/>
+											</UFormField>
+										</div>
+										<div class="flex items-center">
+											{{
+												cartStore.formatCurrency(
+													product.quantity * product.price
+												)
+											}}
+										</div>
+										<div
+											class="flex flex-col items-center justify-center gap-4"
+										>
+											<!-- <button class="cursor-pointer group"
 									@click="toggleWishlist"
 								>
 									<UIcon
@@ -155,15 +166,17 @@ const closeSubmitOrder = () => {
 										class="text-2xl w-6 text-text group-hover:text-main"
 									/>
 								</button> -->
-									<button
-										class="cursor-pointer group"
-										@click="cartStore.removeFromCart(product.product_id)"
-									>
-										<UIcon
-											name="mynaui:trash"
-											class="text-2xl w-6 text-text group-hover:text-red-500"
-										/>
-									</button>
+											<button
+												class="cursor-pointer group"
+												@click="cartStore.removeFromCart(product.product_id)"
+											>
+												<UIcon
+													name="mynaui:trash"
+													class="text-2xl w-6 text-text group-hover:text-red-500"
+												/>
+											</button>
+										</div>
+									</div>
 								</div>
 							</article>
 						</div>
@@ -186,7 +199,7 @@ const closeSubmitOrder = () => {
 					<!-- submit order -->
 					<div
 						v-if="cartStore.cart.length"
-						class="shadow-md border border-border rounded-2xl p-6 flex-1 flex flex-col"
+						class="shadow-md border border-border rounded-2xl p-6 flex-1 flex flex-col w-full lg:w-auto"
 					>
 						<div
 							class="flex items-center justify-between py-2 gap-6 border-b border-b-border"

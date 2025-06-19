@@ -42,8 +42,8 @@ getProduct()
 
 		<section class="mt-8">
 			<div class="container">
-				<div class="flex items-start justify-start gap-8">
-					<div class="w-1/2">
+				<div class="flex items-start justify-start gap-6 lg:gap-8 flex-col md:flex-row">
+					<div class="w-full md:w-1/2">
 						<ClientOnly>
 							<!-- MAIN SWIPER -->
 							<UiFuncybox
@@ -70,7 +70,7 @@ getProduct()
 								</swiper-slide>
 									</swiper-container> -->
 								<div
-									class="rounded-2xl overflow-hidden border border-border p-8"
+									class="rounded-2xl overflow-hidden border border-border p-4 md:p-8 w-full sm:w-auto"
 								>
 									<a
 										data-fancybox="gallery"

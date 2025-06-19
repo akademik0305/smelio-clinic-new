@@ -30,7 +30,7 @@ getCategories()
 
 		<section class="mt-8">
 			<div class="container">
-				<div class="mt-6 grid grid-cols-5 gap-5">
+				<div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
 					<CategoryCard v-for="category in categories" :key="category.id" :category="category" />
 				</div>
 			</div>

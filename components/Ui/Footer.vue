@@ -18,8 +18,8 @@ getContact()
 	<!-- footer -->
 	<footer class="footer border-t border-border bg-navbar-bg py-8">
 		<div class="container">
-			<div class="flex items-start justify-between gap-6">
-				<div class="flex flex-col gap-3 w-1/2">
+			<div class="flex flex-col md:flex-row items-start justify-between gap-6">
+				<div class="flex flex-col gap-3 w-full md:w-1/2">
 					<NuxtLink to="/" class="block w-40 h-auto">
 						<img
 							:src="contact?.imageUrlFooter"

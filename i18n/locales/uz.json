@@ -10,5 +10,6 @@
   "resend_code": "Kodni qayta yuborish",
   "show": "Ko'rsatish",
   "empty_data_product": "Mahsulotlar topilmadi",
-  "empty_cart": "Hozircha savatingizda mahsulotlar mavjud emas"
+  "empty_cart": "Hozircha savatingizda mahsulotlar mavjud emas",
+  "orders_history": "Buyurtmalar tarixi"
 }

@@ -41,7 +41,7 @@
   --color-main: #FFB300;
   --color-navbar-bg: #FFFFFF;
   --color-bg: #F8F8F8;
-    --color-bg-soft: #EFEFEF;
+  --color-bg-soft: #EFEFEF;
     --color-text: #2a2a2a;
     --color-subtext: #666666;
   --color-border: #DDDDDD;
@@ -71,6 +71,8 @@
   --lg: 1024px;
   --xl: 1280px;
   --xxl: 1536px;
+  /* breakpoint */
+    --breakpoint-xs: 450px
 }
 
 
@@ -88,6 +90,7 @@ body {
 button {
   cursor: pointer;
 }
+
 input {
   outline: none;
 }
@@ -171,8 +174,7 @@ input {
 
 /* swiper custom styles */
 swiper-container::part(wrapper) {
-  /* margin: -10px; */
-  padding: 10px;
+  padding: 10px 0;
 }
 
 swiper-container::part(pagination) {

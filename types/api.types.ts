@@ -30,6 +30,12 @@ export type TProduct = {
   quantity: number,
 }
 
+export type THomeSection = {
+  id: number,
+  name: string,
+  products: TProduct[],
+}
+
 export type TSection = {
   section: {
     id: number,

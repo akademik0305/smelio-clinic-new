@@ -5,7 +5,7 @@
 // // service
 import Service from '~/service/Service'
 import urls from '~/service/urls'
-import type { TSection } from '~/types/api.types'
+import type { THomeSection } from '~/types/api.types'
 
 // //> utils
 const { locale } = useI18n()
@@ -22,17 +22,17 @@ const token = useToken()
 // })
 //> functions
 
-//===============================-< categories >-===============================
+//===============================-< get  banner >-===============================
 //> variables
-const categoryCardsRef = ref(null)
-const categoryCardsSwiper = useSwiper(categoryCardsRef, {
-	slidesPerView: 5.2,
-	spaceBetween: 20,
-	autoplay: {
-		delay: 3000,
-	},
-})
+const banners = ref()
 //> functions
+async function getBanners() {
+	const res = await Service.get(urls.getBanners(), locale.value, null)
+
+	banners.value = res.data
+}
+
+getBanners()
 
 //===============================-< banners swiper >-===============================
 //> variables
@@ -48,17 +48,37 @@ const bannersSwiper = useSwiper(bannersRef, {
 })
 //> functions
 
-//===============================-< get  banner >-===============================
+//===============================-< categories >-===============================
 //> variables
-const banners = ref()
+const categoryCardsRef = ref(null)
+const categoryCardsSwiper = useSwiper(categoryCardsRef, {
+	spaceBetween: 20,
+	breakpoints: {
+		320: {
+			slidesPerView: 2.2,
+			spaceBetween: 12,
+		},
+		450: {
+			slidesPerView: 2.2,
+		},
+		600: {
+			slidesPerView: 2.6,
+		},
+		768: {
+			slidesPerView: 3.2,
+		},
+		1024: {
+			slidesPerView: 4.2,
+		},
+		1280: {
+			slidesPerView: 5.2,
+		},
+	},
+	autoplay: {
+		delay: 3000,
+	},
+})
 //> functions
-async function getBanners() {
-	const res = await Service.get(urls.getBanners(), locale.value, null)
-
-	banners.value = res.data
-}
-
-getBanners()
 
 //===============================-< get categories >-===============================
 //> variables
@@ -74,10 +94,10 @@ getCategories()
 
 //===============================-< get sections >-===============================
 //> variables
-const sections = ref<TSection[]>()
+const sections = ref<THomeSection[]>()
 
 async function getSections() {
-	const res = await Service.get<TSection[]>(
+	const res = await Service.get<THomeSection[]>(
 		urls.getSections(),
 		locale.value,
 		token.value
@@ -101,7 +121,11 @@ function refetchSections() {
 					<div class="relative">
 						<swiper-container ref="bannersRef" :init="true">
 							<swiper-slide v-for="(slide, idx) in banners" :key="idx">
-								<a :href="slide.url" target="_blank" class="block h-[450px]">
+								<a
+									:href="slide.url"
+									target="_blank"
+									class="block h-[30svh] md:h-[450px]"
+								>
 									<img
 										class="w-full h-full object-cover rounded-xl"
 										:src="slide.imageUrl"
@@ -208,7 +232,7 @@ function refetchSections() {
 						/>
 					</NuxtLink>
 				</div>
-				<div class="mt-4 grid grid-cols-5 gap-5">
+				<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
 					<ProductCard
 						v-for="product in section.products"
 						:key="product.id"

@@ -47,7 +47,7 @@ function changePage(page: number) {
 		<section class="mt-8">
 			<div class="container">
 				<div v-if="section.dataProvider.items.length">
-					<div class="grid grid-cols-4 gap-5">
+					<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
 						<ProductCard
 							v-for="product in section.dataProvider.items"
 							:key="product.id"
