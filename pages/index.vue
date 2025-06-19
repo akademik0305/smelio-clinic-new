@@ -135,13 +135,13 @@ function refetchSections() {
 							</swiper-slide>
 						</swiper-container>
 						<button
-							class="absolute top-1/2 -translate-y-1/2 -left-5 w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center p-2 z-10"
+							class="absolute top-1/2 -translate-y-1/2 -left-5 w-12 h-12 rounded-full bg-white shadow-md hidden md:flex items-center justify-center p-2 z-10"
 							@click="bannersSwiper.prev()"
 						>
 							<UIcon name="tabler:chevron-left" class="text-2xl" />
 						</button>
 						<button
-							class="absolute top-1/2 -translate-y-1/2 -right-5 w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center p-2 z-10"
+							class="absolute top-1/2 -translate-y-1/2 -right-5 w-12 h-12 rounded-full bg-white shadow-md hidden md:flex items-center justify-center p-2 z-10"
 							@click="bannersSwiper.next()"
 						>
 							<UIcon name="tabler:chevron-right" class="text-2xl" />
@@ -165,13 +165,13 @@ function refetchSections() {
 						</swiper-slide>
 					</swiper-container>
 					<button
-						class="absolute top-1/2 -translate-y-1/2 -left-5 w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center p-2 z-10"
+						class="absolute top-1/2 -translate-y-1/2 -left-5 w-12 h-12 rounded-full bg-white shadow-md hidden md:flex items-center justify-center p-2 z-10"
 						@click="categoryCardsSwiper.prev()"
 					>
 						<UIcon name="tabler:chevron-left" class="text-2xl" />
 					</button>
 					<button
-						class="absolute top-1/2 -translate-y-1/2 -right-5 w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center p-2 z-10"
+						class="absolute top-1/2 -translate-y-1/2 -right-5 w-12 h-12 rounded-full bg-white shadow-md hidden md:flex items-center justify-center p-2 z-10"
 						@click="categoryCardsSwiper.next()"
 					>
 						<UIcon name="tabler:chevron-right" class="text-2xl" />
@@ -232,7 +232,9 @@ function refetchSections() {
 						/>
 					</NuxtLink>
 				</div>
-				<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
+				<div
+					class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5"
+				>
 					<ProductCard
 						v-for="product in section.products"
 						:key="product.id"
