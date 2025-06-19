@@ -8,6 +8,7 @@ import Service from '~/service/Service'
 import urls from '~/service/urls'
 import { useCartStore } from '~/store/cart.store'
 const { locale } = useI18n()
+const toast = useToast();
 const token = useToken()
 const cartStore = useCartStore()
 
@@ -91,12 +92,16 @@ async function onSubmit() {
 	const res = await Service.post(url, locale.value, data, token.value)
 
 	if (res.status === 200) {
-		console.log(res)
 		isSuccessOrder.value = true
 		cartStore.cart = []
 		setTimeout(() => {
 			emits('success')
 		}, 2000)
+	} else {
+		toast.add({
+			title: res.message,
+			color: 'error',
+		})
 	}
 }
 </script>
@@ -116,7 +121,7 @@ async function onSubmit() {
 				class="space-y-6 mt-6"
 				@submit="onSubmit"
 			>
-				<UFormField name="phone" label="Telefo'n raqam" class="">
+				<UFormField name="phone" label="Qo'shimcha telefon raqam " class="">
 					<UInput
 						v-model="state.phone"
 						v-maska="'+998 ## ### ## ##'"

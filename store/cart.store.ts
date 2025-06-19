@@ -9,11 +9,7 @@ export const useCartStore = defineStore("useCartStore", () => {
 
   // products count
   const productsCount = computed(() => {
-    let count = 0;
-    cart.value?.forEach((product: TCartProduct) => {
-      count += product.quantity
-    })
-    return count
+    return cart.value.length
   })
 
   // format currency

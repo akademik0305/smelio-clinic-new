@@ -79,7 +79,6 @@ const closeSubmitOrder = () => {
 //===============================-< on submit >-===============================
 //> variables
 //> functions
-//> functions
 </script>
 <template>
 	<main class="py-6">
