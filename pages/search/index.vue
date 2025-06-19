@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 //===============================-< imports >-===============================
 //> utils
+import { useI18n } from 'vue-i18n'
 import Service from '~/service/Service'
 import urls from '~/service/urls'
 import type { TSearch } from '~/types/api.types'
@@ -15,7 +16,11 @@ const isFinishedSearch = ref(false)
 // Asl qidiruv funksiyamiz
 async function handleSearch(value: string) {
 	searchValue.value = value
-	const res = await Service.get<TSearch>(urls.search(value, current_page.value), locale.value, null)
+	const res = await Service.get<TSearch>(
+		urls.search(value, current_page.value),
+		locale.value,
+		null
+	)
 	products.value = res.data
 	isFinishedSearch.value = true
 }
@@ -52,7 +57,9 @@ function changePage(page: number) {
 		<section class="mt-8">
 			<div class="container">
 				<div v-if="products?.items.length && searchValue">
-					<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5">
+					<div
+						class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5"
+					>
 						<ProductCard
 							v-for="product in products.items"
 							:key="product.id"
