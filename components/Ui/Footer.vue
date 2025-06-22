@@ -3,6 +3,7 @@
 import Service from '~/service/Service'
 import urls from '~/service/urls'
 const { locale } = useI18n()
+const localePath = useLocalePath();
 //===============================-< get contact >-===============================
 //> variables
 const contact = ref()
@@ -20,7 +21,7 @@ getContact()
 		<div class="container">
 			<div class="flex flex-col md:flex-row items-start justify-between gap-6">
 				<div class="flex flex-col gap-3 w-full md:w-1/2">
-					<NuxtLink to="/" class="block w-40 h-auto">
+					<NuxtLink :to="localePath('/')" class="block w-40 h-auto">
 						<img
 							:src="contact?.imageUrlFooter"
 							alt="logo"

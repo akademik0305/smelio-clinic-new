@@ -12,14 +12,14 @@ import { useCartStore } from '~/store/cart.store'
 //utils
 const { locale, setLocale, t } = useI18n()
 const router = useRouter()
-const localePath = useLocalePath()
 const token = useToken()
 const wishlistCount = useWishlistCount()
 const toast = useToast()
+const localePath = useLocalePath();
 // store
 const authStore = useAuthStore()
 const cartStore = useCartStore()
-// const localePath = useLocalePath()
+
 
 // get data
 // const companyData = useCompanyData();
@@ -131,7 +131,7 @@ onUnmounted(() => {
 			<div class="container">
 				<div class="py-4 flex items-center justify-between flex-col gap-4 md:flex-row">
 					<div class="flex items-center gap-6 justify-between md:justify-start w-full">
-						<NuxtLink to="/" class="block w-40 h-auto">
+						<NuxtLink :to="localePath('/')" class="block w-40 h-auto">
 							<img
 								:src="contact?.imageUrlFooter"
 								alt="logo"
@@ -139,20 +139,20 @@ onUnmounted(() => {
 							/>
 						</NuxtLink>
 						<NuxtLink
-							to="/categories"
+							:to="localePath('/categories')"
 							class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl py-2.5 px-10 cursor-pointer group hover:bg-bg hover:border-main hover:text-main transition-colors"
 						>
 							<UIcon
 								name="ic:round-menu"
 								class="text-2xl w-6 text-text group-hover:text-main"
 							/>
-							Katalog
+							{{ $t('catalog') }}
 						</NuxtLink>
 					</div>
 					<!-- navbar right -->
 					<div class="flex items-center gap-3">
 						<NuxtLink
-							to="/search"
+							:to="localePath('/search')"
 							class="flex items-center justify-center gap-2 w-full py-1.5 px-2 cursor-pointer hover:border-main transition-colors relative group"
 						>
 							<UIcon
@@ -175,7 +175,7 @@ onUnmounted(() => {
 							>
 						</button>
 						<NuxtLink
-							to="/cart"
+							:to="localePath('/cart')"
 							class="relative flex items-center justify-center gap-2 w-full py-1.5 px-2 cursor-pointer hover:border-main transition-colors group"
 						>
 							<UIcon

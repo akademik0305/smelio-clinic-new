@@ -18,6 +18,7 @@ const { t } = useI18n()
 const cartStore = useCartStore()
 const authStore = useAuthStore()
 const toast = useToast()
+const localePath = useLocalePath()
 
 //===============================-< get wishlists >-===============================
 //> variables
@@ -127,7 +128,7 @@ const closeSubmitOrder = () => {
 									class="flex-1 flex justify-between flex-col md:flex-row items-start md:items-center gap-2 md:gap-4"
 								>
 									<div class="col-span-2 line-clamp-2">
-										<NuxtLink :to="`/products/${2}`" class="text-md text-text">
+										<NuxtLink :to="localePath(`/products/${product.product_id}`)" class="text-md text-text">
 											{{ product.product_name }}
 										</NuxtLink>
 									</div>

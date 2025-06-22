@@ -1,4 +1,7 @@
 <script lang="ts" setup>
+const localePath = useLocalePath();
+
+// props
 const props = defineProps({
 	category: {
 		type: Object,
@@ -8,7 +11,7 @@ const props = defineProps({
 </script>
 <template>
 	<NuxtLink
-		:to="`/categories/${props.category.id}`"
+		:to="localePath(`/categories/${props.category.id}`)"
 		class="block rounded-xl overflow-hidden shadow-md border border-border group p-4"
 	>
 		<div

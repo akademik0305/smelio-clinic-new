@@ -61,5 +61,6 @@
   "payments": "To'lovlar",
   "payments_history": "To'lovlar tarixi",
   "payment_type": "To'lov turi",
-  "amount": "To'lov summasi"
+  "amount": "To'lov summasi",
+  "catalog": "Katalog"
 }

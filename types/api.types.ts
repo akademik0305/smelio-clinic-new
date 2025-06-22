@@ -21,6 +21,7 @@ export type TProduct = {
   category_id: string,
   categoryName: string,
   imageUrl: string,
+  images: string[]
   isSaved: string,
   price: number,
   priceFormat: string,

@@ -61,5 +61,6 @@
   "payments": "Payments",
   "payments_history": "Payment history",
   "payment_type": "Payment type",
-  "amount": "Payment amount"
+  "amount": "Payment amount",
+  "catalog": "Catalog"
 }

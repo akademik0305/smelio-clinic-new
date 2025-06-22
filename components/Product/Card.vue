@@ -12,6 +12,7 @@ const { locale, t } = useI18n()
 const toast = useToast()
 const token = useToken()
 const wishlistCount = useWishlistCount()
+const localePath = useLocalePath();
 // store
 const authStore = useAuthStore()
 const cartStore = useCartStore()
@@ -92,7 +93,7 @@ onMounted(() => {
 		</button>
 
 		<NuxtLink
-			:to="`/products/${props.product.id}`"
+			:to="localePath(`/products/${props.product.id}`)"
 			class="w-full h-auto flex items-center justify-cente rounded-xl overflow-hidden"
 		>
 			<img
@@ -102,7 +103,7 @@ onMounted(() => {
 			/>
 		</NuxtLink>
 		<div class="mt-4 flex-1 flex flex-col">
-			<NuxtLink :to="`/products/${props.product.id}`" class="text-sm md:text-md text-text">
+			<NuxtLink :to="localePath(`/products/${props.product.id}`)" class="text-sm md:text-md text-text">
 				{{ product.name }}
 			</NuxtLink>
 			<div class="mt-2 md:mt-4 flex-1">
@@ -117,7 +118,7 @@ onMounted(() => {
 					class="w-full flex items-center justify-between gap-3"
 				>
 					<NuxtLink
-						to="/cart"
+						:to="localePath('/cart')"
 						class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-1.5 px-4 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
 					>
 						<UIcon

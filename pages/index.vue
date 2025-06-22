@@ -10,6 +10,7 @@ import type { THomeSection } from '~/types/api.types'
 // //> utils
 const { locale } = useI18n()
 const token = useToken()
+const localePath = useLocalePath()
 // const router = useRouter()
 // const localePath = useLocalePath()
 
@@ -222,7 +223,7 @@ function refetchSections() {
 				<div class="flex items-center justify-between">
 					<h2 class="text-2xl font-semibold">{{ section.name }}</h2>
 					<NuxtLink
-						:to="`/sections/${section.id}`"
+						:to="localePath(`/sections/${section.id}`)"
 						class="flex items-center gap-2 text-text hover:text-main transition-colors group"
 					>
 						{{ $t('all') }}

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue'
 
+const localePath = useLocalePath();
 type TLinks = {
 	label: string
 	url?: string
@@ -21,7 +22,7 @@ const props = defineProps({
 			class="flex items-center justify-start gap-2"
 		>
 			<NuxtLink
-				:to="link.url"
+				:to="localePath(link.url || '/')"
 				class="text-sm text-subtext"
 				:class="[
 					link.url ? 'hover:text-main transition-colors duration-300' : '',

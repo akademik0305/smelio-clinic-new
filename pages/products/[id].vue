@@ -8,6 +8,7 @@ const { locale } = useI18n()
 const route = useRoute()
 const token = useToken()
 const cartStore = useCartStore()
+const localePath = useLocalePath()
 //===============================-< get product detail >-===============================
 //> variables
 const product = ref<TProduct>()
@@ -56,26 +57,41 @@ getProduct()
 									},
 								}"
 							>
-								<!-- <swiper-container
-									:init="true"
-									:loop="true"
-									:slides-per-view="1"
-									:space-between="20"
-									:pagination="{
-										clickable: true,
-									}"
-									:autoplay="{
-										delay: 3000,
-									}"
-									class="rounded-2xl overflow-hidden border border-border"
-								>
-									<swiper-slide v-for="idx in 10" :key="idx" class="p-4">
-								</swiper-slide>
-									</swiper-container> -->
 								<div
 									class="rounded-2xl overflow-hidden border border-border p-4 md:p-8 w-full sm:w-auto"
 								>
-									<a
+									<div v-if="product.images.length">
+										<swiper-container
+											:init="true"
+											:loop="true"
+											:slides-per-view="1"
+											:space-between="20"
+											:pagination="{
+												clickable: true,
+											}"
+											:autoplay="{
+												delay: 3000,
+											}"
+											class="rounded-2xl overflow-hidden border border-border"
+										>
+											<swiper-slide v-for="image in product.images" :key="image" class="p-4">
+												<a
+													data-fancybox="gallery"
+													class="w-full h-auto flex items-center justify-center"
+													:href="image"
+												>
+													<img
+														:src="image"
+														:alt="product.name"
+														class="w-full h-full max-w-80"
+													/>
+												</a>
+											</swiper-slide>
+										</swiper-container>
+									</div>
+
+									<a	
+										v-else
 										data-fancybox="gallery"
 										class="w-full h-auto flex items-center justify-center"
 										:href="product?.imageUrl"
@@ -102,7 +118,7 @@ getProduct()
 								class="w-max flex items-center justify-between gap-3"
 							>
 								<NuxtLink
-									to="/cart"
+									:to="localePath('/cart')"
 									class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-1.5 px-4 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
 								>
 									<UIcon
