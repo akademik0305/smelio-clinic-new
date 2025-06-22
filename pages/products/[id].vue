@@ -2,10 +2,12 @@
 //===============================-< imports >-===============================
 import Service from '~/service/Service'
 import urls from '~/service/urls'
+import { useCartStore } from '~/store/cart.store'
 import type { TProduct } from '~/types/api.types'
 const { locale } = useI18n()
 const route = useRoute()
 const token = useToken()
+const cartStore = useCartStore()
 //===============================-< get product detail >-===============================
 //> variables
 const product = ref<TProduct>()
@@ -18,7 +20,6 @@ async function getProduct() {
 	)
 
 	product.value = res.data
-	console.log(product.value)
 }
 
 getProduct()
@@ -42,7 +43,9 @@ getProduct()
 
 		<section class="mt-8">
 			<div class="container">
-				<div class="flex items-start justify-start gap-6 lg:gap-8 flex-col md:flex-row">
+				<div
+					class="flex items-start justify-start gap-6 lg:gap-8 flex-col md:flex-row"
+				>
 					<div class="w-full md:w-1/2">
 						<ClientOnly>
 							<!-- MAIN SWIPER -->
@@ -95,7 +98,7 @@ getProduct()
 
 						<div class="mt-6">
 							<div
-								v-if="false"
+								v-if="cartStore.checkIsExist(product.id)"
 								class="w-max flex items-center justify-between gap-3"
 							>
 								<NuxtLink
@@ -114,23 +117,32 @@ getProduct()
 										name="mynaui:trash"
 										class="text-2xl w-6 text-main group-hover:text-white"
 									/>
-									<span class="text-sm text-main group-hover:text-white"
-										>{{ $t('delete') }}</span
-									>
+									<span class="text-sm text-main group-hover:text-white">{{
+										$t('delete')
+									}}</span>
 								</button>
 							</div>
-							<button
-								v-else
-								class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full py-2 px-10 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
-							>
-								<UIcon
-									name="proicons:cart"
-									class="text-2xl w-6 text-bg group-hover:text-main"
-								/>
-								<span class="text-sm text-bg group-hover:text-main"
-									>{{ $t('add_to_cart') }}</span
+							<div v-else class="w-full">
+								<p
+									v-if="!product.residue"
+									class="flex items-center justify-center gap-2 bg-gray-400 border border-bg rounded-full w-full py-2 px-3 md:px-6 flex-1 text-xs md:text-base"
 								>
-							</button>
+									{{ $t('empty') }}
+								</p>
+								<button
+									v-else
+									class="flex items-center justify-center gap-2 bg-main border border-bg rounded-full w-full py-2 px-3 md:px-6 cursor-pointer group hover:bg-bg hover:border-main transition-colors"
+									@click="cartStore.addToCart(product)"
+								>
+									<UIcon
+										name="proicons:cart"
+										class="text-2xl w-6 text-bg group-hover:text-main"
+									/>
+									<span class="text-sm text-bg group-hover:text-main">{{
+										$t('add_to_cart')
+									}}</span>
+								</button>
+							</div>
 						</div>
 					</div>
 				</div>

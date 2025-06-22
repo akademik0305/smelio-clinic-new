@@ -50,7 +50,6 @@ const stateUser = reactive<Partial<SchemaUser>>({
 
 //> functions
 async function onSubmitUser() {
-	console.log('submit')
 
 	const formdata = new FormData()
 	formdata.append('firstname', stateUser.firstname ?? '')
@@ -62,9 +61,7 @@ async function onSubmitUser() {
 		token.value
 	)
 
-	console.log(res)
 	if (res.status === 200) {
-		console.log('success')
 		getProfileInfo()
 	}
 }

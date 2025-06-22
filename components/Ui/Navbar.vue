@@ -33,7 +33,6 @@ const cartStore = useCartStore()
 //> variables
 type TLocale = 'uz' | 'ru' | 'en'
 const locales = ['Uz', 'Ru', 'En']
-console.log(locale.value)
 
 const currentLang = ref<TLocale>(locale.value)
 
@@ -116,7 +115,6 @@ onMounted(() => {
 	currentLang.value = locale.value
 	window.addEventListener('scroll', handleScrool)
 	// mapStore.getUserPosition()
-	// console.log(mapStore.activeAddress)
 })
 onUnmounted(() => {
 	window.removeEventListener('scroll', handleScrool)

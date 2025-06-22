@@ -60,8 +60,15 @@ export const useCartStore = defineStore("useCartStore", () => {
   }
 
   function handleChangeCount(product: TCartProduct) {
-    if (product.quantity <= 0) {
-      removeFromCart(product.product_id)
+
+    if (product.quantity) {
+      if (product.quantity > product.residue) {
+        product.quantity = product.residue
+      }
+
+      if (product.quantity <= 0) {
+        removeFromCart(product.product_id)
+      }
     }
   }
 

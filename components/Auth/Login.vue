@@ -102,7 +102,6 @@ async function onSubmitCode() {
 		token.value
 	)
 
-	console.log(res)
 	if (res.status === 200) {
 		if (!res.data) {
 			formType.value = 'name'
@@ -150,7 +149,6 @@ async function onSubmitUser() {
 		token.value
 	)
 
-	console.log(res)
 	if (res.status === 200) {
 		emits('success', res.data)
 	}
