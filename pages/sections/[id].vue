@@ -38,7 +38,7 @@ function changePage(page: number) {
 				<h2 class="text-2xl font-semibold">{{ section.section.name }}</h2>
 				<BaseBreadcump
 					:links="[
-						{ label: 'Asosiy sahifa', url: '/' },
+						{ label: $t('home_page'), url: '/' },
 						{ label: section.section.name },
 					]"
 				/>

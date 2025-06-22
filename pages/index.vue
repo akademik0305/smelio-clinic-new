@@ -156,7 +156,7 @@ function refetchSections() {
 		<section class="pb-8">
 			<div class="container">
 				<div class="flex items-center justify-between">
-					<h2 class="text-2xl font-semibold">Ommabop kategoriyalar</h2>
+					<h2 class="text-2xl font-semibold">{{ $t('popular_categories') }}</h2>
 				</div>
 				<div class="mt-4 relative">
 					<swiper-container ref="categoryCardsRef" :init="true" class="">
@@ -225,7 +225,7 @@ function refetchSections() {
 						:to="`/sections/${section.id}`"
 						class="flex items-center gap-2 text-text hover:text-main transition-colors group"
 					>
-						Barchasi
+						{{ $t('all') }}
 						<UIcon
 							name="uil:arrow-right"
 							class="font-medium text-2xl text-text group-hover:text-main transition-colors"

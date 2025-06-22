@@ -10,6 +10,9 @@ export default {
   updateName() { return `/profile/update-name` },
   updatePhone() { return `/update-username/phone` },
   updatePhoneVerify() { return `/update-username/verify` },
+  getOrders(page: number) { return `/profile/my-orders?page=${page}` },
+  getPayments(page: number) { return `/profile/my-payments?page=${page}` },
+
 
 
   // home page

@@ -7,7 +7,7 @@ import type { TabsItem } from '@nuxt/ui'
 import Service from '~/service/Service'
 import urls from '~/service/urls'
 import { useCartStore } from '~/store/cart.store'
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const toast = useToast();
 const token = useToken()
 const cartStore = useCartStore()
@@ -36,8 +36,8 @@ const orderTypes = ref<TabsItem[]>([
 const schema = z
 	.object({
 		phone: z
-			.string({ required_error: 'Telefon raqamini kiriting' })
-			.min(17, 'Telefon raqamini to`g`ri kiriting'),
+			.string({ required_error: t('enter_phone') })
+			.min(17, t('wrong_number')),
 		requireAddress: z.string(),
 		address: z.string().optional(),
 	})
@@ -121,7 +121,7 @@ async function onSubmit() {
 				class="space-y-6 mt-6"
 				@submit="onSubmit"
 			>
-				<UFormField name="phone" label="Qo'shimcha telefon raqam " class="">
+				<UFormField name="phone" :label="$t('second_phone')" class="">
 					<UInput
 						v-model="state.phone"
 						v-maska="'+998 ## ### ## ##'"
@@ -142,15 +142,14 @@ async function onSubmit() {
 						type="submit"
 						class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl py-2.5 px-10 cursor-pointer group hover:bg-bg hover:border-main hover:text-text transition-colors text-white w-full"
 					>
-						Davom etish
+						{{ $t('continue') }}
 					</button>
 				</div>
 			</UForm>
 		</div>
 		<div v-else>
 			<p class="text-center text-text">
-				Buyurtmangiz qabul qilindi tez orada operatorlarimiz siz bilan aloqaga
-				chiqishadi
+				{{ $t('order_success_message') }}
 			</p>
 		</div>
 	</div>

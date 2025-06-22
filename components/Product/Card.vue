@@ -8,7 +8,7 @@ import Service from '~/service/Service'
 import urls from '~/service/urls'
 import { useAuthStore } from '~/store/auth.store'
 import { useCartStore } from '~/store/cart.store'
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const toast = useToast()
 const token = useToken()
 const wishlistCount = useWishlistCount()
@@ -60,7 +60,7 @@ async function toggleWishlist(product_id: number) {
 		}
 	} else {
 		toast.add({
-			title: "Saqlanganlarga qo'shish uchun ro'yhatdan o'tishiz kerak",
+			title: t('need_register_for_wishlist'),
 			color: 'error',
 		})
 	}
@@ -134,7 +134,7 @@ onMounted(() => {
 							class="text-2xl w-6 text-main group-hover:text-white"
 						/>
 						<span class="text-sm text-main group-hover:text-white hidden md:block"
-							>O'chirish</span
+							>{{ $t('delete') }}</span
 						>
 					</button>
 				</div>
@@ -144,7 +144,7 @@ onMounted(() => {
 						v-if="!props.product.residue"
 						class="flex items-center justify-center gap-2 bg-gray-400 border border-bg rounded-full w-full py-2 px-3 md:px-6 flex-1 text-xs md:text-base"
 					>
-						Tugagan
+						{{ $t('empty') }}
 					</p>
 					<button
 						v-else
@@ -155,7 +155,7 @@ onMounted(() => {
 							name="proicons:cart"
 							class="text-2xl w-6 text-bg group-hover:text-main"
 						/>
-						<span class="text-sm text-bg group-hover:text-main">Savatga</span>
+						<span class="text-sm text-bg group-hover:text-main">{{ $t('add_to_cart') }}</span>
 					</button>
 				</div>
 			</footer>

@@ -32,7 +32,7 @@ getContact()
 					</p>
 				</div>
 				<div class="flex flex-col gap-3">
-					<h4>Connect With Us</h4>
+					<h4>{{ $t('contact') }}</h4>
 					<div class="flex items-center gap-2">
 						<a
 							v-if="contact?.instagram_url"
@@ -78,12 +78,12 @@ getContact()
 					<a
 						:href="`mailto:${contact?.email}`"
 						class="text-gray-500 font-inter hover:text-main transition-all"
-						>Email: {{ contact?.email }}</a
+						>{{ $t('email') }}: {{ contact?.email }}</a
 					>
 					<a
 						:href="`tel:${contact?.phone}`"
 						class="text-gray-500 font-inter hover:text-main transition-all"
-						>Phone: {{ contact?.phone }}</a
+						>{{ $t('phone') }}: {{ contact?.phone }}</a
 					>
 				</div>
 			</div>
@@ -91,9 +91,7 @@ getContact()
 			<div
 				class="border-t border-t-gray-200 mt-6 pt-6 text-center font-inter text-gray-600 text-sm"
 			>
-				© {{ new Date().getFullYear() }} .Barcha huquqlar himoyalangan.
-				Tovarlarning ko'rsatilgan qiymati va ularni sotib olish shartlari joriy
-				sanaga amal qiladi
+				© {{ new Date().getFullYear() }} .{{ $t('footer_copy') }}
 			</div>
 		</div>
 	</footer>

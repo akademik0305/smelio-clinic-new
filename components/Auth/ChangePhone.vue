@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 //===============================-< imports >-===============================
-//> variables
-//> functions
 import * as z from 'zod'
 // import type { FormSubmitEvent } from '@nuxt/ui'
+import {useI18n} from 'vue-i18n'
 // utils
 import Service from '~/service/Service'
 import urls from '~/service/urls'
-const { locale } = useI18n()
+const { locale, t } = useI18n()
 const token = useToken()
 
 // props
@@ -26,8 +25,8 @@ const emits = defineEmits(['success'])
 const formType = ref<'phone' | 'code' | 'name'>('phone')
 const schema = z.object({
 	phone: z
-		.string({ required_error: 'Telefon raqamini kiriting' })
-		.min(17, 'Telefon raqamini to`g`ri kiriting'),
+		.string({ required_error: t('enter_phone') })
+		.min(17, t('wrong_number')),
 })
 
 type Schema = z.output<typeof schema>
@@ -87,8 +86,8 @@ function tick() {
 //> variables
 const schemaCode = z.object({
 	code: z
-		.array(z.string(), { required_error: 'Kodni kiriting' })
-		.length(4, { message: 'Kod 4 belgidan iborat bo‘lishi kerak' }),
+		.array(z.string(), { required_error: t('enter_code') })
+		.length(4, { message: t('wrong_code') }),
 })
 
 type SchemaCode = z.output<typeof schemaCode>
@@ -116,7 +115,7 @@ async function onSubmitCode() {
 		codeForm.value?.setErrors([
 			{
 				name: 'code',
-				message: "Tasdiqlash kodi noto'g'ri",
+				message: t('code_error'),
 			},
 		])
 	}
@@ -139,7 +138,7 @@ onMounted(() => {
 			class="space-y-6"
 			@submit="onSubmit"
 		>
-			<UFormField label="Telefo'n raqam" name="phone">
+			<UFormField :label="$t('phone_number')" name="phone">
 				<UInput
 					v-model="state.phone"
 					v-maska="'+998 ## ### ## ##'"
@@ -153,7 +152,7 @@ onMounted(() => {
 					type="submit"
 					class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl py-2.5 px-10 cursor-pointer group hover:bg-bg hover:border-main hover:text-text transition-colors text-white w-full"
 				>
-					Davom etish
+					{{ $t('continue') }}
 				</button>
 			</div>
 		</UForm>
@@ -168,7 +167,7 @@ onMounted(() => {
 		>
 			<UFormField
 				name="code"
-				label="Yuborilgan kodni kiriting"
+				:label="$t('enter_code')"
 				class="text-center justify-center"
 			>
 				<p class="my-2 font-medium text-text text-lg">{{ state.phone }}</p>
@@ -192,7 +191,7 @@ onMounted(() => {
 					type="submit"
 					class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl py-2.5 px-10 cursor-pointer group hover:bg-bg hover:border-main hover:text-text transition-colors text-white w-full"
 				>
-					Davom etish
+					{{ $t('continue') }}
 				</button>
 			</div>
 		</UForm>

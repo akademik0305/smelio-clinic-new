@@ -48,6 +48,16 @@ function logOut() {
 				/>
 				{{ $t('orders') }}
 			</NuxtLink>
+			<NuxtLink
+				:to="localePath('/profile/payments')"
+				class="flex items-center justify-start gap-5 md:mt-7 font-medium text-nowrap md:text-wrap hover:text-main transition-colors group"
+			>
+				<UIcon
+					name="ic:sharp-history"
+					class="text-2xl w-6 text-text group-hover:text-main transition-colors"
+				/>
+				{{ $t('payments') }}
+			</NuxtLink>
 			<button
 				class="flex items-center justify-start gap-5 md:mt-7 font-medium text-nowrap md:text-wrap hover:text-main transition-colors group"
 				@click="logOut"

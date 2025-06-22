@@ -38,8 +38,8 @@ function changePage(page: number) {
 				<h2 class="text-2xl font-semibold">{{ category.category.name }}</h2>
 				<BaseBreadcump
 					:links="[
-						{ label: 'Asosiy sahifa', url: '/' },
-						{ label: 'Kategoriyalar', url: '/categories' },
+						{ label: $t('home_page'), url: '/' },
+						{ label: $t('categories'), url: '/categories' },
 						{ label: category.category.name },
 					]"
 				/>

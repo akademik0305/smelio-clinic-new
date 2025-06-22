@@ -65,3 +65,49 @@ export type TSearch = {
 }
 
 export type TWishlist = TProduct[]
+
+
+export type TOrderProduct = {
+  id: number,
+  product_id: number,
+  productName: string,
+  count: string,
+  total_sum: string,
+  totalSumFormat: string,
+  product_price: string,
+  productPriceFormat: string,
+}
+
+export type TOrderItem = {
+  id: number,
+  dateFormat: string,
+  delivery_type: number,
+  deliveryTypeName: string,
+  phone: string,
+  delivery_sum: string | null,
+  deliverySumFormat: string,
+  total_sum: string,
+  totalSumFormat: string,
+  status: number,
+  statusName: string,
+  orderItems: TOrderProduct[]
+}
+
+export type TOrder = {
+  items: TOrderItem[],
+  _meta: TMeta
+}
+
+export type TPaymentItem = {
+  id: number,
+  payment_type_id: number,
+  paymentTypeName: string,
+  amount: string,
+  amountSumFormat: string,
+  dateFormat: string,
+}
+
+export type TPayment = {
+  items: TPaymentItem[],
+  _meta: TMeta
+}

@@ -9,7 +9,7 @@
 // import { useAuthStore } from '~/store/auth.store'
 import { useAuthStore } from '~/store/auth.store'
 import { useCartStore } from '~/store/cart.store'
-// const { locale } = useI18n()
+const { t } = useI18n()
 // const toast = useToast()
 // const token = useToken()
 // const wishlistCount = useWishlistCount()
@@ -66,7 +66,7 @@ const openSubmitOrder = () => {
 		isOpenSubmitOrder.value = true
 	} else {
 		toast.add({
-			title: "Buyurtmani rashmiylashtirish uchun ro'yhatdan o'tishingiz kerak",
+			title: t('need_login_for_order'),
 			color: 'error',
 		})
 	}
@@ -84,9 +84,9 @@ const closeSubmitOrder = () => {
 	<main class="py-6">
 		<nav>
 			<div class="container">
-				<h2 class="text-2xl font-semibold">Korzinka</h2>
+				<h2 class="text-2xl font-semibold">{{ $t('cart') }}</h2>
 				<BaseBreadcump
-					:links="[{ label: 'Asosiy sahifa', url: '/' }, { label: 'Korzinka' }]"
+					:links="[{ label: 'Asosiy sahifa', url: '/' }, { label: $t('cart') }]"
 				/>
 			</div>
 		</nav>
@@ -99,13 +99,13 @@ const closeSubmitOrder = () => {
 						class="shadow-md border border-border rounded-2xl p-6 flex-2 w-full"
 					>
 						<div class="flex items-center justify-between">
-							<h3 class="font-medium text-xl">Mahsulotlar:</h3>
+							<h3 class="font-medium text-xl">{{ $t('products') }}:</h3>
 							<button
 								v-if="cartStore.cart.length"
 								class="cursor-pointer hover:text-main transition-colors underline"
 								@click="cartStore.clearCart"
 							>
-								Tozalash
+								{{ $t('clear') }}
 							</button>
 						</div>
 						<div v-if="cartStore.cart.length" class="">
@@ -204,14 +204,14 @@ const closeSubmitOrder = () => {
 							class="flex items-center justify-between py-2 gap-6 border-b border-b-border"
 						>
 							<p class="text-subtext">
-								{{ cartStore.productsCount }} dona mahsulot narxi:
+								{{ cartStore.productsCount }} {{ $t('product_price') }}:
 							</p>
 							<p class="font-semibold text-text">{{ cartStore.allPrice }}</p>
 						</div>
 						<div
 							class="mt-2 flex items-center justify-between py-2 gap-6 border-b border-b-border"
 						>
-							<p class="font-semibold text-text text-lg">Jami:</p>
+							<p class="font-semibold text-text text-lg">{{ $t('all_summ') }}:</p>
 							<p class="font-semibold text-text text-lg">
 								{{ cartStore.allPrice }}
 							</p>
@@ -221,7 +221,7 @@ const closeSubmitOrder = () => {
 							@click="openSubmitOrder"
 						>
 							<span class="text-sm text-bg group-hover:text-main"
-								>Rasmiylashtirish</span
+								>{{ $t('order') }}</span
 							>
 						</button>
 					</div>

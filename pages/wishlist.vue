@@ -20,11 +20,11 @@ getWishlists()
 	<main class="py-6">
 		<nav>
 			<div class="container">
-				<h2 class="text-2xl font-semibold">Sevimlilar</h2>
+				<h2 class="text-2xl font-semibold">{{ $t('wishlist') }}</h2>
 				<BaseBreadcump
 					:links="[
-						{ label: 'Asosiy sahifa', url: '/' },
-						{ label: 'Sevimlilar' },
+						{ label: $t('home_page'), url: '/' },
+						{ label: $t('wishlist') },
 					]"
 				/>
 			</div>

@@ -36,5 +36,3 @@ onUnmounted(() => {
 		<slot />
 	</div>
 </template>
-
-<style></style>

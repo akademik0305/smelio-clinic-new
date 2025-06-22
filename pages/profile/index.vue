@@ -128,14 +128,14 @@ onMounted(() => {})
 								class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl w-full text-white py-2.5 px-10 group hover:bg-bg hover:border-main hover:text-main transition-colors"
 								@click="onSubmitUser"
 							>
-								Saqlash
+								{{ $t('save') }}
 							</button>
 							<button
 								type="button"
 								class="flex items-center justify-center gap-2 bg-white border border-main rounded-xl w-full text-main py-2.5 px-10 group hover:bg-main hover:border-main hover:text-white transition-colors"
 								@click="openChangePhone"
 							>
-								Raqamni o'zgartish
+								{{ $t('change_phone') }}
 							</button>
 						</div>
 					</UForm>
@@ -154,7 +154,7 @@ onMounted(() => {})
 			<template #header>
 				<div class="">
 					<h5 class="font-semibold text-xl text-center">
-						Raqamni almashtirish
+						{{ $t('change_phone') }}
 					</h5>
 				</div>
 			</template>

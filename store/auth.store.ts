@@ -19,7 +19,8 @@ export const useAuthStore = defineStore(
 	},
 	{
 		persist: {
-			storage: piniaPluginPersistedstate.sessionStorage(),
+			storage: piniaPluginPersistedstate.localStorage(),
+			key: 'rm-auth'
 		},
 	}
 );

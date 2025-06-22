@@ -18,11 +18,11 @@ getCategories()
 	<main class="py-6">
 		<nav>
 			<div class="container">
-				<h2 class="text-2xl font-semibold">Kategoriyalar</h2>
+				<h2 class="text-2xl font-semibold">{{ $t('categories') }}</h2>
 				<BaseBreadcump
 					:links="[
-						{ label: 'Asosiy sahifa', url: '/' },
-						{ label: 'Kategoriyalar' },
+						{ label: $t('home_page'), url: '/' },
+						{ label: $t('categories') },
 					]"
 				/>
 			</div>

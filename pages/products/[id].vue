@@ -32,8 +32,8 @@ getProduct()
 				</h2>
 				<BaseBreadcump
 					:links="[
-						{ label: 'Asosiy sahifa', url: '/' },
-						{ label: 'Kategoriyalar', url: '/categories' },
+						{ label: $t('home_page'), url: '/' },
+						{ label: $t('categories'), url: '/categories' },
 						{ label: product?.name },
 					]"
 				/>
@@ -88,7 +88,7 @@ getProduct()
 						</ClientOnly>
 					</div>
 					<div class="flex-1 flex flex-col">
-						<h4 class="text-xl font-semibold">Mahsulot haqida qisqacha</h4>
+						<h4 class="text-xl font-semibold">{{ $t('about_product') }}</h4>
 						<p class="mt-2">
 							{{ product.description }}
 						</p>
@@ -115,7 +115,7 @@ getProduct()
 										class="text-2xl w-6 text-main group-hover:text-white"
 									/>
 									<span class="text-sm text-main group-hover:text-white"
-										>O'chirish</span
+										>{{ $t('delete') }}</span
 									>
 								</button>
 							</div>
@@ -128,7 +128,7 @@ getProduct()
 									class="text-2xl w-6 text-bg group-hover:text-main"
 								/>
 								<span class="text-sm text-bg group-hover:text-main"
-									>Savatga</span
+									>{{ $t('add_to_cart') }}</span
 								>
 							</button>
 						</div>

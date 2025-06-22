@@ -10,7 +10,7 @@ import { useCartStore } from '~/store/cart.store'
 // const router = useRouter()
 
 //utils
-const { locale, setLocale } = useI18n()
+const { locale, setLocale, t } = useI18n()
 const router = useRouter()
 const localePath = useLocalePath()
 const token = useToken()
@@ -103,7 +103,7 @@ function goToWishlist() {
 		router.push(localePath('/wishlist'))
 	} else {
 		toast.add({
-			title: "Saqlanganlarni ko'rish uchun tizimga kirishingiz kerak",
+			title: t('need_login_for_see_wishlist'),
 			color: 'error'
 		})
 	}
@@ -229,7 +229,7 @@ onUnmounted(() => {
 			<template #header>
 				<div class="">
 					<h5 class="font-semibold text-xl text-center">
-						Kirish yoki ro'yxatdan o'tish
+						{{ $t('login_or_register') }}
 					</h5>
 				</div>
 			</template>
