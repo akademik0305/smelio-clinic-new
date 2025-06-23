@@ -50,7 +50,6 @@ const stateUser = reactive<Partial<SchemaUser>>({
 
 //> functions
 async function onSubmitUser() {
-
 	const formdata = new FormData()
 	formdata.append('firstname', stateUser.firstname ?? '')
 	formdata.append('lastname', stateUser.lastname ?? '')
@@ -91,51 +90,61 @@ onMounted(() => {})
 	<main class="py-10">
 		<div class="container max-w-7xl mx-auto px-4 flex-1 flex flex-col">
 			<div
-				class="flex items-start justify-start gap-5 flex-1 flex-col md:flex-row"
+				class="flex items-stretch justify-start gap-5 flex-1 flex-col md:flex-row"
 			>
 				<!-- sidebar start -->
 				<profile-sidebar />
 				<!-- sidebar end -->
 
-				<div
-					class="bg-white border border-border rounded-2xl p-7 flex-1 w-full"
-				>
-					<h3 class="font-semibold text-xl text-pr-text">
-						{{ $t('personal_info') }}
-					</h3>
+				<div class="flex gap-4 flex-col xl:flex-row w-full flex-1">
+					<div
+						class="bg-white border border-border rounded-2xl p-7 flex-1 w-full"
+					>
+						<h3 class="font-semibold text-xl text-pr-text">
+							{{ $t('personal_info') }}
+						</h3>
 
-					<UForm :schema="schemaUser" :state="stateUser" class="mt-8">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-							<UFormField name="firstname" label="Ism" class="">
-								<UInput
-									v-model="stateUser.firstname"
-									size="xl"
-									class="w-full mx-auto flex justify-center"
-								/>
-							</UFormField>
-							<UFormField name="lastname" label="Familiya" class="">
-								<UInput
-									v-model="stateUser.lastname"
-									size="xl"
-									class="w-full mx-auto flex justify-center"
-								/>
-							</UFormField>
-							<button
-								type="submit"
-								class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl w-full text-white py-2.5 px-10 group hover:bg-bg hover:border-main hover:text-main transition-colors"
-								@click="onSubmitUser"
-							>
-								{{ $t('save') }}
-							</button>
-							<button
-								type="button"
-								class="flex items-center justify-center gap-2 bg-white border border-main rounded-xl w-full text-main py-2.5 px-10 group hover:bg-main hover:border-main hover:text-white transition-colors"
-								@click="openChangePhone"
-							>
-								{{ $t('change_phone') }}
-							</button>
-						</div>
-					</UForm>
+						<UForm :schema="schemaUser" :state="stateUser" class="mt-8 flex-1">
+							<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+								<UFormField name="firstname" label="Ism" class="">
+									<UInput
+										v-model="stateUser.firstname"
+										size="xl"
+										class="w-full mx-auto flex justify-center"
+									/>
+								</UFormField>
+								<UFormField name="lastname" label="Familiya" class="">
+									<UInput
+										v-model="stateUser.lastname"
+										size="xl"
+										class="w-full mx-auto flex justify-center"
+									/>
+								</UFormField>
+								<button
+									type="submit"
+									class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl w-full text-white py-2.5 px-10 group hover:bg-bg hover:border-main hover:text-main transition-colors"
+									@click="onSubmitUser"
+								>
+									{{ $t('save') }}
+								</button>
+								<button
+									type="button"
+									class="flex items-center justify-center gap-2 bg-white border border-main rounded-xl w-full text-main py-2.5 px-10 group hover:bg-main hover:border-main hover:text-white transition-colors"
+									@click="openChangePhone"
+								>
+									{{ $t('change_phone') }}
+								</button>
+							</div>
+						</UForm>
+					</div>
+					<div
+						class="bg-main rounded-2xl p-4 flex flex-col items-center justify-center gap-2 w-full xl:w-64"
+					>
+						<p class="font-medium text-text text-lg">{{ $t('balance') }}</p>
+						<p class="font-semibold text-text text-2xl">
+							{{ profile?.balanceFormat }}
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>

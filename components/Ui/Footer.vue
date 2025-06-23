@@ -14,6 +14,10 @@ async function getContact() {
 }
 
 getContact()
+
+watch(locale, () => {
+	getContact();
+})
 </script>
 <template>
 	<!-- footer -->

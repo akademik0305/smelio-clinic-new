@@ -5,5 +5,7 @@ export type TUser = {
   lastname: string,
   status: string,
   auth_key: string,
+  balance: number,
+  balanceFormat: string,
 };
 

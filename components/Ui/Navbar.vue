@@ -4,6 +4,8 @@ import type { TUser } from '../../types/auth.type'
 import urls from '~/service/urls'
 import Service from '~/service/Service'
 import { useCartStore } from '~/store/cart.store'
+const switchLocalePath = useSwitchLocalePath();
+
 
 //===============================-< imports >-===============================
 // import { useRouter } from 'vue-router'
@@ -38,7 +40,8 @@ const currentLang = ref<TLocale>(locale.value)
 
 //> functions
 watch(currentLang, () => {
-	setLocale(currentLang.value.toLowerCase() as TLocale)
+	// setLocale(currentLang.value.toLowerCase() as TLocale)
+	router.push(switchLocalePath(currentLang.value.toLowerCase() as TLocale))
 })
 
 //===============================-< fixed navbar and category >-===============================

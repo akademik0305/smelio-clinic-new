@@ -62,5 +62,6 @@
   "payments_history": "To'lovlar tarixi",
   "payment_type": "To'lov turi",
   "amount": "To'lov summasi",
-  "catalog": "Katalog"
+  "catalog": "Katalog",
+  "balance": "Balans"
 }

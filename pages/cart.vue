@@ -87,7 +87,7 @@ const closeSubmitOrder = () => {
 			<div class="container">
 				<h2 class="text-2xl font-semibold">{{ $t('cart') }}</h2>
 				<BaseBreadcump
-					:links="[{ label: 'Asosiy sahifa', url: '/' }, { label: $t('cart') }]"
+					:links="[{ label:  t('home_page'), url: '/' }, { label: $t('cart') }]"
 				/>
 			</div>
 		</nav>
