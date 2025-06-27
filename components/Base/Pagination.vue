@@ -36,7 +36,7 @@ function handleChangePagination() {
 			size="md"
 			:show-controls="true"
 			:items-per-page="20"
-			:total="props.meta.totalCount * 20"
+			:total="props.meta.totalCount"
 			@update:page="handleChangePagination"
 		/>
 	</div>

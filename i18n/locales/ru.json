@@ -62,5 +62,6 @@
   "payments_history": "История платежей",
   "payment_type": "Тип оплаты",
   "amount": "Сумма оплаты",
-  "catalog": "Каталог"
+  "catalog": "Каталог",
+  "balance": "Баланс"
 }
