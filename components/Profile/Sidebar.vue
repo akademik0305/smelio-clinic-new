@@ -27,7 +27,19 @@ function logOut() {
 			{{ $t('personal_cabinet') }}
 		</h2>
 
-		<div class="mt-4 md:mt-0 flex flex-row md:flex-col overflow-x-auto gap-4 md:gap-0 pb-4 md:pb-0">
+		<div
+			class="mt-4 md:mt-0 flex flex-row md:flex-col overflow-x-auto gap-4 md:gap-0 pb-4 md:pb-0"
+		>
+			<NuxtLink
+				:to="localePath('/profile/cards')"
+				class="flex items-center justify-start gap-5 md:mt-7 font-medium text-nowrap md:text-wrap hover:text-main transition-colors group"
+			>
+				<UIcon
+					name="proicons:person"
+					class="text-2xl w-6 text-text group-hover:text-main transition-colors"
+				/>
+				{{ $t('company_cards') }}
+			</NuxtLink>
 			<NuxtLink
 				:to="localePath('/profile')"
 				class="flex items-center justify-start gap-5 md:mt-7 font-medium text-nowrap md:text-wrap hover:text-main transition-colors group"
@@ -71,3 +83,12 @@ function logOut() {
 		</div>
 	</div>
 </template>
+<style>
+a.router-link-active.router-link-exact-active {
+	color: var(--color-main);
+}
+
+a.router-link-active.router-link-exact-active span {
+	background-color: var(--color-main);
+}
+</style>

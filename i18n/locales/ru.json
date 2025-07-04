@@ -63,5 +63,9 @@
   "payment_type": "Тип оплаты",
   "amount": "Сумма оплаты",
   "catalog": "Каталог",
-  "balance": "Баланс"
+  "balance": "Баланс",
+  "company_cards": "Карты компании",
+  "card_number": "Номер карты",
+  "card_name": "Название карты",
+  "card_number_copied": "Номер карты скопирован"
 }

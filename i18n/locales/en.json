@@ -63,5 +63,9 @@
   "payment_type": "Payment type",
   "amount": "Payment amount",
   "catalog": "Catalog",
-  "balance": "Balance"
+  "balance": "Balance",
+  "company_cards": "Company cards",
+  "card_number": "Card number",
+  "card_name": "Card name",
+  "card_number_copied": "Card number copied"
 }

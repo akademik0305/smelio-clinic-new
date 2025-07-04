@@ -112,3 +112,9 @@ export type TPayment = {
   items: TPaymentItem[],
   _meta: TMeta
 }
+
+export type TCards = {
+  card_name: string,
+  card_number: string,
+  id: number,
+}

@@ -40,4 +40,8 @@ export default {
   // orders
   orderDelivery() { return `/order/delivery` },
   orderPickup() { return `/order/store-pickup` },
+
+  // cards
+  getCards() { return `/my-card/all` },
+
 };
