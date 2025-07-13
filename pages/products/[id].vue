@@ -74,7 +74,11 @@ getProduct()
 											}"
 											class="rounded-2xl overflow-hidden border border-border"
 										>
-											<swiper-slide v-for="image in product.images" :key="image" class="p-4">
+											<swiper-slide
+												v-for="image in product.images"
+												:key="image"
+												class="p-4"
+											>
 												<a
 													data-fancybox="gallery"
 													class="w-full h-auto flex items-center justify-center"
@@ -90,7 +94,7 @@ getProduct()
 										</swiper-container>
 									</div>
 
-									<a	
+									<a
 										v-else
 										data-fancybox="gallery"
 										class="w-full h-auto flex items-center justify-center"
@@ -111,6 +115,17 @@ getProduct()
 						<p class="mt-2">
 							{{ product.description }}
 						</p>
+						<div class="mt-2 md:mt-4 flex-1">
+							<p class="font-bold text-sm md:text-xl">
+								{{ product.priceFormat }}
+							</p>
+							<p
+							v-if="product.oldPrice"
+								class="font-medium text-xs md:text-sm line-through text-subtext"
+							>
+								{{ product.oldPriceFormat }}
+							</p>
+						</div>
 
 						<div class="mt-6">
 							<div

@@ -35,7 +35,7 @@ function logOut() {
 				class="flex items-center justify-start gap-5 md:mt-7 font-medium text-nowrap md:text-wrap hover:text-main transition-colors group"
 			>
 				<UIcon
-					name="proicons:person"
+					name="solar:card-broken"
 					class="text-2xl w-6 text-text group-hover:text-main transition-colors"
 				/>
 				{{ $t('company_cards') }}
