@@ -162,18 +162,18 @@ function refetchSections() {
 								</a>
 							</swiper-slide>
 						</swiper-container>
-						<button
-							class="absolute top-1/2 -translate-y-1/2 -left-5 w-12 h-12 rounded-full bg-main shadow-md hidden md:flex items-center justify-center p-2 z-10"
+						<!-- <button
+							class="absolute top-1/2 -translate-y-1/2 -left-5 w-12 h-12 rounded-full bg-white shadow-md hidden md:flex items-center justify-center p-2 z-10"
 							@click="bannersSwiper.prev()"
 						>
 							<UIcon name="tabler:chevron-left" class="text-2xl" />
 						</button>
 						<button
-							class="absolute top-1/2 -translate-y-1/2 -right-5 w-12 h-12 rounded-full bg-main shadow-md hidden md:flex items-center justify-center p-2 z-10"
+							class="absolute top-1/2 -translate-y-1/2 -right-5 w-12 h-12 rounded-full bg-white shadow-md hidden md:flex items-center justify-center p-2 z-10"
 							@click="bannersSwiper.next()"
 						>
 							<UIcon name="tabler:chevron-right" class="text-2xl" /></button
-						>main
+						> -->
 					</div>
 				</ClientOnly>
 			</div>

@@ -143,51 +143,69 @@ onUnmounted(() => {
 							/>
 						</NuxtLink>
 					</div>
-					<!-- menu -->
-					<ul class="flex items-center gap-4">
-						<li class="relative group">
-							<NuxtLink
-								:to="localePath('/about')"
-								class="font-medium text-text group-hover:text-main transition-colors duration-300"
-								>Klinika haqida</NuxtLink
-							>
-							<span
-								class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-							/>
-						</li>
-						<li class="relative group">
-							<NuxtLink
-								:to="localePath('/services')"
-								class="font-medium text-text group-hover:text-main transition-colors duration-300"
-								>Xizmatlar</NuxtLink
-							>
-							<span
-								class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-							/>
-						</li>
-						<li class="relative group">
-							<NuxtLink
-								:to="localePath('/employees')"
-								class="font-medium text-text group-hover:text-main transition-colors duration-300"
-								>Xodimlar</NuxtLink
-							>
-							<span
-								class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-							/>
-						</li>
-						<li class="relative group">
-							<NuxtLink
-								:to="localePath('/contact')"
-								class="font-medium text-text group-hover:text-main transition-colors duration-300"
-								>Bog'lanish</NuxtLink
-							>
-							<span
-								class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-							/>
-						</li>
-					</ul>
 					<!-- navbar right -->
-					<div class="flex items-center gap-3">
+					<div class="flex items-center gap-8">
+						<!-- menu -->
+						<ul class="flex items-center gap-4">
+							<li class="relative group">
+								<NuxtLink
+									:to="localePath('/about')"
+									class="font-medium text-text group-hover:text-main transition-colors duration-300"
+									>Klinika haqida</NuxtLink
+								>
+								<span
+									class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+								/>
+							</li>
+							<li class="relative group">
+								<NuxtLink
+									:to="localePath('/services')"
+									class="font-medium text-text group-hover:text-main transition-colors duration-300"
+									>Xizmatlar</NuxtLink
+								>
+								<span
+									class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+								/>
+							</li>
+							<li class="relative group">
+								<NuxtLink
+									:to="localePath('/employees')"
+									class="font-medium text-text group-hover:text-main transition-colors duration-300"
+									>Xodimlar</NuxtLink
+								>
+								<span
+									class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+								/>
+							</li>
+							<li class="relative group">
+								<NuxtLink
+									:to="localePath('/contact')"
+									class="font-medium text-text group-hover:text-main transition-colors duration-300"
+									>Bog'lanish</NuxtLink
+								>
+								<span
+									class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+								/>
+							</li>
+							<li class="relative group">
+								<NuxtLink
+									:to="localePath('/contact')"
+									class="font-medium text-text group-hover:text-main transition-colors duration-300"
+									>Bog'lanish</NuxtLink
+								>
+								<span
+									class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+								/>
+							</li>
+							<li class="relative bg-gradient px-3 py-1.5 rounded-md">
+								<NuxtLink
+									:to="localePath('/contact')"
+									class="font-medium text-text group-hover:text-main transition-colors duration-300"
+									>Bog'lanish</NuxtLink
+								>
+							</li>
+						</ul>
+						<!-- language -->
 						<USelect
 							v-model="currentLang"
 							leading-icon="material-symbols:language"

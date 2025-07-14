@@ -39,6 +39,7 @@
 /* custom themes */
 /* colors: fe0000, #fff, #000, 1447e6, 2A9D8F, 0077B6 */
 @theme {
+  /* colors */
   --color-main: #0077B6;
   --color-navbar-bg: #FFFFFF;
   --color-bg: #F9FAFB;
@@ -47,14 +48,16 @@
   --color-subtext: #6B7280;
   --color-border: #D1D5DB;
   --ui-primary: var(--color-main);
+  --color-gradient: linear-gradient(to right, #2A9D8F, #0077B6);
+
 
 
   /* fonts */
   --font-inter: 'Inter', sans-serif;
-  --font-prosto: 'Prosto One'
+  --font-prosto: 'Prosto One';
 
-    /* font sizes */
-    --text-tiny: 10px;
+  /* font sizes */
+  --text-tiny: 10px;
 
   /* margins */
   --spacing-4.5: 18px;
@@ -183,15 +186,15 @@ swiper-container::part(pagination) {
 }
 
 swiper-container::part(bullet) {
-  width: 16px;
-  height: 10px;
+  width: 25px;
+  height: 5px;
   background-color: var(--color-text);
   border-radius: 10px;
 }
 
 swiper-container::part(bullet-active) {
-  width: 20px;
-  height: 10px;
+  width: 30px;
+  height: 5px;
   background-color: var(--color-main);
   border-radius: 10px;
 }
