@@ -40,7 +40,8 @@
 /* colors: fe0000, #fff, #000, 1447e6, 2A9D8F, 0077B6 */
 @theme {
   /* colors */
-  --color-main: #0077B6;
+  --color-main: #4f39f6;
+  --color-second: #2A9D8F;
   --color-navbar-bg: #FFFFFF;
   --color-bg: #F9FAFB;
   --color-bg-soft: #EDF1F2;
@@ -48,7 +49,7 @@
   --color-subtext: #6B7280;
   --color-border: #D1D5DB;
   --ui-primary: var(--color-main);
-  --color-gradient: linear-gradient(to right, #2A9D8F, #0077B6);
+  /* --color-gradient: linear-gradient(to right, #2A9D8F, #0077B6); */
 
 
 
@@ -179,6 +180,10 @@ input {
 /* swiper custom styles */
 swiper-container::part(wrapper) {
   padding: 10px 0;
+}
+
+swiper-slide{
+  height: auto;
 }
 
 swiper-container::part(pagination) {

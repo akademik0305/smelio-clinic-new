@@ -25,7 +25,7 @@
   "contact": "Biz bilan bog'lanish",
   "email": "Email",
   "phone": "Telefon",
-  "footer_copy": "Barcha huquqlar himoyalangan. \t\t\t\tTovarlarning ko'rsatilgan qiymati va ularni sotib olish shartlari joriy \t\t\t\tsanaga amal qiladi",
+  "footer_copy": "Barcha huquqlar himoyalangan.",
   "login_or_register": "Kirish yoki ro'yxatdan o'tish",
   "home_page": "Asosiy sahifa",
   "categories": "Kategoriyalar",
@@ -67,5 +67,7 @@
   "company_cards": "Kompaniya karta raqamlari",
   "card_number": "Karta raqami",
   "card_name": "Karta nomi",
-  "card_number_copied": "Karta raqamidan nusxa olindi"
+  "card_number_copied": "Karta raqamidan nusxa olindi",
+  "services": "Xizmatlar",
+  "employees": "Xodimlar"
 }

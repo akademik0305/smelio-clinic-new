@@ -25,7 +25,7 @@
   "contact": "Contact us",
   "email": "Email",
   "phone": "Phone",
-  "footer_copy": "All rights reserved. The prices and purchase terms are valid as of the current date",
+  "footer_copy": "All rights reserved.",
   "login_or_register": "Login or register",
   "home_page": "Home page",
   "categories": "Categories",
@@ -67,5 +67,6 @@
   "company_cards": "Company cards",
   "card_number": "Card number",
   "card_name": "Card name",
-  "card_number_copied": "Card number copied"
+  "card_number_copied": "Card number copied",
+  "services": "Services"
 }

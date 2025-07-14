@@ -1,9 +1,6 @@
 <script setup lang="ts">
-import { useAuthStore } from '~/store/auth.store'
-import type { TUser } from '../../types/auth.type'
 import urls from '~/service/urls'
 import Service from '~/service/Service'
-import { useCartStore } from '~/store/cart.store'
 const switchLocalePath = useSwitchLocalePath()
 
 //===============================-< imports >-===============================
@@ -13,13 +10,10 @@ const switchLocalePath = useSwitchLocalePath()
 //utils
 const { locale, setLocale, t } = useI18n()
 const router = useRouter()
-const token = useToken()
-const wishlistCount = useWishlistCount()
-const toast = useToast()
+// const token = useToken()
+// const toast = useToast()
 const localePath = useLocalePath()
 // store
-const authStore = useAuthStore()
-const cartStore = useCartStore()
 
 // get data
 // const companyData = useCompanyData();
@@ -60,29 +54,7 @@ function handleScrool() {
 	}
 }
 
-//===============================-< login or register >-===============================
-//> variables
-const isOpenLogin = ref(false)
-const openLogin = () => {
-	if (authStore?.user) {
-		router.push(localePath('/profile'))
-	} else {
-		isOpenLogin.value = true
-	}
-}
 
-const closeLogin = () => {
-	isOpenLogin.value = false
-}
-
-//> functions
-function submitLogin(user_data: TUser) {
-	token.value = user_data.auth_key
-	authStore.user = { ...user_data, auth_key: '' }
-	authStore.isLogged = true
-	window.location.reload()
-	closeLogin()
-}
 
 //===============================-< get contact >-===============================
 //> variables
@@ -95,19 +67,6 @@ async function getContact() {
 
 getContact()
 
-//===============================-< go to wishlist page >-===============================
-//> variables
-//> functions
-function goToWishlist() {
-	if (authStore.isLogged) {
-		router.push(localePath('/wishlist'))
-	} else {
-		toast.add({
-			title: t('need_login_for_see_wishlist'),
-			color: 'error',
-		})
-	}
-}
 
 //===============================-< on page load >-===============================
 //> variables
@@ -144,7 +103,7 @@ onUnmounted(() => {
 						</NuxtLink>
 					</div>
 					<!-- navbar right -->
-					<div class="flex items-center gap-8">
+					<div class="flex items-center gap-6">
 						<!-- menu -->
 						<ul class="flex items-center gap-4">
 							<li class="relative group">
@@ -187,22 +146,12 @@ onUnmounted(() => {
 									class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
 								/>
 							</li>
-							<li class="relative group">
-								<NuxtLink
-									:to="localePath('/contact')"
-									class="font-medium text-text group-hover:text-main transition-colors duration-300"
-									>Bog'lanish</NuxtLink
+							<li class="relative">
+								<button
+									class="relative h-auto w-auto py-1.5 px-6 overflow-hidden border border-main text-main shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-main before:duration-300 before:ease-out hover:text-white hover:shadow-main hover:before:h-full hover:before:w-full hover:before:opacity-80 rounded-md"
 								>
-								<span
-									class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-								/>
-							</li>
-							<li class="relative bg-gradient px-3 py-1.5 rounded-md">
-								<NuxtLink
-									:to="localePath('/contact')"
-									class="font-medium text-text group-hover:text-main transition-colors duration-300"
-									>Bog'lanish</NuxtLink
-								>
+									<span class="relative z-10">Suxbatga yozilish</span>
+								</button>
 							</li>
 						</ul>
 						<!-- language -->
@@ -211,7 +160,7 @@ onUnmounted(() => {
 							leading-icon="material-symbols:language"
 							:items="locales"
 							size="md"
-							class="border border-gray-500"
+							class="border border-border rounded-md py-2 hover:border-main transition-all duration-300"
 						>
 							<template #default="{ modelValue }">
 								<span class="capitalize text-text">{{ modelValue }}</span>
@@ -221,19 +170,5 @@ onUnmounted(() => {
 				</div>
 			</div>
 		</nav>
-
-		<!--=== modals ===-->
-		<!-- send phone number -->
-		<BaseModal :is-open="isOpenLogin" @close="closeLogin">
-			<template #header>
-				<div class="">
-					<h5 class="font-semibold text-xl text-center">
-						{{ $t('login_or_register') }}
-					</h5>
-				</div>
-			</template>
-			<AuthLogin @success="submitLogin" />
-		</BaseModal>
-		<!--=== modals ===-->
 	</div>
 </template>
