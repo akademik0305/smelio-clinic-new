@@ -3,7 +3,7 @@ import { useAuthStore } from './store/auth.store'
 
 //===============================-< seo >-===============================
 useSeoMeta({
-	title: 'Reklama Markazi',
+	title: 'Smelio Clinic',
 	ogImage: '/icon.png',
 
 })

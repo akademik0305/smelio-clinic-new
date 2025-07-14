@@ -4,8 +4,7 @@ import type { TUser } from '../../types/auth.type'
 import urls from '~/service/urls'
 import Service from '~/service/Service'
 import { useCartStore } from '~/store/cart.store'
-const switchLocalePath = useSwitchLocalePath();
-
+const switchLocalePath = useSwitchLocalePath()
 
 //===============================-< imports >-===============================
 // import { useRouter } from 'vue-router'
@@ -17,11 +16,10 @@ const router = useRouter()
 const token = useToken()
 const wishlistCount = useWishlistCount()
 const toast = useToast()
-const localePath = useLocalePath();
+const localePath = useLocalePath()
 // store
 const authStore = useAuthStore()
 const cartStore = useCartStore()
-
 
 // get data
 // const companyData = useCompanyData();
@@ -106,7 +104,7 @@ function goToWishlist() {
 	} else {
 		toast.add({
 			title: t('need_login_for_see_wishlist'),
-			color: 'error'
+			color: 'error',
 		})
 	}
 }
@@ -132,82 +130,64 @@ onUnmounted(() => {
 			:class="[isFixedNav ? 'fixed top-0 shadow-md ' : 'static']"
 		>
 			<div class="container">
-				<div class="py-4 flex items-center justify-between flex-col gap-4 md:flex-row">
-					<div class="flex items-center gap-6 justify-between md:justify-start w-full">
-						<NuxtLink :to="localePath('/')" class="block w-40 h-auto">
+				<div
+					class="py-4 flex items-center justify-between flex-col gap-4 md:flex-row"
+				>
+					<div class="flex items-center gap-6 justify-between">
+						<!-- logo -->
+						<NuxtLink :to="localePath('/')" class="block">
 							<img
-								:src="contact?.imageUrlFooter"
+								src="~/assets/images/logo/logo-nobg.png"
 								alt="logo"
-								class="w-full h-full object-cover"
+								class="w-full h-full max-h-14 object-cover"
 							/>
-						</NuxtLink>
-						<NuxtLink
-							:to="localePath('/categories')"
-							class="flex items-center justify-center gap-2 bg-main border border-bg rounded-xl py-2.5 px-10 cursor-pointer group hover:bg-bg hover:border-main hover:text-main transition-colors"
-						>
-							<UIcon
-								name="ic:round-menu"
-								class="text-2xl w-6 text-text group-hover:text-main"
-							/>
-							{{ $t('catalog') }}
 						</NuxtLink>
 					</div>
+					<!-- menu -->
+					<ul class="flex items-center gap-4">
+						<li class="relative group">
+							<NuxtLink
+								:to="localePath('/about')"
+								class="font-medium text-text group-hover:text-main transition-colors duration-300"
+								>Klinika haqida</NuxtLink
+							>
+							<span
+								class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+							/>
+						</li>
+						<li class="relative group">
+							<NuxtLink
+								:to="localePath('/services')"
+								class="font-medium text-text group-hover:text-main transition-colors duration-300"
+								>Xizmatlar</NuxtLink
+							>
+							<span
+								class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+							/>
+						</li>
+						<li class="relative group">
+							<NuxtLink
+								:to="localePath('/employees')"
+								class="font-medium text-text group-hover:text-main transition-colors duration-300"
+								>Xodimlar</NuxtLink
+							>
+							<span
+								class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+							/>
+						</li>
+						<li class="relative group">
+							<NuxtLink
+								:to="localePath('/contact')"
+								class="font-medium text-text group-hover:text-main transition-colors duration-300"
+								>Bog'lanish</NuxtLink
+							>
+							<span
+								class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+							/>
+						</li>
+					</ul>
 					<!-- navbar right -->
 					<div class="flex items-center gap-3">
-						<NuxtLink
-							:to="localePath('/search')"
-							class="flex items-center justify-center gap-2 w-full py-1.5 px-2 cursor-pointer hover:border-main transition-colors relative group"
-						>
-							<UIcon
-								name="i-lucide-search"
-								class="text-2xl w-6 text-text group-hover:text-main transition-colors"
-							/>
-						</NuxtLink>
-						<button
-							class="flex items-center justify-center gap-2 w-full py-1.5 px-2 cursor-pointer hover:border-main transition-colors relative group"
-							@click="goToWishlist"
-						>
-							<UIcon
-								name="mdi:heart-outline"
-								class="text-2xl w-6 text-text group-hover:text-main transition-colors"
-							/>
-							<span
-								v-if="wishlistCount"
-								class="flex items-center justify-center bg-main rounded-full p-0.5 absolute top-0 right-0 text-bg text-xs w-5 h-5"
-								>{{ wishlistCount || 0 }}</span
-							>
-						</button>
-						<NuxtLink
-							:to="localePath('/cart')"
-							class="relative flex items-center justify-center gap-2 w-full py-1.5 px-2 cursor-pointer hover:border-main transition-colors group"
-						>
-							<UIcon
-								name="proicons:cart"
-								class="text-2xl w-6 text-text group-hover:text-main transition-colors"
-							/>
-							<span
-								v-if="cartStore.productsCount"
-								class="flex items-center justify-center bg-main rounded-full p-0.5 absolute top-0 right-0 text-bg text-xs w-5 h-5"
-								>{{ cartStore.productsCount || 0 }}</span
-							>
-						</NuxtLink>
-						<button
-							class="relative flex items-center justify-center gap-2 w-full py-1.5 px-2 cursor-pointer hover:border-main transition-colors group"
-							@click="openLogin"
-						>
-							<UIcon
-								name="proicons:person"
-								class="text-2xl w-6 text-text group-hover:text-main transition-colors"
-							/>
-							<span
-								class="text-text group-hover:text-main transition-colors whitespace-nowrap"
-								>{{
-									authStore?.user?.firstname
-										? authStore?.user?.firstname
-										: 'Kirish'
-								}}</span
-							>
-						</button>
 						<USelect
 							v-model="currentLang"
 							leading-icon="material-symbols:language"

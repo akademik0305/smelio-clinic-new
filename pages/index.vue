@@ -121,32 +121,59 @@ function refetchSections() {
 				<ClientOnly>
 					<div class="relative">
 						<swiper-container ref="bannersRef" :init="true">
-							<swiper-slide v-for="(slide, idx) in banners" :key="idx">
+							<!-- <swiper-slide v-for="(slide, idx) in banners" :key="idx">
 								<a
 									:href="slide.url"
 									target="_blank"
-									class="block h-[30svh] md:h-[450px]"
+									class="block h-[40svh] md:h-[400px]"
 								>
 									<img
-										class="w-full h-full object-cover rounded-xl"
+										class="w-full h-full object-cover rounded-sm"
 										:src="slide.imageUrl"
+										alt="kfc"
+									/>
+								</a>
+							</swiper-slide> -->
+							<swiper-slide>
+								<a href="#" class="block h-[40svh] md:h-[400px]">
+									<img
+										class="w-full h-full object-cover rounded-sm"
+										src="~/assets/images/jpg/banner.jpg"
+										alt="kfc"
+									/>
+								</a>
+							</swiper-slide>
+							<swiper-slide>
+								<a href="#" class="block h-[40svh] md:h-[400px]">
+									<img
+										class="w-full h-full object-cover rounded-sm"
+										src="~/assets/images/jpg/banner-2.jpg"
+										alt="kfc"
+									/>
+								</a>
+							</swiper-slide>
+							<swiper-slide>
+								<a href="#" class="block h-[40svh] md:h-[400px]">
+									<img
+										class="w-full h-full object-cover rounded-sm"
+										src="~/assets/images/jpg/banner-3.jpg"
 										alt="kfc"
 									/>
 								</a>
 							</swiper-slide>
 						</swiper-container>
 						<button
-							class="absolute top-1/2 -translate-y-1/2 -left-5 w-12 h-12 rounded-full bg-white shadow-md hidden md:flex items-center justify-center p-2 z-10"
+							class="absolute top-1/2 -translate-y-1/2 -left-5 w-12 h-12 rounded-full bg-main shadow-md hidden md:flex items-center justify-center p-2 z-10"
 							@click="bannersSwiper.prev()"
 						>
 							<UIcon name="tabler:chevron-left" class="text-2xl" />
 						</button>
 						<button
-							class="absolute top-1/2 -translate-y-1/2 -right-5 w-12 h-12 rounded-full bg-white shadow-md hidden md:flex items-center justify-center p-2 z-10"
+							class="absolute top-1/2 -translate-y-1/2 -right-5 w-12 h-12 rounded-full bg-main shadow-md hidden md:flex items-center justify-center p-2 z-10"
 							@click="bannersSwiper.next()"
 						>
-							<UIcon name="tabler:chevron-right" class="text-2xl" />
-						</button>
+							<UIcon name="tabler:chevron-right" class="text-2xl" /></button
+						>main
 					</div>
 				</ClientOnly>
 			</div>
@@ -162,7 +189,7 @@ function refetchSections() {
 				<div class="mt-4 relative">
 					<swiper-container ref="categoryCardsRef" :init="true" class="">
 						<swiper-slide v-for="(slide, idx) in categories" :key="idx">
-							<CategoryCard :category="slide" />
+							<!-- <CategoryCard :category="slide" /> -->
 						</swiper-slide>
 					</swiper-container>
 					<button
@@ -182,69 +209,65 @@ function refetchSections() {
 		</section>
 		<!-- categories cards -->
 
-		<!-- categories -->
-		<!-- <section class="pb-8">
-			<div class="container">
-				<ClientOnly>
-					<div>
-						<swiper-container
-							ref="categoriesRef"
-							:init="true"
-							class="h-auto overflow-hidden"
-						>
-							<swiper-slide v-for="(slide, idx) in 8" :key="idx">
-								<div
-									class="flex items-center gap-2 bg-bg-soft rounded-xl px-6 py-2.5 shadow-md hover:bg-main transition-colors cursor-pointer group"
-								>
-									<UIcon
-										name="i-lucide-search"
-										class="text-text group-hover:text-bg"
-									/>
-									<p class="text-center text-text group-hover:text-bg">
-										Smartfonlar
-									</p>
-								</div>
-							</swiper-slide>
-						</swiper-container>
-					</div>
-				</ClientOnly>
-			</div>
-		</section> -->
-		<!-- categories -->
-
-		<!-- hot products -->
-		<section
-			v-for="section in sections"
-			v-show="section.products.length"
-			:key="section.id"
-			class="pb-8"
-		>
-			<div class="container">
-				<div class="flex items-center justify-between">
-					<h2 class="text-2xl font-semibold">{{ section.name }}</h2>
-					<NuxtLink
-						:to="localePath(`/sections/${section.id}`)"
-						class="flex items-center gap-2 text-text hover:text-main transition-colors group"
+		<!-- <div>
+			<div
+				class="bg-[--bg-color] shadow-lg rounded-lg max-w-sm py-8 px-4 border border-[--pr-color]"
+			>
+				<div class="flex flex-col items-center">
+					<div
+						class="w-32 h-32 rounded-full border-2 border-[--pr-color] relative"
 					>
-						{{ $t('all') }}
-						<UIcon
-							name="uil:arrow-right"
-							class="font-medium text-2xl text-text group-hover:text-main transition-colors"
+						<img
+							src="~/assets/images/jpg/muhammadrasul.jpg"
+							class="w-full h-full rounded-full"
+							alt=""
 						/>
-					</NuxtLink>
+
+						<a
+							class="w-8 h-8 z-10 flex items-center justify-center absolute right-0 bottom-0"
+							href="https://www.linkedin.com/in/nurmukhamedov/"
+						>
+							<img
+								class="w-full h-full"
+								src="~/assets/images/svg/linkedin-icon.svg"
+								alt="LinkedIn"
+							/>
+						</a>
+					</div>
 				</div>
-				<div
-					class="mt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5"
-				>
-					<ProductCard
-						v-for="product in section.products"
-						:key="product.id"
-						:product="product"
-						@success-wishlist="refetchSections"
-					/>
+				<div class="text-center mt-4">
+					<h4 class="text-2xl text-white font-semibold">
+						Muhammadrasul Nurmukhamedov
+					</h4>
+					<h5 class="text-md text-white opacity-75">Frontend Engineer</h5>
+				</div>
+
+				<ul class="space-y-3 text-sm mt-5">
+					<li
+						v-for="item in 4"
+						:key="item"
+						class="flex items-center gap-x-3 min-w-0"
+					>
+						<Icon
+							name="i-heroicons:check-circle-20-solid"
+							class="w-5 h-5 flex-shrink-0 text-white"
+						/>
+						<span class="text-gray-600 dark:text-gray-400 truncate"
+							>Frontend</span
+						>
+					</li>
+				</ul>
+				<div class="mt-4 text-white text-center">
+					<div class="flex items-center justify-center gap-2">
+						<p class="font-semibold">Tajriba:</p>
+						<p class="text-[#FBEA97] font-medium uppercase">2.5 yil+</p>
+					</div>
+				</div>
+				<div class="mt-2 text-center">
+					<p class="text-white font-semibold">Intervyu darajasi:</p>
+					<p class="text-[#FBEA97] opacity-90 uppercase">Junior - Middle</p>
 				</div>
 			</div>
-		</section>
-		<!-- hot products -->
+		</div> -->
 	</main>
 </template>

@@ -37,14 +37,15 @@
 }
 
 /* custom themes */
+/* colors: fe0000, #fff, #000, 1447e6, 2A9D8F, 0077B6 */
 @theme {
-  --color-main: #FFB300;
+  --color-main: #0077B6;
   --color-navbar-bg: #FFFFFF;
-  --color-bg: #F8F8F8;
-  --color-bg-soft: #EFEFEF;
-    --color-text: #2a2a2a;
-    --color-subtext: #666666;
-  --color-border: #DDDDDD;
+  --color-bg: #F9FAFB;
+  --color-bg-soft: #EDF1F2;
+  --color-text: #1E1E1E;
+  --color-subtext: #6B7280;
+  --color-border: #D1D5DB;
   --ui-primary: var(--color-main);
 
 
@@ -72,7 +73,7 @@
   --xl: 1280px;
   --xxl: 1536px;
   /* breakpoint */
-    --breakpoint-xs: 450px
+  --breakpoint-xs: 450px
 }
 
 
