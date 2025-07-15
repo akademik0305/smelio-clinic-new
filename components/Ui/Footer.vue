@@ -40,6 +40,7 @@ watch(locale, () => {
 						va estetik xizmatlar mavjud.
 					</p>
 				</div>
+
 				<div class="flex flex-col gap-3">
 					<h4>{{ $t('contact') }}</h4>
 					<div class="flex items-center gap-2">
@@ -53,31 +54,19 @@ watch(locale, () => {
 								class="text-xl text-gray-500 hover:text-main transition"
 							/>
 						</a>
-						<a
-							v-if="contact?.facebook_url"
-							href="#"
-							target="_blank"
-						>
+						<a v-if="contact?.facebook_url" href="#" target="_blank">
 							<UIcon
 								name="circum:facebook"
 								class="text-xl text-gray-500 hover:text-main transition"
 							/>
 						</a>
-						<a
-							v-if="contact?.telegram_url"
-							href="#"
-							target="_blank"
-						>
+						<a v-if="contact?.telegram_url" href="#" target="_blank">
 							<UIcon
 								name="hugeicons:telegram"
 								class="text-xl text-gray-500 hover:text-main transition"
 							/>
 						</a>
-						<a
-							v-if="contact?.youtube_url"
-							href="#"
-							target="_blank"
-						>
+						<a v-if="contact?.youtube_url" href="#" target="_blank">
 							<UIcon
 								name="hugeicons:youtube"
 								class="text-xl text-gray-500 hover:text-main transition"
@@ -94,6 +83,21 @@ watch(locale, () => {
 						class="text-gray-500 font-inter hover:text-main transition-all"
 						>{{ $t('phone') }}: +998 33 180 10 08</a
 					>
+					<a
+						:href="`https://maps.app.goo.gl/xesCLfjJVR1gFbmcA`"
+						target="_blank"
+						class="text-gray-500 font-inter hover:text-main transition-all"
+						>{{ $t('address') }}:  Smelio Clinic </a
+					>
+				</div>
+				<div class="w-full max-w-72 rounded-md overflow-hidden">
+					<iframe
+						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2996.756800690699!2d69.23431717643692!3d41.31415400053402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8ba126df1961%3A0x8303adc34f63582f!2z0JzQtdC00LjQsNC_0LDRgNC6IFFvcmF0b3No!5e0!3m2!1sru!2s!4v1752594166251!5m2!1sru!2s"
+						title="map"
+						allowfullscreen=""
+						loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"
+					/>
 				</div>
 				<!-- <div class="flex flex-col gap-3">
 					<h4>{{ $t('contact') }}</h4>

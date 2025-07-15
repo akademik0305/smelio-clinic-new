@@ -108,6 +108,16 @@ onUnmounted(() => {
 						<ul class="flex items-center gap-4">
 							<li class="relative group">
 								<NuxtLink
+									:to="localePath('/')"
+									class="font-medium text-text group-hover:text-main transition-colors duration-300"
+									>Asosiy sahifa</NuxtLink
+								>
+								<span
+									class="absolute bottom-0 left-0 w-full bg-main h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+								/>
+							</li>
+							<li class="relative group">
+								<NuxtLink
 									:to="localePath('/about')"
 									class="font-medium text-text group-hover:text-main transition-colors duration-300"
 									>Klinika haqida</NuxtLink
