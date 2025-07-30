@@ -97,6 +97,52 @@ const employeeCardsSwiper = useSwiper(employeeCardsRef, {
 	},
 });
 //> functions
+//===============================-< awwards >-===============================
+//> variables
+const awwardsRef = ref(null);
+const awwardsSwiper = useSwiper(awwardsRef, {
+	spaceBetween: 20,
+	slidesPerView: 2,
+	effect: "creative",
+	creativeEffect: {},
+	loop: true,
+	autoplay: {
+		delay: 3000,
+	},
+});
+//> functions
+//===============================-< works swiper >-===============================
+//> variables
+const worksRef = ref<any>(null);
+const worksSwiper = useSwiper(worksRef, {
+	loop: true,
+	effect: "creative",
+	autoplay: {
+		delay: 5000,
+	},
+	creativeEffect: {
+		prev: {
+			shadow: true,
+			origin: "left center",
+			translate: ["-5%", 0, -200],
+			rotate: [0, 100, 0],
+		},
+		next: {
+			origin: "right center",
+			translate: ["5%", 0, -200],
+			rotate: [0, -100, 0],
+		},
+	},
+});
+
+const worksSwiperNext = () => {
+	worksRef.value?.swiper?.slideNext();
+};
+const worksSwiperPrev = () => {
+	worksRef.value?.swiper?.slidePrev();
+};
+
+//> functions
 
 //===============================-< get categories >-===============================
 //> variables
@@ -141,7 +187,9 @@ const services = [
 	{ id: 7, name: "Tishni tortib tashlash (ekstraksiya)" },
 ];
 
-onMounted(() => {});
+onMounted(() => {
+	console.log(worksSwiper.instance);
+});
 </script>
 <template>
 	<main class="">
@@ -233,7 +281,7 @@ onMounted(() => {});
 		</section>
 		<!-- service cards -->
 
-		<!-- service cards -->
+		<!-- employee cards -->
 		<section class="pb-8">
 			<div class="container">
 				<div class="flex items-center justify-between">
@@ -320,7 +368,133 @@ onMounted(() => {});
 				</div>
 			</div>
 		</section>
-		<!-- service cards -->
+		<!-- employee cards -->
+
+		<!-- awwars  -->
+		<section class="pb-8">
+			<div class="container">
+				<div class="flex items-center justify-between">
+					<h2 class="text-3xl font-semibold">Награды нашей стоматологии</h2>
+					<NuxtLink
+						to="/services"
+						class="text-main hover:text-main-hover flex items-center gap-1 text-sm group transition-color duration-300"
+					>
+						Смотреть все награды
+						<UIcon
+							name="tabler:chevron-right"
+							class="text-lg text-main group-hover:translate-x-1 transition-transform duration-300"
+						/>
+					</NuxtLink>
+				</div>
+				<div class="mt-4 relative">
+					<UiFuncybox
+						:options="{
+							Carousel: {
+								infinite: false,
+							},
+						}"
+					>
+						<swiper-container ref="awwardsRef" :init="true">
+							<swiper-slide v-for="item in 6" :key="item">
+								<div class="flex gap-4 border-b border-border pb-4">
+									<div class="w-full">
+										<a
+											class="w-full h-auto flex items-center justify-center"
+											href="./awward.webp"
+											data-fancybox="gallery"
+											data-caption="Благодарственное письмо от I`MOMS"
+										>
+											<img
+												src="~/assets/images/webp/awward.webp"
+												alt="product.name"
+												class="w-full h-full max-w-80"
+											/>
+										</a>
+									</div>
+									<div class="p-4">
+										<h4 class="text-text text-xl font-medium">
+											Благодарственное письмо от I`MOMS
+										</h4>
+										<p class="mt-4 text-text font-medium">
+											Сеть стоматологий «Доктор Келлер» одержала победу на
+											конкурсе «Клиника года-2024” в номинации
+											"Ультрасовременная семейная клиника широкого спектра
+											услуг."
+										</p>
+									</div>
+								</div>
+							</swiper-slide>
+						</swiper-container>
+					</UiFuncybox>
+					<button
+						class="absolute top-1/2 -translate-y-1/2 -left-12 w-12 h-12 rounded-full hidden md:flex items-center justify-center p-0 z-10"
+						@click="awwardsSwiper.prev()"
+					>
+						<UIcon name="tabler:chevron-left" class="text-4xl text-main" />
+					</button>
+					<button
+						class="absolute top-1/2 -translate-y-1/2 -right-12 w-12 h-12 rounded-full hidden md:flex items-center justify-center p-0 z-10"
+						@click="awwardsSwiper.next()"
+					>
+						<UIcon name="tabler:chevron-right" class="text-4xl text-main" />
+					</button>
+				</div>
+			</div>
+		</section>
+		<!-- awwars  -->
+
+		<!-- works -->
+		<section class="pb-8">
+			<div class="container">
+				<div class="flex items-center justify-between">
+					<h2 class="text-3xl font-semibold">Наши работы</h2>
+				</div>
+				<div class="mt-4 relative">
+					<ClientOnly>
+						<swiper-container
+							ref="worksRef"
+							class="overflow-hidden"
+							:init="false"
+						>
+							<swiper-slide class="h-[40svh] md:max-h-[500px]">
+								<img
+									class="w-full h-full object-cover"
+									src="~/assets/images/jpg/banner.jpg"
+									alt="kfc"
+								/>
+							</swiper-slide>
+							<swiper-slide class="h-[40svh] md:max-h-[500px]">
+								<img
+									class="w-full h-full object-cover"
+									src="~/assets/images/jpg/banner-2.jpg"
+									alt="kfc"
+								/>
+							</swiper-slide>
+							<swiper-slide class="h-[40svh] md:max-h-[500px]">
+								<img
+									class="w-full h-full object-cover"
+									src="~/assets/images/jpg/banner-3.jpg"
+									alt="kfc"
+								/>
+							</swiper-slide>
+						</swiper-container>
+						<button
+							class="absolute top-1/2 -translate-y-1/2 left-0 w-15 h-[40svh] md:h-[500px] bg-gradient-to-r from-white/40 to-transparent hidden md:flex items-center justify-center p-0 z-10"
+							@click="worksSwiperPrev"
+						>
+							<UIcon name="tabler:chevron-left" class="text-2xl text-main" />
+						</button>
+						<button
+							class="absolute top-1/2 -translate-y-1/2 right-0 w-15 h-[40svh] md:h-[500px] bg-gradient-to-r from-transparent to-white/40 hidden md:flex items-center justify-center p-0 z-10"
+							@click="worksSwiperNext"
+						>
+							<UIcon name="tabler:chevron-right" class="text-2xl text-main" />
+						</button>
+					</ClientOnly>
+				</div>
+			</div>
+		</section>
+		<!-- works -->
 
 		<!-- map -->
 		<section class="pb-8">

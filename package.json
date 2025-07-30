@@ -25,7 +25,6 @@
     "eslint": "^9.0.0",
     "maska": "^3.1.1",
     "nuxt": "^3.16.2",
-    "nuxt-mapbox": "1.6.3",
     "nuxt-swiper": "2.0.0",
     "pinia": "^3.0.1",
     "pinia-plugin-persistedstate": "^4.2.0",
