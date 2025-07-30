@@ -258,12 +258,12 @@ onMounted(() => {
 		<section class="pb-8">
 			<div class="container">
 				<div class="flex items-center justify-between">
-					<h2 class="text-3xl font-semibold">Услуги клиники</h2>
+					<h2 class="text-3xl font-semibold">Klinika xizmatlari</h2>
 					<NuxtLink
 						to="/services"
 						class="text-main hover:text-main-hover flex items-center gap-1 text-sm group transition-color duration-300"
 					>
-						Смотреть все услуги
+						Barcha xizmatlarni ko'rish
 						<UIcon
 							name="tabler:chevron-right"
 							class="text-lg text-main group-hover:translate-x-1 transition-transform duration-300"
@@ -285,12 +285,12 @@ onMounted(() => {
 		<section class="pb-8">
 			<div class="container">
 				<div class="flex items-center justify-between">
-					<h2 class="text-3xl font-semibold">Наши врачи-стоматологи</h2>
+					<h2 class="text-3xl font-semibold">Bizning stomatologlarimiz</h2>
 					<NuxtLink
 						to="/services"
 						class="text-main hover:text-main-hover flex items-center gap-1 text-sm group transition-color duration-300"
 					>
-						Смотреть всех врачей
+						Barcha shifokorlarni ko'rish
 						<UIcon
 							name="tabler:chevron-right"
 							class="text-lg text-main group-hover:translate-x-1 transition-transform duration-300"
@@ -312,31 +312,31 @@ onMounted(() => {
 						</div>
 						<div class="px-4">
 							<h3 class="mt-5 font-medium text-2xl text-text">
-								Фридман Илья Юльевич
+								Fridman Ilya Yulievich
 							</h3>
 							<p class="mt-5 font-medium text-text">
-								Меня зовут Зайцева Екатерина Александровна, я — главный врач в
-								стоматологической клинике «Доктор Келлер».
+								Mening ismim Ekaterina Aleksandrovna Zaitseva, men Doktor Keller
+								stomatologiya klinikasining bosh shifokoriman.
 							</p>
 							<p class="mt-4 font-medium text-text">
-								Нахожу индивидуальный подход к каждому пациенту, особенно при
-								сильном страхе перед посещением стоматолога. Занимаюсь лечением
-								кариеса любой сложности, эндодонтическим лечением при воспалении
-								как самого нерва, так и тканей периодонта, окружающих корень
-								зуба. Провожу профессиональную гигиену полости рта с последующим
-								глубоким или поверхностным фторированием при необходимости,
-								домашнее отбеливание, либо отбеливание Zoom4. Занимаюсь
-								реконструкцией положения отдельных зубов в зубом ряду там, где
-								ортодонтическое лечение неприемлимо. Также осуществляю полную
-								подготовку к протезированию. Cчитаю, что каждый пациент должен
-								получить качественное лечение и выходить от стоматолога с
-								улыбкой.
+								Men har bir bemorga individual yondashuvni topaman, ayniqsa tish
+								shifokoriga tashrif buyurishdan qo'rqish. Men har qanday
+								murakkablikdagi kariesni davolayman, asabning o'zi va tish
+								ildizini o'rab turgan periodontal to'qimalarning
+								yallig'lanishini endodontik davolash. Men professional og'iz
+								gigienasini bajaraman, keyin kerak bo'lsa chuqur yoki yuzaki
+								florlash, uyda oqartirish yoki Zoom4 oqartirish. Men ortodontik
+								davolanishni qabul qilib bo'lmaydigan tish qatoridagi alohida
+								tishlarning holatini qayta tiklayman. Men ham protezlash uchun
+								to'liq tayyorgarlik ko'raman. Har bir bemor sifatli davolanishi
+								va tish shifokoridan tabassum bilan ketishi kerak, deb
+								hisoblayman.
 							</p>
 							<p class="mt-4 font-medium text-text">
-								Возраст пациентов: от 14 до 90 лет.
+								Bemorlarning yoshi: 14 yoshdan 90 yoshgacha.
 							</p>
 							<p class="mt-4 font-medium text-subtext text-xs">
-								Главный врач, стоматолог-терапевт
+								Bosh shifokor, stomatolog-terapevt
 							</p>
 						</div>
 					</NuxtLink>
@@ -357,10 +357,10 @@ onMounted(() => {
 							</div>
 							<div class="px-4">
 								<h3 class="mt-5 font-medium text-xl text-text">
-									Фридман Илья Юльевич
+									Fridman Ilya Yulievich
 								</h3>
 								<p class="mt-4 font-medium text-subtext text-xs">
-									Главный врач, стоматолог-терапевт
+									Bosh shifokor, stomatolog-terapevt
 								</p>
 							</div>
 						</NuxtLink>
@@ -374,12 +374,12 @@ onMounted(() => {
 		<section class="pb-8">
 			<div class="container">
 				<div class="flex items-center justify-between">
-					<h2 class="text-3xl font-semibold">Награды нашей стоматологии</h2>
+					<h2 class="text-3xl font-semibold">Stomatologiyamiz mukofotlari</h2>
 					<NuxtLink
 						to="/services"
 						class="text-main hover:text-main-hover flex items-center gap-1 text-sm group transition-color duration-300"
 					>
-						Смотреть все награды
+						Barcha mukofotlarni ko'rish
 						<UIcon
 							name="tabler:chevron-right"
 							class="text-lg text-main group-hover:translate-x-1 transition-transform duration-300"
@@ -413,13 +413,13 @@ onMounted(() => {
 									</div>
 									<div class="p-4">
 										<h4 class="text-text text-xl font-medium">
-											Благодарственное письмо от I`MOMS
+											I`MOMS dan minnatdorchilik maktubi
 										</h4>
 										<p class="mt-4 text-text font-medium">
-											Сеть стоматологий «Доктор Келлер» одержала победу на
-											конкурсе «Клиника года-2024” в номинации
-											"Ультрасовременная семейная клиника широкого спектра
-											услуг."
+											Doctor Keller stomatologiya klinikalari tarmog'i 2024
+											yilgi "Yil klinikasi" tanlovida keng ko'lamli xizmatlar
+											nominatsiyasiga ega ultra zamonaviy oilaviy klinikada
+											g'olib chiqdi.
 										</p>
 									</div>
 								</div>
@@ -447,7 +447,7 @@ onMounted(() => {
 		<section class="pb-8">
 			<div class="container">
 				<div class="flex items-center justify-between">
-					<h2 class="text-3xl font-semibold">Наши работы</h2>
+					<h2 class="text-3xl font-semibold">Bizning ishlarimiz</h2>
 				</div>
 				<div class="mt-4 relative">
 					<ClientOnly>
