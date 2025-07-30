@@ -158,7 +158,7 @@ onUnmounted(() => {
 							</li>
 							<li class="relative">
 								<button
-									class="relative h-auto w-auto py-1.5 px-6 overflow-hidden border border-main text-main shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-main before:duration-300 before:ease-out hover:text-white hover:shadow-main hover:before:h-full hover:before:w-full hover:before:opacity-80 rounded-md"
+									class="relative flex h-auto py-2 px-4 border rounded-md items-center justify-center overflow-hidden bg-main font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-main hover:shadow-main hover:border-main hover:before:border-[25px]"
 								>
 									<span class="relative z-10">Suxbatga yozilish</span>
 								</button>
