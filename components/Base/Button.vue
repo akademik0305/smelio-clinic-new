@@ -31,10 +31,13 @@ onMounted(() => {});
 
 <template>
 	<button
-		class="flex items-center justify-center rounded-xl px-6 py-2.5 text-center transition-colors duration-500 group gap-2 border text-white hover:bg-white"
+		class="relative flex h-auto py-2 px-4 border rounded-md items-center justify-center overflow-hidden font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-main hover:before:border-[25px]"
 		:class="[
 			isFull ? ' w-full' : 'w-52',
-			{ 'bg-main border-main hover:text-main': props.type === 'main' },
+			{
+				'bg-main border-main hover:text-main hover:shadow-main hover:border-main':
+					props.type === 'main',
+			},
 			{ 'bg-green border-green hover:text-green': props.type === 'success' },
 			{ 'bg-red border-red hover:text-red': props.type === 'error' },
 		]"
@@ -45,7 +48,7 @@ onMounted(() => {});
 			name="line-md:loading-twotone-loop"
 			class="w-6 h-6"
 		/>
-		<span class="text-md leading-6">
+		<span class="text-md leading-6 relative z-10">
 			{{ props.isLoading ? loadingText : props.text }}
 		</span>
 	</button>

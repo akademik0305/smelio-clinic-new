@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import urls from '~/service/urls'
-import Service from '~/service/Service'
-const switchLocalePath = useSwitchLocalePath()
+import urls from "~/service/urls";
+import Service from "~/service/Service";
+const switchLocalePath = useSwitchLocalePath();
 
 //===============================-< imports >-===============================
 // import { useRouter } from 'vue-router'
 // const router = useRouter()
 
 //utils
-const { locale, setLocale, t } = useI18n()
-const router = useRouter()
+const { locale, setLocale, t } = useI18n();
+const router = useRouter();
 // const token = useToken()
 // const toast = useToast()
-const localePath = useLocalePath()
+const localePath = useLocalePath();
 // store
 
 // get data
@@ -25,60 +25,57 @@ const localePath = useLocalePath()
 // getdata();
 //===============================-< languages >-===============================
 //> variables
-type TLocale = 'uz' | 'ru' | 'en'
-const locales = ['Uz', 'Ru', 'En']
+type TLocale = "uz" | "ru" | "en";
+const locales = ["Uz", "Ru", "En"];
 
-const currentLang = ref<TLocale>(locale.value)
+const currentLang = ref<TLocale>(locale.value);
 
 //> functions
 watch(currentLang, () => {
 	// setLocale(currentLang.value.toLowerCase() as TLocale)
-	router.push(switchLocalePath(currentLang.value.toLowerCase() as TLocale))
-})
+	router.push(switchLocalePath(currentLang.value.toLowerCase() as TLocale));
+});
 
 //===============================-< fixed navbar and category >-===============================
 //> variables
-const startFixed = 80
-const isFixedNav = ref(false)
+const startFixed = 80;
+const isFixedNav = ref(false);
 
 //> functions
 function handleScrool() {
 	const navbarHeight =
-		document.querySelector('#navbar')?.scrollHeight || startFixed
+		document.querySelector("#navbar")?.scrollHeight || startFixed;
 	if (window.scrollY > navbarHeight) {
-		isFixedNav.value = true
-		document.body.style.paddingTop = '80px'
+		isFixedNav.value = true;
+		document.body.style.paddingTop = "80px";
 	} else {
-		isFixedNav.value = false
-		document.body.style.paddingTop = '0px'
+		isFixedNav.value = false;
+		document.body.style.paddingTop = "0px";
 	}
 }
 
-
-
 //===============================-< get contact >-===============================
 //> variables
-const contact = ref()
+const contact = ref();
 //> functions
 async function getContact() {
-	const res = await Service.get(urls.getContactInfo(), locale.value, null)
-	contact.value = res.data
+	const res = await Service.get(urls.getContactInfo(), locale.value, null);
+	contact.value = res.data;
 }
 
-getContact()
-
+getContact();
 
 //===============================-< on page load >-===============================
 //> variables
 //> functions
 onMounted(() => {
-	currentLang.value = locale.value
-	window.addEventListener('scroll', handleScrool)
+	currentLang.value = locale.value;
+	window.addEventListener("scroll", handleScrool);
 	// mapStore.getUserPosition()
-})
+});
 onUnmounted(() => {
-	window.removeEventListener('scroll', handleScrool)
-})
+	window.removeEventListener("scroll", handleScrool);
+});
 </script>
 
 <template>
@@ -157,11 +154,7 @@ onUnmounted(() => {
 								/>
 							</li>
 							<li class="relative">
-								<button
-									class="relative flex h-auto py-2 px-4 border rounded-md items-center justify-center overflow-hidden bg-main font-medium text-white shadow-2xl transition-all duration-300 before:absolute before:inset-0 before:border-0 before:border-white before:duration-100 before:ease-linear hover:bg-white hover:text-main hover:shadow-main hover:border-main hover:before:border-[25px]"
-								>
-									<span class="relative z-10">Suxbatga yozilish</span>
-								</button>
+								<BaseButton text="Qabulga yozilish" />
 							</li>
 						</ul>
 						<!-- language -->

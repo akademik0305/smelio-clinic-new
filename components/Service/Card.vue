@@ -16,7 +16,7 @@ const props = defineProps({
 	>
 		<!-- Icon -->
 		<div
-			class="relative z-10 w-32 h-32 mx-auto flex items-center justify-center rounded-full bg-white p-4"
+			class="relative z-10 w-28 h-28 mx-auto flex items-center justify-center rounded-full bg-white p-4"
 		>
 			<img
 				src="~/assets/images/svg/service-list-4.svg"

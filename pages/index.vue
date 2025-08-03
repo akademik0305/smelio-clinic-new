@@ -194,7 +194,7 @@ onMounted(() => {
 <template>
 	<main class="">
 		<!-- banner -->
-		<section class="pb-8">
+		<section class="pb-10">
 			<ClientOnly>
 				<div class="relative">
 					<swiper-container
@@ -255,7 +255,7 @@ onMounted(() => {
 		<!-- banner -->
 
 		<!-- service cards -->
-		<section class="pb-8">
+		<section class="pb-10">
 			<div class="container">
 				<div class="flex items-center justify-between">
 					<h2 class="text-3xl font-semibold">Klinika xizmatlari</h2>
@@ -282,7 +282,7 @@ onMounted(() => {
 		<!-- service cards -->
 
 		<!-- employee cards -->
-		<section class="pb-8">
+		<section class="pb-10">
 			<div class="container">
 				<div class="flex items-center justify-between">
 					<h2 class="text-3xl font-semibold">Bizning stomatologlarimiz</h2>
@@ -371,7 +371,7 @@ onMounted(() => {
 		<!-- employee cards -->
 
 		<!-- awwars  -->
-		<section class="pb-8">
+		<section class="pb-10">
 			<div class="container">
 				<div class="flex items-center justify-between">
 					<h2 class="text-3xl font-semibold">Stomatologiyamiz mukofotlari</h2>
@@ -444,7 +444,7 @@ onMounted(() => {
 		<!-- awwars  -->
 
 		<!-- works -->
-		<section class="pb-8">
+		<section class="pb-10">
 			<div class="container">
 				<div class="flex items-center justify-between">
 					<h2 class="text-3xl font-semibold">Bizning ishlarimiz</h2>
@@ -497,7 +497,7 @@ onMounted(() => {
 		<!-- works -->
 
 		<!-- map -->
-		<section class="pb-8">
+		<section class="pb-10">
 			<div class="relative overflow-hidden w-full">
 				<a
 					href="https://yandex.uz/maps/org/235868343416/?utm_medium=mapframe&utm_source=maps"
