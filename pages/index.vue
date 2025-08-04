@@ -194,7 +194,7 @@ onMounted(() => {
 <template>
 	<main class="">
 		<!-- banner -->
-		<section class="pb-10">
+		<header class="pb-10">
 			<ClientOnly>
 				<div class="relative">
 					<swiper-container
@@ -251,7 +251,7 @@ onMounted(() => {
 					</button>
 				</div>
 			</ClientOnly>
-		</section>
+		</header>
 		<!-- banner -->
 
 		<!-- service cards -->
@@ -287,7 +287,7 @@ onMounted(() => {
 				<div class="flex items-center justify-between">
 					<h2 class="text-3xl font-semibold">Bizning stomatologlarimiz</h2>
 					<NuxtLink
-						to="/services"
+						to="/employees"
 						class="text-main hover:text-main-hover flex items-center gap-1 text-sm group transition-color duration-300"
 					>
 						Barcha shifokorlarni ko'rish
