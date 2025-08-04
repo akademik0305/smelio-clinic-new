@@ -33,7 +33,7 @@ const props = defineProps({
 			<span
 				v-if="index + 1 !== props.links?.length"
 				class="text-sm text-subtext"
-				>/</span
+				>></span
 			>
 		</div>
 	</div>
