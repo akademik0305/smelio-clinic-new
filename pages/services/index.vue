@@ -1,4 +1,13 @@
 <script lang="ts" setup>
+
+//===============================-< order create status >-===============================
+//> variables
+const isOpenOrder = useOrderStatus();
+//> functions
+const openOrder = () => {
+	isOpenOrder.value = true
+}
+
 const services = [
 	{
 		name: "Kattalar uchun stomatologiya",
@@ -57,7 +66,7 @@ const services = [
 							oshiramiz. Kel, biz ham kelamiz Barcha oilaviy fotosuratlaringiz
 							yorqin tabassumlarga ega ekanligiga ishonch hosil qiling!
 						</p>
-						<BaseButton text="Qabulga yozilish" />
+						<BaseButton text="Qabulga yozilish" @click="openOrder" />
 					</div>
 				</div>
 			</div>

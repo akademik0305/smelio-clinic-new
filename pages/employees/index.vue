@@ -1,4 +1,13 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+//===============================-< order create status >-===============================
+//> variables
+const isOpenOrder = useOrderStatus();
+//> functions
+const openOrder = () => {
+	isOpenOrder.value = true
+}
+
+</script>
 <template>
 	<main class="wrapper">
 		<nav class="mt-5">
@@ -43,7 +52,7 @@
 										Bosh shifokor, stomatolog-terapevt
 									</p>
 									<div class="mt-4" @click.stop.prevent>
-										<BaseButton text="Qabulga yozilish" />
+										<BaseButton text="Qabulga yozilish" @click="openOrder" />
 									</div>
 								</div>
 							</NuxtLink>

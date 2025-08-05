@@ -1,14 +1,14 @@
 <script setup lang="ts">
+//===============================-< imports >-===============================
 import urls from "~/service/urls";
 import Service from "~/service/Service";
 const switchLocalePath = useSwitchLocalePath();
 
-//===============================-< imports >-===============================
 // import { useRouter } from 'vue-router'
 // const router = useRouter()
 
 //utils
-const { locale, setLocale, t } = useI18n();
+const { locale,} = useI18n();
 const router = useRouter();
 // const token = useToken()
 // const toast = useToast()
@@ -35,6 +35,15 @@ watch(currentLang, () => {
 	// setLocale(currentLang.value.toLowerCase() as TLocale)
 	router.push(switchLocalePath(currentLang.value.toLowerCase() as TLocale));
 });
+
+//===============================-< order create status >-===============================
+//> variables
+const isOpenOrder = useOrderStatus();
+//> functions
+const openOrder = () => {
+	isOpenOrder.value = true
+}
+
 
 //===============================-< fixed navbar and category >-===============================
 //> variables
@@ -98,7 +107,7 @@ onUnmounted(() => {
 								class="w-full h-full max-h-14 object-cover"
 							/>
 						</NuxtLink>
-					</div>
+					</div>openOrder
 					<!-- navbar right -->
 					<div class="flex items-center gap-6">
 						<!-- menu -->
@@ -154,7 +163,7 @@ onUnmounted(() => {
 								/>
 							</li>
 							<li class="relative">
-								<BaseButton text="Qabulga yozilish" />
+								<BaseButton text="Qabulga yozilish" @click="openOrder"/>
 							</li>
 						</ul>
 						<!-- language -->
