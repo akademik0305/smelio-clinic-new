@@ -107,7 +107,7 @@ onUnmounted(() => {
 								class="w-full h-full max-h-14 object-cover"
 							/>
 						</NuxtLink>
-					</div>openOrder
+					</div>
 					<!-- navbar right -->
 					<div class="flex items-center gap-6">
 						<!-- menu -->
