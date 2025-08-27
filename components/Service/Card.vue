@@ -19,7 +19,7 @@ const props = defineProps({
 			class="relative z-10 w-28 h-28 mx-auto flex items-center justify-center rounded-full bg-white p-4"
 		>
 			<img
-				src="~/assets/images/svg/service-list-4.svg"
+				:src="service.imageUrl"
 				alt="karies"
 				class="object-contain"
 			/>

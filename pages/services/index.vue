@@ -1,5 +1,11 @@
 <script lang="ts" setup>
-
+//===============================-< imports >-===============================
+import Service from "~/service/Service";
+import urls from "~/service/urls";
+// //> utils
+const { locale } = useI18n();
+const token = useToken();
+// const localePath = useLocalePath();
 //===============================-< order create status >-===============================
 //> variables
 const isOpenOrder = useOrderStatus();
@@ -8,33 +14,20 @@ const openOrder = () => {
 	isOpenOrder.value = true
 }
 
-const services = [
-	{
-		name: "Kattalar uchun stomatologiya",
-		items: [
-			{ id: 0, name: "Tish kariesini davolash" },
-			{ id: 1, name: "Tish toshlarini tozalash (gigiyena)" },
-			{ id: 2, name: "Tish nervini olib plombalash (endodontiya)" },
-			{ id: 3, name: "Estetik plombalash" },
-		],
-	},
-	{
-		name: "Bolalar stomatologiyasi",
-		items: [
-			{ id: 4, name: "Tishni oqartirish (bleaching)" },
-			{ id: 5, name: "Sun’iy tish o‘rnatish (protezlash)" },
-			{ id: 6, name: "Breketlar o‘rnatish (ortodontiya)" },
-		],
-	},
-	{
-		name: "Kattalar uchun stomatologiya",
-		items: [
-			{ id: 6, name: "Breketlar o‘rnatish (ortodontiya)" },
-			{ id: 7, name: "Tishni tortib tashlash (ekstraksiya)" },
-			{ id: 7, name: "Tishni tortib tashlash (ekstraksiya)" },
-		],
-	},
-];
+//===============================-< get services >-===============================
+//> variables
+const services = ref();
+
+//> functions
+
+async function getServices() {
+	services.value = await Service.get(
+		urls.getCategoryService(),
+		locale.value,
+		token.value
+	);
+}
+getServices();
 </script>
 <template>
 	<main class="wrapper">
@@ -93,7 +86,7 @@ const services = [
 		<section class="pt-6 pb-10">
 			<div class="container">
 				<div
-					v-for="category in services"
+					v-for="category in services?.data"
 					:key="category.name"
 					class="mt-4 first:mt-0"
 				>
@@ -102,7 +95,7 @@ const services = [
 					</div>
 					<div class="mt-4 relative grid grid-cols-5 gap-4">
 						<ServiceCard
-							v-for="serice in category.items"
+							v-for="serice in category.services"
 							:key="serice.name"
 							:service="serice"
 						/>

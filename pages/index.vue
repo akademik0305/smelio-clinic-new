@@ -5,12 +5,17 @@
 // // service
 import Service from "~/service/Service";
 import urls from "~/service/urls";
-import type { THomeSection } from "~/types/api.types";
+import type {
+	TAwwards,
+	TEmployee,
+	TEmployees,
+	TPortfolios,
+} from "~/types/api.types";
 
 // //> utils
 const { locale } = useI18n();
 const token = useToken();
-const localePath = useLocalePath();
+// const localePath = useLocalePath();
 // const router = useRouter()
 // const localePath = useLocalePath()
 
@@ -113,7 +118,7 @@ const awwardsSwiper = useSwiper(awwardsRef, {
 //> functions
 //===============================-< works swiper >-===============================
 //> variables
-const worksRef = ref<any>(null);
+const worksRef = ref(null);
 const worksSwiper = useSwiper(worksRef, {
 	loop: true,
 	effect: "creative",
@@ -144,48 +149,67 @@ const worksSwiperPrev = () => {
 
 //> functions
 
-//===============================-< get categories >-===============================
+//===============================-< get services >-===============================
 //> variables
-const categories = ref();
+const services = ref();
+
 //> functions
-async function getCategories() {
-	const res = await Service.get(urls.getHomeCategories(), locale.value, null);
 
-	categories.value = res.data;
-}
-
-getCategories();
-
-//===============================-< get sections >-===============================
-//> variables
-const sections = ref<THomeSection[]>();
-
-async function getSections() {
-	const res = await Service.get<THomeSection[]>(
-		urls.getSections(),
+async function getServices() {
+	services.value = await Service.get(
+		urls.getServices(),
 		locale.value,
 		token.value
 	);
-	sections.value = res.data;
 }
-
-getSections();
+getServices();
+//===============================-< get employees >-===============================
+//> variables
+const employees = ref<TEmployees>();
+const firstEmployee = ref<TEmployee>();
 
 //> functions
 
-// DEBUG
-const services = [
-	{ id: 0, name: "Tish kariesini davolash" },
-	{ id: 1, name: "Tish toshlarini tozalash (gigiyena)" },
-	{ id: 2, name: "Tish nervini olib plombalash (endodontiya)" },
-	{ id: 3, name: "Estetik plombalash" },
-	{ id: 4, name: "Tishni oqartirish (bleaching)" },
-	{ id: 5, name: "Sun’iy tish o‘rnatish (protezlash)" },
-	{ id: 6, name: "Breketlar o‘rnatish (ortodontiya)" },
-	{ id: 6, name: "Breketlar o‘rnatish (ortodontiya)" },
-	{ id: 7, name: "Tishni tortib tashlash (ekstraksiya)" },
-	{ id: 7, name: "Tishni tortib tashlash (ekstraksiya)" },
-];
+async function getEmployees() {
+	employees.value = await Service.get(
+		urls.getOurTeam(),
+		locale.value,
+		token.value
+	);
+	firstEmployee.value = employees.value?.data.shift();
+}
+
+getEmployees();
+
+//===============================-< get awwards >-===============================
+//> variables
+const awwards = ref<TAwwards>();
+
+//> functions
+
+async function getAwwards() {
+	awwards.value = await Service.get(
+		urls.getAwwards(),
+		locale.value,
+		token.value
+	);
+}
+getAwwards();
+
+//===============================-< get works >-===============================
+//> variables
+const portfolio = ref<TPortfolios>();
+
+//> functions
+
+async function getPortfolio() {
+	portfolio.value = await Service.get(
+		urls.getPortfolio(),
+		locale.value,
+		token.value
+	);
+}
+getPortfolio();
 
 onMounted(() => {
 	console.log(worksSwiper.instance);
@@ -202,39 +226,18 @@ onMounted(() => {
 						:init="true"
 						class="overflow-hidden"
 					>
-						<!-- <swiper-slide v-for="(slide, idx) in banners" :key="idx">
-								<a
-									:href="slide.url"
-									target="_blank"
-									class="block h-[40svh] md:h-[400px]"
-								>
-									<img
-										class="w-full h-full object-cover rounded-sm"
-										:src="slide.imageUrl"
-										alt="kfc"
-									/>
-								</a>
-							</swiper-slide> -->
-						<swiper-slide class="h-[40svh] md:max-h-[500px]">
-							<img
-								class="w-full h-full object-cover"
-								src="~/assets/images/jpg/banner.jpg"
-								alt="kfc"
-							/>
-						</swiper-slide>
-						<swiper-slide class="h-[40svh] md:max-h-[500px]">
-							<img
-								class="w-full h-full object-cover"
-								src="~/assets/images/jpg/banner-2.jpg"
-								alt="kfc"
-							/>
-						</swiper-slide>
-						<swiper-slide class="h-[40svh] md:max-h-[500px]">
-							<img
-								class="w-full h-full object-cover"
-								src="~/assets/images/jpg/banner-3.jpg"
-								alt="kfc"
-							/>
+						<swiper-slide v-for="(slide, idx) in banners" :key="idx">
+							<a
+								:href="slide.url"
+								target="_blank"
+								class="block h-[40svh] md:h-[400px]"
+							>
+								<img
+									class="w-full h-full object-cover rounded-sm"
+									:src="slide.imageUrl"
+									alt="Banner"
+								/>
+							</a>
 						</swiper-slide>
 					</swiper-container>
 					<button
@@ -272,7 +275,7 @@ onMounted(() => {
 				</div>
 				<div class="mt-4 relative grid grid-cols-5 gap-4">
 					<ServiceCard
-						v-for="serice in services"
+						v-for="serice in services?.data"
 						:key="serice.name"
 						:service="serice"
 					/>
@@ -300,67 +303,50 @@ onMounted(() => {
 
 				<div class="mt-8 flex items-start gap-5">
 					<NuxtLink
-						:to="`/employees/1`"
+						:to="`/employees/${firstEmployee?.id}`"
 						class="block max-w-1/2 border-b border-b-border pb-4"
 					>
 						<div class="w-full h-auto">
 							<img
-								src="~/assets/images/webp/doctor.webp"
+								:src="firstEmployee?.imageUrl"
 								class="w-full h-full"
-								alt=""
+								:alt="firstEmployee?.full_name"
 							/>
 						</div>
 						<div class="px-4">
 							<h3 class="mt-5 font-medium text-2xl text-text">
-								Fridman Ilya Yulievich
+								{{ firstEmployee?.full_name }}
 							</h3>
-							<p class="mt-5 font-medium text-text">
-								Mening ismim Ekaterina Aleksandrovna Zaitseva, men Doktor Keller
-								stomatologiya klinikasining bosh shifokoriman.
-							</p>
-							<p class="mt-4 font-medium text-text">
-								Men har bir bemorga individual yondashuvni topaman, ayniqsa tish
-								shifokoriga tashrif buyurishdan qo'rqish. Men har qanday
-								murakkablikdagi kariesni davolayman, asabning o'zi va tish
-								ildizini o'rab turgan periodontal to'qimalarning
-								yallig'lanishini endodontik davolash. Men professional og'iz
-								gigienasini bajaraman, keyin kerak bo'lsa chuqur yoki yuzaki
-								florlash, uyda oqartirish yoki Zoom4 oqartirish. Men ortodontik
-								davolanishni qabul qilib bo'lmaydigan tish qatoridagi alohida
-								tishlarning holatini qayta tiklayman. Men ham protezlash uchun
-								to'liq tayyorgarlik ko'raman. Har bir bemor sifatli davolanishi
-								va tish shifokoridan tabassum bilan ketishi kerak, deb
-								hisoblayman.
-							</p>
-							<p class="mt-4 font-medium text-text">
-								Bemorlarning yoshi: 14 yoshdan 90 yoshgacha.
-							</p>
 							<p class="mt-4 font-medium text-subtext text-xs">
-								Bosh shifokor, stomatolog-terapevt
+								{{ firstEmployee?.position }}
 							</p>
+							<p
+								class="mt-5 font-medium text-text"
+								v-html="firstEmployee?.content"
+							/>
 						</div>
 					</NuxtLink>
 
 					<div class="grid grid-cols-2 gap-4">
 						<NuxtLink
-							v-for="item in 4"
-							:key="item"
-							:to="`/employees/1`"
+							v-for="item in employees?.data"
+							:key="item.id"
+							:to="`/employees/${item.id}`"
 							class="block border-b border-b-border pb-4"
 						>
 							<div class="w-full h-auto">
 								<img
-									src="~/assets/images/webp/doctor.webp"
+									:src="item.imageUrl"
 									class="w-full h-full"
-									alt=""
+									:alt="item.full_name"
 								/>
 							</div>
 							<div class="px-4">
 								<h3 class="mt-5 font-medium text-xl text-text">
-									Fridman Ilya Yulievich
+									{{ item.full_name }}
 								</h3>
 								<p class="mt-4 font-medium text-subtext text-xs">
-									Bosh shifokor, stomatolog-terapevt
+									{{ item.position }}
 								</p>
 							</div>
 						</NuxtLink>
@@ -375,7 +361,7 @@ onMounted(() => {
 			<div class="container">
 				<div class="flex items-center justify-between">
 					<h2 class="text-3xl font-semibold">Stomatologiyamiz mukofotlari</h2>
-					<NuxtLink
+					<!-- <NuxtLink
 						to="/services"
 						class="text-main hover:text-main-hover flex items-center gap-1 text-sm group transition-color duration-300"
 					>
@@ -384,7 +370,7 @@ onMounted(() => {
 							name="tabler:chevron-right"
 							class="text-lg text-main group-hover:translate-x-1 transition-transform duration-300"
 						/>
-					</NuxtLink>
+					</NuxtLink> -->
 				</div>
 				<div class="mt-4 relative">
 					<UiFuncybox
@@ -395,31 +381,28 @@ onMounted(() => {
 						}"
 					>
 						<swiper-container ref="awwardsRef" :init="true">
-							<swiper-slide v-for="item in 6" :key="item">
+							<swiper-slide v-for="item in awwards?.data" :key="item.id">
 								<div class="flex gap-4 border-b border-border pb-4">
-									<div class="w-full">
+									<div class="w-full max-w-48">
 										<a
 											class="w-full h-auto flex items-center justify-center"
-											href="./awward.webp"
+											:href="item.imageUrl"
 											data-fancybox="gallery"
 											data-caption="Благодарственное письмо от I`MOMS"
 										>
 											<img
-												src="~/assets/images/webp/awward.webp"
-												alt="product.name"
+												:src="item.imageUrl"
+												:alt="item.title"
 												class="w-full h-full max-w-80"
 											/>
 										</a>
 									</div>
 									<div class="p-4">
 										<h4 class="text-text text-xl font-medium">
-											I`MOMS dan minnatdorchilik maktubi
+											{{ item.title }}
 										</h4>
 										<p class="mt-4 text-text font-medium">
-											Doctor Keller stomatologiya klinikalari tarmog'i 2024
-											yilgi "Yil klinikasi" tanlovida keng ko'lamli xizmatlar
-											nominatsiyasiga ega ultra zamonaviy oilaviy klinikada
-											g'olib chiqdi.
+											{{ item.description }}
 										</p>
 									</div>
 								</div>
@@ -427,12 +410,14 @@ onMounted(() => {
 						</swiper-container>
 					</UiFuncybox>
 					<button
+						v-if="awwards?.data?.length && awwards?.data?.length > 2"
 						class="absolute top-1/2 -translate-y-1/2 -left-12 w-12 h-12 rounded-full hidden md:flex items-center justify-center p-0 z-10"
 						@click="awwardsSwiper.prev()"
 					>
 						<UIcon name="tabler:chevron-left" class="text-4xl text-main" />
 					</button>
 					<button
+						v-if="awwards?.data?.length && awwards?.data?.length > 2"
 						class="absolute top-1/2 -translate-y-1/2 -right-12 w-12 h-12 rounded-full hidden md:flex items-center justify-center p-0 z-10"
 						@click="awwardsSwiper.next()"
 					>
@@ -456,25 +441,15 @@ onMounted(() => {
 							class="overflow-hidden"
 							:init="false"
 						>
-							<swiper-slide class="h-[40svh] md:max-h-[500px]">
+							<swiper-slide
+								v-for="item in portfolio?.data"
+								:key="item.id"
+								class="h-[40svh] md:max-h-[500px]"
+							>
 								<img
 									class="w-full h-full object-cover"
-									src="~/assets/images/jpg/banner.jpg"
-									alt="kfc"
-								/>
-							</swiper-slide>
-							<swiper-slide class="h-[40svh] md:max-h-[500px]">
-								<img
-									class="w-full h-full object-cover"
-									src="~/assets/images/jpg/banner-2.jpg"
-									alt="kfc"
-								/>
-							</swiper-slide>
-							<swiper-slide class="h-[40svh] md:max-h-[500px]">
-								<img
-									class="w-full h-full object-cover"
-									src="~/assets/images/jpg/banner-3.jpg"
-									alt="kfc"
+									:src="item.imageUrl"
+									alt="banner"
 								/>
 							</swiper-slide>
 						</swiper-container>
@@ -499,19 +474,12 @@ onMounted(() => {
 		<!-- map -->
 		<section class="pb-10">
 			<div class="relative overflow-hidden w-full">
-				<a
-					href="https://yandex.uz/maps/org/235868343416/?utm_medium=mapframe&utm_source=maps"
-					style="color: #eee; font-size: 12px; position: absolute; top: 0px"
-					>Smelio Dental Clinic</a
-				><a
-					href="https://yandex.uz/maps/10336/fergana/category/medical_center_clinic/184106108/?utm_medium=mapframe&utm_source=maps"
-					style="color: #eee; font-size: 12px; position: absolute; top: 14px"
-					>Медцентр, клиника в Фергане</a
-				><iframe
-					title="map"
-					src="https://yandex.uz/map-widget/v1/org/235868343416/?ll=71.779813%2C40.365999&z=18.46"
-					allowfullscreen="true"
-					class="relative w-full h-[50svh]"
+				<iframe
+					src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3039.9419228630854!2d71.7761512!3d40.3658121!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb856e07d8c5d3%3A0x10577e00597fff0f!2sSmelio%20Stomatalogiya!5e0!3m2!1sru!2s!4v1756054859649!5m2!1sru!2s"
+					style="border: 0"
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					class="h-[50vh] w-full"
 				/>
 			</div>
 			<!-- map -->

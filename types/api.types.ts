@@ -1,120 +1,72 @@
 export type ApiResponse<Data> = {
-  data: Data,
-  status: number,
-  message: string,
-  success: boolean
+	data: Data;
+	status: number;
+	message: string;
+	success: boolean;
 };
 
-
 export type TMeta = {
-  totalCount: number,
-  pageCount: number,
-  currentPage: number,
-  perPage: number
-}
+	totalCount: number;
+	pageCount: number;
+	currentPage: number;
+	perPage: number;
+};
 
+export type TEmployee = {
+	id: number;
+	full_name: string;
+	position: string;
+	content: string;
+	imageUrl: string;
+};
 
-export type TProduct = {
-  id: number,
-  name: string,
-  description: string,
-  category_id: string,
-  categoryName: string,
-  imageUrl: string,
-  images: string[]
-  isSaved: string,
-  price: number,
-  priceFormat: string,
-  oldPrice: number,
-  oldPriceFormat: string,
-  residue: number,
-  quantity: number,
-}
+export type TEmployees = {
+	data: TEmployee[];
+};
 
-export type THomeSection = {
-  id: number,
-  name: string,
-  products: TProduct[],
-}
+// awwards
+export type TAwward = {
+	id: number;
+	title: string;
+	description: string;
+	imageUrl: string;
+};
 
-export type TSection = {
-  section: {
-    id: number,
-    name: string,
-    imageUrl: string
-  },
-  dataProvider: {
-    items: TProduct[],
-    _meta: TMeta
-  }
-}
-export type TCategory = {
-  category: {
-    id: number,
-    name: string,
-    imageUrl: string
-  },
-  dataProvider: {
-    items: TProduct[],
-    _meta: TMeta
-  }
-}
+export type TAwwards = {
+	data: TAwward[];
+};
 
-export type TSearch = {
-  items: TProduct[],
-  _meta: TMeta
-}
+// portfolios
+export type TPortfolio = {
+	id: number;
+	imageUrl: string;
+};
 
-export type TWishlist = TProduct[]
+export type TPortfolios = {
+	data: TPortfolio[];
+};
 
+// services
+export type TService = {
+	id: number;
+	name: string;
+	duration: string;
+	content: string;
+	price: number;
+	priceFormat: string;
+	imageUrl: string;
+	category_id: number;
+	categoryName: string;
+};
 
-export type TOrderProduct = {
-  id: number,
-  product_id: number,
-  productName: string,
-  count: string,
-  total_sum: string,
-  totalSumFormat: string,
-  product_price: string,
-  productPriceFormat: string,
-}
+export type TServices = {
+	data: TService[];
+};
 
-export type TOrderItem = {
-  id: number,
-  dateFormat: string,
-  delivery_type: number,
-  deliveryTypeName: string,
-  phone: string,
-  delivery_sum: string | null,
-  deliverySumFormat: string,
-  total_sum: string,
-  totalSumFormat: string,
-  status: number,
-  statusName: string,
-  orderItems: TOrderProduct[]
-}
-
-export type TOrder = {
-  items: TOrderItem[],
-  _meta: TMeta
-}
-
-export type TPaymentItem = {
-  id: number,
-  payment_type_id: number,
-  paymentTypeName: string,
-  amount: string,
-  amountSumFormat: string,
-  dateFormat: string,
-}
-
-export type TPayment = {
-  items: TPaymentItem[],
-  _meta: TMeta
-}
-
-export type TCards = {
-  card_name: string,
-  card_number: string,
-  id: number,
-}
+// about
+export type TAbout = {
+	data: {
+		content: string;
+		id: number;
+	};
+};

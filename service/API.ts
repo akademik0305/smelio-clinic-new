@@ -6,7 +6,7 @@ const createAxiosInstance = (): AxiosInstance => {
   // const baseUrl = config.public.apiBaseUrl;
 
   return axios.create({
-    baseURL: 'https://api.markazi.uz/api'
+    baseURL: 'https://admin.smelio.uz/api'
   });
 };
 

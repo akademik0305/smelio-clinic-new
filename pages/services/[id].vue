@@ -1,12 +1,42 @@
 <script lang="ts" setup>
+//===============================-< imports >-===============================
+import Service from "~/service/Service";
+import urls from "~/service/urls";
+import type { TService, TServices } from "~/types/api.types";
+// //> utils
+const { locale } = useI18n();
+const token = useToken();
+const route = useRoute();
+// const localePath = useLocalePath();
 //===============================-< order create status >-===============================
 //> variables
 const isOpenOrder = useOrderStatus();
 //> functions
 const openOrder = () => {
-	isOpenOrder.value = true
-}
+	isOpenOrder.value = true;
+};
 
+//===============================-< get services >-===============================
+//> variables
+const services = ref<TServices>();
+const activeService = ref<TService>();
+
+//> functions
+
+async function getServices() {
+	services.value = await Service.get(
+		urls.getServices(),
+		locale.value,
+		token.value
+	);
+	const current = services.value?.data.find(
+		(ser) => ser.id === Number(route.params.id)
+	);
+	if (current) {
+		activeService.value = current;
+	}
+}
+getServices();
 </script>
 <template>
 	<main class="wrapper">
@@ -29,7 +59,9 @@ const openOrder = () => {
 					<div
 						class="flex flex-col items-center justify-center py-10 relative gap-6 text-center"
 					>
-						<h3 class="text-white text-4xl font-bold">Tish implantatsiyasi</h3>
+						<h3 class="text-white text-4xl font-bold">
+							{{ activeService?.name }}
+						</h3>
 						<p class="text-white font-medium">
 							"Doktor Keller" klinikasi - oilaviy stomatologiya
 						</p>
@@ -53,7 +85,7 @@ const openOrder = () => {
 							url: '/services',
 						},
 						{
-							label: 'Tish implantatsiyasi',
+							label: activeService?.name ?? '',
 						},
 					]"
 				/>
@@ -67,14 +99,13 @@ const openOrder = () => {
 				<div class="flex gap-4 items-start">
 					<div class="">
 						<h3 class="font-bold text-2xl">
-							Implant o'rnatish uchun ko'rsatmalar
+							{{ activeService?.name }}
 						</h3>
-						<p class="mt-5 font-semibold text-text">
-							Implantatsiyaning asosiy ko'rsatkichi - bittadan hammasigacha
-							bo'lgan har qanday tishlarning yo'qligi. Tishlarni tiklashning
-							ushbu usuli quyidagi hollarda ham qo'llaniladi:
-						</p>
-
+						<p
+							class="mt-5 font-medium text-text"
+							v-html="activeService?.content"
+						/>
+						<!-- 
 						<ul class="mt-5">
 							<li
 								v-for="item in 4"
@@ -96,7 +127,7 @@ const openOrder = () => {
 							olib tashlash kerak bo'lsa, implantatsiyani ko'rib chiqishga
 							arziydi. Titan novdalarga mahkamlash tish yo'qolganidan keyin
 							paydo bo'lgan ko'plab muammolarni hal qiladi.
-						</p>
+						</p> -->
 					</div>
 					<div
 						class="shadow-lg rounded-lg w-full max-w-[400px] p-6 border border-border"
@@ -104,20 +135,26 @@ const openOrder = () => {
 						<div>
 							<p class="font-semibold text-text">Davolash narxi</p>
 							<p class="text-xl font-semibold mt-2 text-main">
-								120 000 UZS dan
+								{{ activeService?.priceFormat }}
 							</p>
 						</div>
 						<div class="mt-4">
 							<p class="font-semibold text-text">Davomiyligi</p>
-							<p class="text-xl font-semibold mt-2 text-main">1 soat</p>
+							<p class="text-xl font-semibold mt-2 text-main">
+								{{ activeService?.duration }}
+							</p>
 						</div>
 						<div class="mt-4">
-							<BaseButton text="Qabulga yozilish" :is-full="true" @click="openOrder" />
+							<BaseButton
+								text="Qabulga yozilish"
+								:is-full="true"
+								@click="openOrder"
+							/>
 						</div>
 					</div>
 				</div>
 
-				<div class="mt-8">
+				<!-- <div class="mt-8">
 					<h3 class="font-bold text-2xl">Kalit taslim implantatsiya turlari</h3>
 					<p v-for="item in 5" :key="item" class="mt-4 font-medium text-text">
 						<span class="font-semibold">Klassik ikki bosqichli. </span>
@@ -126,7 +163,7 @@ const openOrder = () => {
 						Ikkinchi, ortopedik bosqichda, shilliq qavat kesiladi va avval
 						saqich hosil qiluvchi pinga, keyin esa toj.
 					</p>
-				</div>
+				</div> -->
 			</div>
 		</section>
 		<!-- services -->
