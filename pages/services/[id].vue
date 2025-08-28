@@ -8,14 +8,6 @@ const { locale } = useI18n();
 const token = useToken();
 const route = useRoute();
 // const localePath = useLocalePath();
-//===============================-< order create status >-===============================
-//> variables
-const isOpenOrder = useOrderStatus();
-//> functions
-const openOrder = () => {
-	isOpenOrder.value = true;
-};
-
 //===============================-< get services >-===============================
 //> variables
 const services = ref<TServices>();
@@ -37,6 +29,23 @@ async function getServices() {
 	}
 }
 getServices();
+
+//===============================-< order create status >-===============================
+//> variables
+const isOpenOrder = ref(false);
+//> functions
+const openOrder = () => {
+	isOpenOrder.value = true;
+};
+
+const closeOrder = () => {
+	isOpenOrder.value = false;
+};
+
+// submit
+async function submitOrder() {
+	closeOrder();
+}
 </script>
 <template>
 	<main class="wrapper">
@@ -153,19 +162,23 @@ getServices();
 						</div>
 					</div>
 				</div>
-
-				<!-- <div class="mt-8">
-					<h3 class="font-bold text-2xl">Kalit taslim implantatsiya turlari</h3>
-					<p v-for="item in 5" :key="item" class="mt-4 font-medium text-text">
-						<span class="font-semibold">Klassik ikki bosqichli. </span>
-						Birinchi, jarrohlik bosqichida implant vidalanadi, va shilliq qavat
-						tepada tikiladi, uning ostida u ildiz otadi bir necha oy davomida.
-						Ikkinchi, ortopedik bosqichda, shilliq qavat kesiladi va avval
-						saqich hosil qiluvchi pinga, keyin esa toj.
-					</p>
-				</div> -->
 			</div>
 		</section>
 		<!-- services -->
+
+		<!--===Modals===-->
+		<BaseModal :is-open="isOpenOrder" @close="closeOrder">
+			<template #header>
+				<h3 class="font-semibold text-lg">Qabulga yozilish</h3>
+				<p class="mt-2 text-text">
+					Qabulga yozilish uchun
+					<span class="text-main font-semibold">Ismingiz</span> va
+					<span class="text-main font-semibold">Raqamingiz</span>ni qoldiring
+					tez orada operatorlarimiz sizga aloqaga chiqishadi
+				</p>
+			</template>
+			<OrderCreate :service-id="Number(route.params.id)" @success="submitOrder" />
+		</BaseModal>
+		<!--===Modals===-->
 	</main>
 </template>

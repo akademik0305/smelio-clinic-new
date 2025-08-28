@@ -9,6 +9,17 @@ const toast = useToast();
 const token = useToken();
 const { locale, t } = useI18n();
 
+const props = defineProps({
+	teamId: {
+		type: Number,
+		default: null,
+	},
+	serviceId: {
+		type: Number,
+		default: null,
+	},
+});
+
 // emits
 const emits = defineEmits(["success"]);
 
@@ -29,35 +40,40 @@ const state = reactive<Partial<Schema>>({
 });
 
 //> fuctions
+interface IData {
+	full_name: string | undefined;
+	phone: string | undefined;
+	team_id?: number;
+	service_id?: number;
+}
+
 const form = useTemplateRef("form");
 async function onSubmit() {
-	const data = {
-		name: state.name,
+	const data: IData = {
+		full_name: state.name,
 		phone: state.phone?.replace(/[\s-]+/g, ""),
 	};
 
-  const res = {
-    success: true
-  }
-	// const res = await Service.post(
-	// 	urls.addCustomer(),
-	// 	locale.value,
-	// 	data,
-	// 	token.value
-	// );
-	if (res.success) {
+	if (props.teamId) data.team_id = props.teamId;
+	if (props.serviceId) data.service_id = props.serviceId;
+
+	const res = await Service.post(
+		urls.sendContact(),
+		locale.value,
+		data,
+		token.value
+	);
+	if (res.status === 200) {
 		toast.add({
-			title: "Mijoz muvaffaqqiyatli qo'shildi",
+			title: "Xabaringiz muvaffaqqiyali yuborildi",
 			color: "success",
 		});
 		emits("success", data);
 	} else {
-		form.value?.setErrors([
-			{
-				name: "phone",
-				message: "Bu raqam tizimda mavjud, boshqa raqam kiriting",
-			},
-		]);
+		toast.add({
+			title: "Qayta urinib ko'ring",
+			color: "error",
+		});
 	}
 }
 </script>
@@ -85,7 +101,7 @@ async function onSubmit() {
 			</UFormField>
 
 			<div class="">
-				<BaseButton text="Yuborish" is-full/>
+				<BaseButton text="Yuborish" is-full />
 			</div>
 		</UForm>
 	</div>

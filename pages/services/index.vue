@@ -8,12 +8,23 @@ const token = useToken();
 // const localePath = useLocalePath();
 //===============================-< order create status >-===============================
 //> variables
-const isOpenOrder = useOrderStatus();
+const isOpenOrder = ref(false);
+const activeId = ref<number | undefined>(undefined);
 //> functions
-const openOrder = () => {
-	isOpenOrder.value = true
-}
+const openOrder = (id: number) => {
+	activeId.value = id;
+	isOpenOrder.value = true;
+};
 
+const closeOrder = () => {
+	activeId.value = undefined;
+	isOpenOrder.value = false;
+};
+
+// submit
+async function submitOrder() {
+	closeOrder();
+}
 //===============================-< get services >-===============================
 //> variables
 const services = ref();
@@ -104,5 +115,20 @@ getServices();
 			</div>
 		</section>
 		<!-- services -->
+
+		<!--===Modals===-->
+		<BaseModal :is-open="isOpenOrder" @close="closeOrder">
+			<template #header>
+				<h3 class="font-semibold text-lg">Qabulga yozilish</h3>
+				<p class="mt-2 text-text">
+					Qabulga yozilish uchun
+					<span class="text-main font-semibold">Ismingiz</span> va
+					<span class="text-main font-semibold">Raqamingiz</span>ni qoldiring
+					tez orada operatorlarimiz sizga aloqaga chiqishadi
+				</p>
+			</template>
+			<OrderCreate @success="submitOrder" />
+		</BaseModal>
+		<!--===Modals===-->
 	</main>
 </template>

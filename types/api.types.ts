@@ -70,3 +70,23 @@ export type TAbout = {
 		id: number;
 	};
 };
+
+// settings
+
+export type TSettings = {
+	status: number;
+	message: string;
+	data: {
+		id: number;
+		address: string;
+		description: string;
+		map: string;
+		email: string;
+		phone: string;
+		facebook: string;
+		instagram: string;
+		telegram: string;
+		youtube: string;
+		imageUrl: null;
+	};
+};

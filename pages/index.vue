@@ -479,7 +479,7 @@ onMounted(() => {
 					style="border: 0"
 					loading="lazy"
 					referrerpolicy="no-referrer-when-downgrade"
-					class="h-[50vh] w-full"
+					class="h-[40svh] md:h-[50vh] w-full"
 				/>
 			</div>
 			<!-- map -->

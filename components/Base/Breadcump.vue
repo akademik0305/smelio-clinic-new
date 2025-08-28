@@ -1,18 +1,18 @@
 <script lang="ts" setup>
-import type { PropType } from 'vue'
+import type { PropType } from "vue";
 
 const localePath = useLocalePath();
 type TLinks = {
-	label: string
-	url?: string
-}[]
+	label: string | undefined;
+	url?: string;
+}[];
 
 const props = defineProps({
 	links: {
 		type: Array as PropType<TLinks>,
 		required: true,
 	},
-})
+});
 </script>
 <template>
 	<div class="flex items-center justify-start gap-2 mt-2">

@@ -1,4 +1,83 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+//===============================-< imports >-===============================
+import { useI18n } from "vue-i18n";
+import * as z from "zod";
+import Service from "~/service/Service";
+import urls from "~/service/urls";
+import type { TSettings } from "~/types/api.types";
+// //> utils
+const { locale, t } = useI18n();
+const token = useToken();
+const toast = useToast();
+
+//===============================-< get settings >-===============================
+//> variables
+const settings = ref<TSettings>();
+
+//> functions
+
+async function getSettings() {
+	settings.value = await Service.get(
+		urls.getSettings(),
+		locale.value,
+		token.value
+	);
+}
+
+getSettings();
+
+//===============================-< submit add >-===============================
+//> variables
+const schema = z.object({
+	name: z.string({ required_error: "Ismni kiriting" }),
+	phone: z
+		.string({ required_error: t("enter_phone") })
+		.min(17, t("wrong_number")),
+});
+
+type Schema = z.output<typeof schema>;
+
+const state = reactive<Partial<Schema>>({
+	name: undefined,
+	phone: "+998 ",
+});
+
+//> fuctions
+interface IData {
+	full_name: string | undefined;
+	phone: string | undefined;
+	team_id?: number;
+	service_id?: number;
+}
+
+const form = useTemplateRef("form");
+async function onSubmit() {
+	const data: IData = {
+		full_name: state.name,
+		phone: state.phone?.replace(/[\s-]+/g, ""),
+	};
+
+	const res = await Service.post(
+		urls.sendContact(),
+		locale.value,
+		data,
+		token.value
+	);
+	if (res.status === 200) {
+		toast.add({
+			title: "Xabaringiz muvaffaqqiyali yuborildi",
+			color: "success",
+		});
+		state.name = ""
+		state.phone = "+998"
+	} else {
+		toast.add({
+			title: "Qayta urinib ko'ring",
+			color: "error",
+		});
+	}
+}
+</script>
 <template>
 	<main class="py-10">
 		<section class="text-subtext relative">
@@ -12,8 +91,8 @@
 							height="100%"
 							class="absolute inset-0"
 							title="map"
-							src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%C4%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
-							style="filter: grayscale(1) contrast(1.2) opacity(0.4)"
+							src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3039.9419228630854!2d71.7761512!3d40.3658121!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb856e07d8c5d3%3A0x10577e00597fff0f!2sSmelio%20Stomatalogiya!5e0!3m2!1sru!2s!4v1756054859649!5m2!1sru!2s"
+							style=""
 						/>
 						<div
 							class="bg-white relative flex flex-wrap py-6 rounded shadow-md"
@@ -24,19 +103,21 @@
 								>
 									Manzil
 								</h2>
-								<p class="mt-1">Bu yerga manzil kiritiladi</p>
+								<p class="mt-1">{{ settings?.data.address }}</p>
 							</div>
 							<div class="lg:w-1/2 px-6 mt-4 lg:mt-0">
 								<h4 class="font-semibold text-text tracking-widest text-xs">
 									EMAIL
 								</h4>
-								<a class="text-indigo-500 leading-relaxed">smelioclinic.gmail.com</a>
+								<a class="text-indigo-500 leading-relaxed">{{
+									settings?.data.email
+								}}</a>
 								<h2
 									class="font-semibold text-text tracking-widest text-xs mt-4"
 								>
 									PHONE
 								</h2>
-								<p class="leading-relaxed">+998 33 180 10 08</p>
+								<p class="leading-relaxed">{{ settings?.data.phone }}</p>
 							</div>
 						</div>
 					</div>
@@ -50,43 +131,36 @@
 							Ushbu formadan foydalanib bizga e-mail jo'nating. Biz siz bilan
 							tez orada bog'lanamiz.
 						</p>
-						<div class="relative mb-4">
-							<label for="name" class="leading-7 text-sm text-subtext"
-								>Ism</label
-							>
-							<input
-								type="text"
-								id="name"
-								name="name"
-								class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-							/>
-						</div>
-						<div class="relative mb-4">
-							<label for="email" class="leading-7 text-sm text-subtext"
-								>Email</label
-							>
-							<input
-								type="email"
-								id="email"
-								name="email"
-								class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-							/>
-						</div>
-						<div class="relative mb-4">
-							<label for="message" class="leading-7 text-sm text-subtext"
-								>Xabar</label
-							>
-							<textarea
-								id="message"
-								name="message"
-								class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
-							/>
-						</div>
-						<button
-							class="relative h-auto w-auto py-1.5 px-6 overflow-hidden border border-main text-main shadow-2xl transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:right-0 before:top-0 before:m-auto before:h-0 before:w-0 before:rounded-sm before:bg-main before:duration-300 before:ease-out hover:text-white hover:shadow-main hover:before:h-full hover:before:w-full hover:before:opacity-80 rounded-md"
+						<UForm
+							ref="form"
+							:schema="schema"
+							:state="state"
+							class="space-y-4 relative mb-4"
+							@submit="onSubmit"
 						>
-							<span class="relative z-10">Yuborish</span>
-						</button>
+							<UFormField label="Ism" name="name" class="">
+								<UInput
+									v-model="state.name"
+									type="text"
+									class="w-full"
+									size="lg"
+								/>
+							</UFormField>
+
+							<UFormField label="Telefon" name="phone" class="">
+								<UInput
+									v-model="state.phone"
+									v-maska="'+998 ## ###-##-##'"
+									type="text"
+									class="w-full"
+									size="lg"
+								/>
+							</UFormField>
+
+							<div class="">
+								<BaseButton text="Yuborish" is-full />
+							</div>
+						</UForm>
 					</div>
 				</div>
 			</div>

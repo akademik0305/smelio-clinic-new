@@ -1,10 +1,47 @@
 <script lang="ts" setup>
+//===============================-< imports >-===============================
+import Service from "~/service/Service";
+import urls from "~/service/urls";
+import type { TEmployee, TEmployees } from "~/types/api.types";
+// //> utils
+const { locale } = useI18n();
+const token = useToken();
+const route = useRoute();
+
+//===============================-< get employees >-===============================
+//> variables
+const employees = ref<TEmployees>();
+const activeEmployee = ref<TEmployee>();
+
+//> functions
+
+async function getEmployees() {
+	employees.value = await Service.get(
+		urls.getOurTeam(),
+		locale.value,
+		token.value
+	);
+	activeEmployee.value = employees.value?.data.find(
+		(emp) => emp.id === Number(route.params.id)
+	);
+}
+
+getEmployees();
 //===============================-< order create status >-===============================
 //> variables
-const isOpenOrder = useOrderStatus();
+const isOpenOrder = ref(false);
 //> functions
 const openOrder = () => {
-	isOpenOrder.value = true
+	isOpenOrder.value = true;
+};
+
+const closeOrder = () => {
+	isOpenOrder.value = false;
+};
+
+// submit
+async function submitOrder() {
+	closeOrder();
 }
 </script>
 <template>
@@ -22,7 +59,7 @@ const openOrder = () => {
 							url: '/employees',
 						},
 						{
-							label: 'Fridman Ilya Yulievich',
+							label: activeEmployee?.full_name,
 						},
 					]"
 				/>
@@ -35,37 +72,22 @@ const openOrder = () => {
 				<div class="flex gap-5">
 					<div class="flex-1 h-auto">
 						<img
-							src="~/assets/images/webp/doctor.webp"
+							:src="activeEmployee?.imageUrl"
 							class="w-full h-full"
-							alt=""
+							:alt="activeEmployee?.full_name"
 						/>
 					</div>
 					<div class="px-4 flex-1">
 						<h3 class="mt-5 font-medium text-2xl text-text">
-							Fridman Ilya Yulievich
+							{{ activeEmployee?.full_name }}
 						</h3>
-						<p class="mt-5 font-medium text-text">
-							Mening ismim Ekaterina Aleksandrovna Zaitseva, men Doktor Keller
-							stomatologiya klinikasining bosh shifokoriman.
-						</p>
-						<p class="mt-4 font-medium text-text">
-							Men har bir bemorga individual yondashuvni topaman, ayniqsa tish
-							shifokoriga tashrif buyurishdan qo'rqish. Men har qanday
-							murakkablikdagi kariesni davolayman, asabning o'zi va tish
-							ildizini o'rab turgan periodontal to'qimalarning yallig'lanishini
-							endodontik davolash. Men professional og'iz gigienasini bajaraman,
-							keyin kerak bo'lsa chuqur yoki yuzaki florlash, uyda oqartirish
-							yoki Zoom4 oqartirish. Men ortodontik davolanishni qabul qilib
-							bo'lmaydigan tish qatoridagi alohida tishlarning holatini qayta
-							tiklayman. Men ham protezlash uchun to'liq tayyorgarlik ko'raman.
-							Har bir bemor sifatli davolanishi va tish shifokoridan tabassum
-							bilan ketishi kerak, deb hisoblayman.
-						</p>
-						<p class="mt-4 font-medium text-text">
-							Bemorlarning yoshi: 14 yoshdan 90 yoshgacha.
-						</p>
+						<p
+							class="mt-5 font-medium text-text"
+							v-html="activeEmployee?.content"
+						/>
+
 						<p class="mt-4 font-medium text-subtext text-xs">
-							Bosh shifokor, stomatolog-terapevt
+							{{ activeEmployee?.position }}
 						</p>
 
 						<div class="mt-4" @click.stop.prevent>
@@ -76,5 +98,20 @@ const openOrder = () => {
 			</div>
 		</section>
 		<!-- employee cards -->
+
+		<!--===Modals===-->
+		<BaseModal :is-open="isOpenOrder" @close="closeOrder">
+			<template #header>
+				<h3 class="font-semibold text-lg">Qabulga yozilish</h3>
+				<p class="mt-2 text-text">
+					Qabulga yozilish uchun
+					<span class="text-main font-semibold">Ismingiz</span> va
+					<span class="text-main font-semibold">Raqamingiz</span>ni qoldiring
+					tez orada operatorlarimiz sizga aloqaga chiqishadi
+				</p>
+			</template>
+			<OrderCreate :team-id="Number(route.params.id)" @success="submitOrder" />
+		</BaseModal>
+		<!--===Modals===-->
 	</main>
 </template>

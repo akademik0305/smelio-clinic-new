@@ -63,17 +63,6 @@ function handleScrool() {
 	}
 }
 
-//===============================-< get contact >-===============================
-//> variables
-const contact = ref();
-//> functions
-async function getContact() {
-	const res = await Service.get(urls.getContactInfo(), locale.value, null);
-	contact.value = res.data;
-}
-
-getContact();
-
 //===============================-< on page load >-===============================
 //> variables
 //> functions
@@ -184,3 +173,14 @@ onUnmounted(() => {
 		</nav>
 	</div>
 </template>
+<style>
+a.router-link-active.router-link-exact-active {
+	color: var(--color-main);
+	/* border-bottom: 2px solid var(--color-main); */
+}
+
+a.router-link-active.router-link-exact-active span,
+a.active span {
+	color: white;
+}
+</style>

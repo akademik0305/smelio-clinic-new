@@ -24,11 +24,11 @@ const emit = defineEmits(["close"]);
 			class="absolute top-0 left-0 bg-gray-950/60 transition-all w-full h-full"
 			@click="emit('close')"
 		/>
-		<!-- overlay -->
+		<!-- main -->
 		<Transition name="modal">
 			<div
 				v-if="props.isOpen"
-				class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-screen max-h-max w-full max-w-md bg-white overflow-visible transition-all duration-700 rounded-2xl"
+				class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-auto max-h-max w-full max-w-md bg-white overflow-visible transition-all duration-700 rounded-2xl"
 			>
 				<div class="absolute top-0 left-0 w-full h-full overflow-hidden">
 					<div class="absolute -top-16 -left-10 bg-main w-28 h-28 rounded-full" />

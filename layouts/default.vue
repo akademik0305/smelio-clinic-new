@@ -8,8 +8,7 @@ const closeOrder = () => {
 };
 
 // submit
-async function submitOrder(data: { name: string; phone: string }) {
-	console.log(data);
+async function submitOrder() {
 	closeOrder();
 }
 </script>
@@ -21,7 +20,7 @@ async function submitOrder(data: { name: string; phone: string }) {
 		</div>
 		<UiFooter />
 
-		<!-- submit delete -->
+		<!-- submit -->
 		<BaseModal :is-open="isOpenOrder" @close="closeOrder">
 			<template #header>
 				<h3 class="font-semibold text-lg">Qabulga yozilish</h3>
