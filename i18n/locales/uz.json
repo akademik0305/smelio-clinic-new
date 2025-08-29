@@ -32,5 +32,9 @@
   "empty_data_product": "No products found",
   "loading": "Loading...",
   "enter_phone": "Telefon raqamingizni kiriting",
-  "wrong_number": "Telefon raqam noto'g'ri"
+  "wrong_number": "Telefon raqam noto'g'ri",
+  "enter_name": "Ismni kiriting",
+  "success_send": "Xabaringiz muvaffaqqiyali yuborildi",
+  "error_send": "Qayta urinib ko'ring",
+  "send": "Yuborish"
 }

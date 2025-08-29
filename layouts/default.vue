@@ -23,10 +23,12 @@ async function submitOrder() {
 		<!-- submit -->
 		<BaseModal :is-open="isOpenOrder" @close="closeOrder">
 			<template #header>
-				<h3 class="font-semibold text-lg">Qabulga yozilish</h3>
+				<h3 class="font-semibold text-lg">{{ $t('submit_order_btn') }}</h3>
 				<p class="mt-2 text-text">
-					Qabulga yozilish uchun <span class="text-main font-semibold">Ismingiz</span> va <span class="text-main font-semibold">Raqamingiz</span>ni qoldiring tez orada
-					operatorlarimiz sizga aloqaga chiqishadi
+					{{ $t('order_modal.title') }}
+					<span class="text-main font-semibold">{{ $t('order_modal.name') }}</span> {{ $t('order_modal.and') }}
+					<span class="text-main font-semibold">{{ $t('order_modal.phone') }}</span>,
+					{{ $t('order_modal.instruction') }}
 				</p>
 			</template>
 			<OrderCreate @success="submitOrder" />

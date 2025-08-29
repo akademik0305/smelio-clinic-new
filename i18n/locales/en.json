@@ -32,5 +32,9 @@
   "empty_data_product": "No products found",
   "loading": "Loading...",
   "enter_phone": "Enter your phone number",
-  "wrong_number": "Enter a valid phone number"
+  "wrong_number": "Enter a valid phone number",
+  "enter_name": "Enter your name",
+  "success_send": "Message sent successfully",
+  "error_send": "Try again",
+  "send": "Send"
 }

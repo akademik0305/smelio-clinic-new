@@ -120,7 +120,7 @@ async function submitOrder() {
 							</p>
 						</div>
 						<div class="mt-4">
-							<BaseButton text="Qabulga yozilish" :is-full="true" @click="openOrder" />
+							<BaseButton :text="$t('submit_order_btn')" :is-full="true" @click="openOrder" />
 						</div>
 					</div>
 				</div>

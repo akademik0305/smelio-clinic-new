@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { Fancybox } from '@fancyapps/ui'
+import '@fancyapps/ui/dist/fancybox/fancybox.css'
 //===============================-< imports >-===============================
 // types
 // import type { TRestaurant, TRestaurantsData } from '~/types/api.types'
@@ -11,6 +13,9 @@ import type {
 	TEmployees,
 	TPortfolios,
 } from "~/types/api.types";
+
+Fancybox.bind('[data-fancybox]', {
+})
 
 // //> utils
 const { locale } = useI18n();
@@ -399,7 +404,9 @@ onMounted(() => {
 						}">
 							<swiper-slide v-for="item in portfolio?.data" :key="item.id"
 								class="h-[35svh] sm:h-[40svh] md:max-h-[500px]">
-								<img class="w-full h-full object-cover rounded-xl" :src="item.imageUrl" :alt="item.title || 'Ish'" />
+								<a :href="item.imageUrl" data-fancybox="gallery">
+									<img class="w-full h-full object-cover rounded-xl" :src="item.imageUrl" :alt="item.title || 'Ish'" />
+								</a>
 							</swiper-slide>
 						</swiper-container>
 

@@ -63,7 +63,7 @@ getServices();
 						<p class="text-white font-medium leading-6 sm:leading-8 text-xs sm:text-sm">
 							{{ $t('services_clinic_description') }}
 						</p>
-						<BaseButton text="Qabulga yozilish" @click="openOrder" />
+						<BaseButton :text="$t('submit_order_btn')" @click="openOrder" />
 					</div>
 				</div>
 			</div>

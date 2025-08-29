@@ -94,7 +94,7 @@ onUnmounted(() => {
 								</NuxtLink>
 							</li>
 							<li>
-								<BaseButton text="Qabulga yozilish" @click="openOrder" />
+								<BaseButton :text="$t('submit_order_btn')" @click="openOrder" />
 							</li>
 						</ul>
 						<USelect v-model="currentLang" leading-icon="material-symbols:language" :items="locales" size="md"
@@ -131,7 +131,7 @@ onUnmounted(() => {
 				<NuxtLink :to="localePath('/services')" @click="closeMenu">{{ $t("services") }}</NuxtLink>
 				<NuxtLink :to="localePath('/employees')" @click="closeMenu">{{ $t("employees") }}</NuxtLink>
 				<NuxtLink :to="localePath('/contact')" @click="closeMenu">{{ $t("contact") }}</NuxtLink>
-				<BaseButton text="Qabulga yozilish" @click="openOrder" />
+				<BaseButton :text="$t('submit_order_btn')" @click="openOrder" />
 				<USelect v-model="currentLang" leading-icon="material-symbols:language" :items="locales" size="md"
 					class="border border-border rounded-md py-2 max-w-[100px] hover:border-main transition-all duration-300">
 					<template #default="{ modelValue }">

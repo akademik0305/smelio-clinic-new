@@ -87,7 +87,7 @@ async function submitOrder() {
 										{{ item.position }}
 									</p>
 									<div class="mt-4" @click.stop.prevent>
-										<BaseButton text="Qabulga yozilish" @click="openOrder(item.id)" />
+										<BaseButton :text="$t('submit_order_btn')" @click="openOrder(item.id)" />
 									</div>
 								</div>
 							</NuxtLink>

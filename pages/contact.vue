@@ -29,7 +29,7 @@ getSettings();
 //===============================-< submit add >-===============================
 //> variables
 const schema = z.object({
-	name: z.string({ required_error: "Ismni kiriting" }),
+	name: z.string({ required_error: t("enter_name") }),
 	phone: z
 		.string({ required_error: t("enter_phone") })
 		.min(17, t("wrong_number")),
@@ -65,14 +65,14 @@ async function onSubmit() {
 	);
 	if (res.status === 200) {
 		toast.add({
-			title: "Xabaringiz muvaffaqqiyali yuborildi",
+			title: t("success_send"),
 			color: "success",
 		});
 		state.name = ""
 		state.phone = "+998"
 	} else {
 		toast.add({
-			title: "Qayta urinib ko'ring",
+			title: t("error_send"),
 			color: "error",
 		});
 	}
@@ -121,16 +121,16 @@ async function onSubmit() {
 						</p>
 
 						<UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-							<UFormField label="Ism" name="name">
+							<UFormField :label="$t('order_modal.name')" name="name">
 								<UInput v-model="state.name" type="text" class="w-full" size="lg" />
 							</UFormField>
 
-							<UFormField label="Telefon" name="phone">
+							<UFormField :label="$t('order_modal.phone')" name="phone">
 								<UInput v-model="state.phone" v-maska="'+998 ## ###-##-##'" type="text" class="w-full" size="lg" />
 							</UFormField>
 
 							<div>
-								<BaseButton text="Yuborish" is-full />
+								<BaseButton :text="t('send')" is-full />
 							</div>
 						</UForm>
 					</div>

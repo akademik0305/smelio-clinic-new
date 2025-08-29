@@ -58,8 +58,8 @@ watch(locale, () => {
 						class="text-gray-500 font-inter hover:text-main transition-all">{{ $t("address") }}: Smelio Clinic
 					</a>
 				</div>
-				<div class="w-full max-w-72 rounded-md overflow-hidden">
-					<iframe
+				<div class="w-full lg:max-w-72 rounded-md overflow-hidden">
+					<iframe width="100%"
 						src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3039.9419228630854!2d71.7761512!3d40.3658121!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb856e07d8c5d3%3A0x10577e00597fff0f!2sSmelio%20Stomatalogiya!5e0!3m2!1sru!2s!4v1756054859649!5m2!1sru!2s"
 						title="map" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" />
 				</div>
