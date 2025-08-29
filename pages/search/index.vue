@@ -46,47 +46,38 @@ function changePage(page: number) {
 </script>
 <template>
 	<main>
-		<section class="py-4 px-2 rounded-b-xl">
+		<!-- search -->
+		<section class="py-4 px-2 md:px-4 lg:px-6 rounded-b-xl">
 			<div class="container">
-				<!-- search -->
 				<BaseSearch placeholder="Qidirish" @change-value="handleChangeValue" />
 			</div>
-			<!-- search -->
 		</section>
+		<!-- search -->
 
-		<section class="mt-8">
+		<section class="mt-6 md:mt-8">
 			<div class="container">
+				<!-- products -->
 				<div v-if="products?.items.length && searchValue">
 					<div
-						class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-5"
-					>
-						<ProductCard
-							v-for="product in products.items"
-							:key="product.id"
-							:product="product"
-							@success-wishlist="handleSearch(searchValue)"
-						/>
+						class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 sm:gap-4 md:gap-5">
+						<ProductCard v-for="product in products.items" :key="product.id" :product="product"
+							@success-wishlist="handleSearch(searchValue)" />
 					</div>
-					<div class="mt-5">
-						<BasePagination
-							v-if="products?._meta.pageCount > 1"
-							:meta="products?._meta"
-							@change-page="changePage"
-						/>
+
+					<!-- pagination -->
+					<div class="mt-6 flex justify-center">
+						<BasePagination v-if="products?._meta.pageCount > 1" :meta="products?._meta" @change-page="changePage" />
 					</div>
 				</div>
-				<div
-					v-else-if="!products?.items.length && isFinishedSearch"
-					class="w-full h-80 flex flex-col items-center justify-center gap-2"
-				>
-					<div class="w-40 h-auto flex justify-center">
-						<Icon
-							name="icon-park-solid:database-network"
-							class="mt-2 text-7xl text-slate-400"
-						/>
+
+				<!-- empty state -->
+				<div v-else-if="!products?.items.length && isFinishedSearch"
+					class="w-full h-72 md:h-80 flex flex-col items-center justify-center gap-3 text-center">
+					<div class="w-28 md:w-40 h-auto flex justify-center">
+						<Icon name="icon-park-solid:database-network" class="text-6xl md:text-7xl text-slate-400" />
 					</div>
-					<p class="font-meduim text-base text-gray-4">
-						{{ $t('empty_data_product') }}
+					<p class="font-medium text-sm md:text-base text-gray-400">
+						{{ $t("empty_data_product") }}
 					</p>
 				</div>
 			</div>

@@ -1,43 +1,48 @@
 export default {
-  // banners
+	// banners
 	getBanners() {
 		return `/data/banners`;
 	},
-  // services
+	// services
 	getServices() {
 		return `/data/services`;
 	},
-  // services category
+	// services category
 	getCategoryService() {
 		return `/data/category-services`;
 	},
-  // our team
+	// our team
 	getOurTeam() {
 		return `/data/our-team`;
 	},
-  // our team
+	// our team
 	getMetaData() {
 		return `/data/meta-data`;
 	},
-  // our team
+	// our team
 	getPortfolio() {
 		return `/data/our-portfolio`;
 	},
-  // our team
+	// our team
 	getSettings() {
 		return `/data/setting`;
 	},
-  // awwards
+	// awwards
 	getAwwards() {
 		return `/data/our-award`;
 	},
-  // about
+	// about
 	getAbout() {
 		return `/data/about`;
 	},
 
-  // contact public
+	// contact public
 	sendContact() {
+		return `/data/contact-us`;
+	},
+
+	// contact public
+	getContactInfo() {
 		return `/data/contact-us`;
 	},
 };
