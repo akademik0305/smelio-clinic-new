@@ -48,11 +48,13 @@ async function submitOrder() {
 	<main class="wrapper">
 		<nav class="mt-5 hidden md:block">
 			<div class="container">
-				<BaseBreadcump :links="[
-					{ label: $t('home_page'), url: '/' },
-					{ label: $t('employees'), url: '/employees' },
-					{ label: activeEmployee?.full_name },
-				]" />
+				<BaseBreadcump
+					:links="[
+						{ label: $t('home_page'), url: '/' },
+						{ label: $t('employees'), url: '/employees' },
+						{ label: activeEmployee?.full_name },
+					]"
+				/>
 			</div>
 		</nav>
 
@@ -63,8 +65,11 @@ async function submitOrder() {
 				<div class="flex flex-col md:flex-row gap-5">
 					<!-- image -->
 					<div class="w-full md:w-1/2 h-auto">
-						<img :src="activeEmployee?.imageUrl" class="w-full h-full object-cover rounded-lg"
-							:alt="activeEmployee?.full_name" />
+						<img
+							:src="activeEmployee?.imageUrl"
+							class="w-full h-full object-cover rounded-lg"
+							:alt="activeEmployee?.full_name"
+						/>
 					</div>
 
 					<!-- content -->
@@ -73,7 +78,10 @@ async function submitOrder() {
 							{{ activeEmployee?.full_name }}
 						</h3>
 
-						<p class="mt-4 md:mt-5 font-medium text-text leading-relaxed" v-html="activeEmployee?.content" />
+						<p
+							class="mt-4 md:mt-5 font-medium text-text leading-relaxed"
+							v-html="activeEmployee?.content"
+						/>
 
 						<p class="mt-3 md:mt-4 font-medium text-subtext text-xs">
 							{{ activeEmployee?.position }}
@@ -91,12 +99,18 @@ async function submitOrder() {
 		<!--===Modals===-->
 		<BaseModal :is-open="isOpenOrder" @close="closeOrder">
 			<template #header>
-				<h3 class="font-semibold text-lg">{{ $t('submit_order_btn') }}</h3>
+				<h3 class="font-semibold text-lg">{{ $t("submit_order_btn") }}</h3>
 				<p class="mt-2 text-text">
-					{{ $t('order_modal.title') }}
-					<span class="text-main font-semibold">{{ $t('order_modal.name') }}</span> {{ $t('order_modal.and') }}
-					<span class="text-main font-semibold">{{ $t('order_modal.phone') }}</span>,
-					{{ $t('order_modal.instruction') }}
+					{{ $t("order_modal.title") }}
+					<span class="text-main font-semibold">{{
+						$t("order_modal.name")
+					}}</span>
+					{{ $t("order_modal.and") }}
+					<span class="text-main font-semibold">{{
+						$t("order_modal.phone")
+					}}</span
+					>,
+					{{ $t("order_modal.instruction") }}
 				</p>
 			</template>
 			<OrderCreate :team-id="Number(route.params.id)" @success="submitOrder" />
