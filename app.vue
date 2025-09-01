@@ -32,6 +32,6 @@ onMounted(() => {
 		>
 			<NuxtLayout />
 		</UApp>
-		<UiColor />
+		<!-- <UiColor /> -->
 	</div>
 </template>

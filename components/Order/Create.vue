@@ -26,7 +26,7 @@ const emits = defineEmits(["success"]);
 //===============================-< submit add >-===============================
 //> variables
 const schema = z.object({
-	name: z.string({ required_error: "Ismni kiriting" }),
+	name: z.string({ required_error: t("enter_name") }),
 	phone: z
 		.string({ required_error: t("enter_phone") })
 		.min(17, t("wrong_number")),
@@ -79,29 +79,17 @@ async function onSubmit() {
 </script>
 <template>
 	<div class="wrapper">
-		<UForm
-			ref="form"
-			:schema="schema"
-			:state="state"
-			class="space-y-4"
-			@submit="onSubmit"
-		>
-			<UFormField label="Ism" name="name" class="">
+		<UForm ref="form" :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
+			<UFormField :label="t('order_modal.name')" name="name" class="">
 				<UInput v-model="state.name" type="text" class="w-full" size="lg" />
 			</UFormField>
 
-			<UFormField label="Telefon" name="phone" class="">
-				<UInput
-					v-model="state.phone"
-					v-maska="'+998 ## ###-##-##'"
-					type="text"
-					class="w-full"
-					size="lg"
-				/>
+			<UFormField :label="t('order_modal.phone')" name="phone" class="">
+				<UInput v-model="state.phone" v-maska="'+998 ## ###-##-##'" type="text" class="w-full" size="lg" />
 			</UFormField>
 
 			<div class="">
-				<BaseButton text="Yuborish" is-full />
+				<BaseButton :text="t('send')" is-full />
 			</div>
 		</UForm>
 	</div>
