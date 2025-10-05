@@ -147,6 +147,7 @@ onUnmounted(() => {
 				<NuxtLink :to="localePath('/about')" @click="closeMenu">{{ $t("about_clinic") }}</NuxtLink>
 				<NuxtLink :to="localePath('/services')" @click="closeMenu">{{ $t("services") }}</NuxtLink>
 				<NuxtLink :to="localePath('/employees')" @click="closeMenu">{{ $t("employees") }}</NuxtLink>
+				<NuxtLink :to="localePath('/news')" @click="closeMenu">{{ $t("news") }}</NuxtLink>
 				<NuxtLink :to="localePath('/contact')" @click="closeMenu">{{ $t("contact") }}</NuxtLink>
 				<BaseButton :text="$t('submit_order_btn')" @click="openOrder" />
 				<USelect v-model="currentLang" leading-icon="material-symbols:language" :items="locales" size="md"
