@@ -45,8 +45,4 @@ export default {
 	getContactInfo() {
 		return `/data/contact-us`;
 	},
-	// contact public
-	getMetaData() {
-		return `/data/meta-data`;
-	},
 };

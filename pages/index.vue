@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import { Fancybox } from "@fancyapps/ui";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
 //===============================-< imports >-===============================
+import { Fancybox } from "@fancyapps/ui/dist/fancybox/fancybox.esm.js";
+import "@fancyapps/ui/dist/fancybox/fancybox.css";
 // types
 // import type { TRestaurant, TRestaurantsData } from '~/types/api.types'
 // // service

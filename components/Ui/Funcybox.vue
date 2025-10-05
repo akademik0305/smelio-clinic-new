@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Fancybox } from '@fancyapps/ui'
+import { Fancybox } from '@fancyapps/ui/dist/fancybox/fancybox.esm.js'
 import '@fancyapps/ui/dist/fancybox/fancybox.css'
 
 const { options } = defineProps({
