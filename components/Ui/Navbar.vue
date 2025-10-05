@@ -57,7 +57,8 @@ onUnmounted(() => {
 				<div class="py-4 flex items-center justify-between flex-row">
 					<!-- logo -->
 					<NuxtLink :to="localePath('/')" class="block">
-						<img src="~/assets/images/logo/logo-nobg.png" alt="logo" class="w-full h-full max-h-14 object-cover" />
+						<img src="~/assets/images/logo/logo-nobg.png" alt="logo"
+							class="w-full h-full max-h-14 object-cover" />
 					</NuxtLink>
 
 					<!-- desktop menu -->
@@ -65,31 +66,43 @@ onUnmounted(() => {
 						<ul class="flex items-center gap-4">
 							<li class="relative group">
 								<NuxtLink :to="localePath('/')"
-									class="font-medium text-text group-hover:text-main transition-colors duration-300">{{ $t('home_page')
+									class="font-medium text-text group-hover:text-main transition-colors duration-300">
+									{{ $t('home_page')
 									}}
 								</NuxtLink>
 							</li>
 							<li class="relative group">
 								<NuxtLink :to="localePath('/about')"
-									class="font-medium text-text group-hover:text-main transition-colors duration-300">{{
+									class="font-medium text-text group-hover:text-main transition-colors duration-300">
+									{{
 										$t("about_clinic") }}
 								</NuxtLink>
 							</li>
 							<li class="relative group">
 								<NuxtLink :to="localePath('/services')"
-									class="font-medium text-text group-hover:text-main transition-colors duration-300">{{
+									class="font-medium text-text group-hover:text-main transition-colors duration-300">
+									{{
 										$t("services") }}
 								</NuxtLink>
 							</li>
 							<li class="relative group">
 								<NuxtLink :to="localePath('/employees')"
-									class="font-medium text-text group-hover:text-main transition-colors duration-300">{{
+									class="font-medium text-text group-hover:text-main transition-colors duration-300">
+									{{
 										$t("employees") }}
 								</NuxtLink>
 							</li>
 							<li class="relative group">
+								<NuxtLink :to="localePath('/news')"
+									class="font-medium text-text group-hover:text-main transition-colors duration-300">
+									{{
+										$t("news") }}
+								</NuxtLink>
+							</li>
+							<li class="relative group">
 								<NuxtLink :to="localePath('/contact')"
-									class="font-medium text-text group-hover:text-main transition-colors duration-300">{{
+									class="font-medium text-text group-hover:text-main transition-colors duration-300">
+									{{
 										$t("contact") }}
 								</NuxtLink>
 							</li>
@@ -97,7 +110,8 @@ onUnmounted(() => {
 								<BaseButton :text="$t('submit_order_btn')" @click="openOrder" />
 							</li>
 						</ul>
-						<USelect v-model="currentLang" leading-icon="material-symbols:language" :items="locales" size="md"
+						<USelect v-model="currentLang" leading-icon="material-symbols:language" :items="locales"
+							size="md"
 							class="border border-border rounded-md py-2 hover:border-main transition-all duration-300">
 							<template #default="{ modelValue }">
 								<span class="capitalize text-text">{{ modelValue }}</span>
@@ -106,10 +120,12 @@ onUnmounted(() => {
 					</div>
 
 					<!-- mobile hamburger -->
-					<button class="lg:hidden flex flex-col gap-1.5" @click="toggleMenu" aria-label="Toggle Menu">
-						<span class="w-6 h-0.5 bg-text transition-all" :class="isMenuOpen ? 'rotate-45 translate-y-2' : ''" />
+					<button class="lg:hidden flex flex-col gap-1.5" aria-label="Toggle Menu" @click="toggleMenu">
+						<span class="w-6 h-0.5 bg-text transition-all"
+							:class="isMenuOpen ? 'rotate-45 translate-y-2' : ''" />
 						<span class="w-6 h-0.5 bg-text transition-all" :class="isMenuOpen ? 'opacity-0' : ''" />
-						<span class="w-6 h-0.5 bg-text transition-all" :class="isMenuOpen ? '-rotate-45 -translate-y-2' : ''" />
+						<span class="w-6 h-0.5 bg-text transition-all"
+							:class="isMenuOpen ? '-rotate-45 -translate-y-2' : ''" />
 					</button>
 				</div>
 			</div>
@@ -122,7 +138,8 @@ onUnmounted(() => {
 
 		<!-- mobile side menu -->
 		<transition name="slide-right">
-			<div v-if="isMenuOpen" class="fixed top-0 right-0 w-72 h-full bg-white shadow-lg z-50 flex flex-col gap-6 p-6">
+			<div v-if="isMenuOpen"
+				class="fixed top-0 right-0 w-72 h-full bg-white shadow-lg z-50 flex flex-col gap-6 p-6">
 				<span class="cancel cursor-pointer absolute top-6 right-6" @click="closeMenu">
 					<UIcon name="tabler:x" class="text-xl" />
 				</span>

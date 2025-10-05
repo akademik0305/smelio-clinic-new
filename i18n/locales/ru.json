@@ -36,5 +36,16 @@
   "enter_name": "Введите ваше имя",
   "success_send": "Сообщение успешно отправлено",
   "error_send": "Попробуйте снова",
-  "send": "Отправить"
+  "send": "Отправить",
+  "news": "Новости",
+  "search": "Поиск",
+  "no_news_found": "Новости не найдены",
+  "try_different_search": "Попробуйте другой поиск",
+  "view_all_news": "Все новости",
+  "latest_news": "Последние новости",
+  "share": "Поделиться",
+  "facebook": "Facebook",
+  "twitter": "Twitter",
+  "whatsapp": "WhatsApp",
+  "telegram": "Telegram"
 }

@@ -36,5 +36,16 @@
   "enter_name": "Enter your name",
   "success_send": "Message sent successfully",
   "error_send": "Try again",
-  "send": "Send"
+  "send": "Send",
+  "news": "News",
+  "search": "Search",
+  "no_news_found": "News not found",
+  "try_different_search": "Try a different search",
+  "view_all_news": "View all news",
+  "latest_news": "Latest news",
+  "share": "Share",
+  "facebook": "Facebook",
+  "twitter": "Twitter",
+  "whatsapp": "WhatsApp",
+  "telegram": "Telegram"
 }

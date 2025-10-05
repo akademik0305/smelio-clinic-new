@@ -20,6 +20,13 @@ export type TEmployee = {
 	imageUrl: string;
 };
 
+export type TNews = {
+	id: number;
+	title: string;
+	content: string;
+	imageUrl: string;
+};
+
 export type TEmployees = {
 	data: TEmployee[];
 };

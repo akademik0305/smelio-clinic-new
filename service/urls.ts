@@ -45,4 +45,16 @@ export default {
 	getContactInfo() {
 		return `/data/contact-us`;
 	},
+	// news
+	getNews(search?: string) {
+		return `/news/all${search ? `?searchKey=${search}` : ""}`;
+	},
+	// news detail
+	getNewsDetail(id: string) {
+		return `/news/detail?id=${id}`;
+	},
+	// Latest news
+	getLatestNews() {
+		return `/news/latest-news`;
+	},
 };

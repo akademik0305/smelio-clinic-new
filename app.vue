@@ -15,11 +15,11 @@ const defaultDescription = "Smelio Clinic rasmiy sayti. Sifatli tibbiy xizmatlar
 const defaultImage = "https://www.smelioclinic.uz/og-image.jpg";
 
 // --- SSR orqali ma’lumot yuklash ---
-const { data: metaData, error: metaError } = await useAsyncData("metaData", async () => {
+const { data: metaData} = await useAsyncData("metaData", async () => {
   return await Service.get(urls.getMetaData(), locale.value, token.value);
 });
 
-const { data: settings, error: settingsError } = await useAsyncData("settings", async () => {
+const { data: settings } = await useAsyncData("settings", async () => {
   return await Service.get(urls.getSettings(), locale.value, token.value);
 });
 

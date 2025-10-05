@@ -36,5 +36,16 @@
   "enter_name": "Ismni kiriting",
   "success_send": "Xabaringiz muvaffaqqiyali yuborildi",
   "error_send": "Qayta urinib ko'ring",
-  "send": "Yuborish"
+  "send": "Yuborish",
+  "news": "Yangiliklar",
+  "search": "Qidirish",
+  "no_news_found": "Yangiliklar topilmadi",
+  "try_different_search": "Boshqa qidiruvni urinib ko'ring",
+  "view_all_news": "Barcha yangiliklarni ko'rish",
+  "latest_news": "Eng yangiliklar",
+  "share": "Ulashish",
+  "facebook": "Facebook",
+  "twitter": "Twitter",
+  "whatsapp": "WhatsApp",
+  "telegram": "Telegram"
 }
