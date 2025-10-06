@@ -28,23 +28,23 @@ colorMode.preference = "light";
 if (!authStore.user) token.value = null;
 
 // --- Dinamik SEO meta ---
-useSeoMeta({
-  title: () => metaData.value?.data?.title || defaultTitle,
-  description: () => metaData.value?.data?.description || defaultDescription,
-  keywords: () => metaData.value?.data?.keywords || "klinik, tibbiyot, shifokor",
-  robots: "index, follow",
+// useSeoMeta({
+//   title: () => metaData.value?.data?.title || defaultTitle,
+//   description: () => metaData.value?.data?.description || defaultDescription,
+//   keywords: () => metaData.value?.data?.keywords || "klinik, tibbiyot, shifokor",
+//   robots: "index, follow",
 
-  ogTitle: () => metaData.value?.data?.title || defaultTitle,
-  ogDescription: () => metaData.value?.data?.description || defaultDescription,
-  ogType: "website",
-  ogUrl: () => `https://www.smelioclinic.uz${route.fullPath}`,
-  ogImage: () => metaData.value?.data?.imageUrl || defaultImage,
+//   ogTitle: () => metaData.value?.data?.title || defaultTitle,
+//   ogDescription: () => metaData.value?.data?.description || defaultDescription,
+//   ogType: "website",
+//   ogUrl: () => `https://www.smelioclinic.uz${route.fullPath}`,
+//   ogImage: () => metaData.value?.data?.imageUrl || defaultImage,
 
-  twitterCard: "summary_large_image",
-  twitterTitle: () => metaData.value?.data?.title || defaultTitle,
-  twitterDescription: () => metaData.value?.data?.description || defaultDescription,
-  twitterImage: () => settings.value?.data?.imageUrl || defaultImage,
-});
+//   twitterCard: "summary_large_image",
+//   twitterTitle: () => metaData.value?.data?.title || defaultTitle,
+//   twitterDescription: () => metaData.value?.data?.description || defaultDescription,
+//   twitterImage: () => settings.value?.data?.imageUrl || defaultImage,
+// });
 
 const ogImages = {
   uz: '/screenshots/home-uz.png',
