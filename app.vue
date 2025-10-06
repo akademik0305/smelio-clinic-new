@@ -68,9 +68,6 @@ useSeoMeta({
   twitterDescription: () => t('seo.description'),
   twitterImage: () => ogImages[locale.value] || ogImages['uz']
 })
-useHead({
-})
-
 
 useHead({
   meta: [

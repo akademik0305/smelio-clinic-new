@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     preference: 'light'
   },
 
-  ssr: true,
+  ssr: false,
 
   runtimeConfig: {
     public: {
