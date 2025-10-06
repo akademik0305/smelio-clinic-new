@@ -9,19 +9,15 @@ const route = useRoute();
 const authStore = useAuthStore();
 const colorMode = useColorMode();
 
-// --- SEO meta defaults ---
-const defaultTitle = "Smelio Clinic - Tibbiy xizmatlar";
-const defaultDescription = "Smelio Clinic rasmiy sayti. Sifatli tibbiy xizmatlar va mutaxassis shifokorlar.";
-const defaultImage = "https://www.smelioclinic.uz/og-image.jpg";
 
 // --- SSR orqali ma’lumot yuklash ---
-const { data: metaData} = await useAsyncData("metaData", async () => {
-  return await Service.get(urls.getMetaData(), locale.value, token.value);
-});
+// const { data: metaData} = await useAsyncData("metaData", async () => {
+//   return await Service.get(urls.getMetaData(), locale.value, token.value);
+// });
 
-const { data: settings } = await useAsyncData("settings", async () => {
-  return await Service.get(urls.getSettings(), locale.value, token.value);
-});
+// const { data: settings } = await useAsyncData("settings", async () => {
+//   return await Service.get(urls.getSettings(), locale.value, token.value);
+// });
 
 // --- Color mode ---
 colorMode.preference = "light";
@@ -86,7 +82,7 @@ useHead({
   ],
   link: [
     { rel: 'icon', href: '/favicon_io/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
-    { rel: 'alternate', hreflang: 'uz', href: 'https://www.smelioclinic.uz/uz/' },
+    { rel: 'alternate', hreflang: 'uz', href: 'https://www.smelioclinic.uz/' },
     { rel: 'alternate', hreflang: 'ru', href: 'https://www.smelioclinic.uz/ru/' },
     { rel: 'alternate', hreflang: 'en', href: 'https://www.smelioclinic.uz/en/' },
     { rel: 'alternate', hreflang: 'x-default', href: 'https://www.smelioclinic.uz/' },
