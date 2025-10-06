@@ -16,6 +16,47 @@ export default defineNuxtConfig({
     },
   },
 
+  app: {
+    head: {
+      title: 'Smelio Clinic - Tibbiy xizmatlar',
+      htmlAttrs: {
+        lang: 'uz',
+      },
+      meta: [
+        // General SEO
+        { name: 'description', content: 'Smelio Clinic rasmiy sayti. Sifatli tibbiy xizmatlar va mutaxassis shifokorlar.' },
+        { name: 'keywords', content: 'klinik, tibbiyot, shifokor' },
+        { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
+
+        // Open Graph
+        { property: 'og:title', content: 'Smelio Clinic - Tibbiy xizmatlar' },
+        { property: 'og:description', content: 'Smelio Clinic rasmiy sayti. Sifatli tibbiy xizmatlar va mutaxassis shifokorlar.' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: 'https://www.smelioclinic.uz/' },
+        { property: 'og:image', content: '/screenshots/home-uz.png' },
+
+        // Twitter
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: 'Smelio Clinic - Tibbiy xizmatlar' },
+        { name: 'twitter:description', content: 'Smelio Clinic rasmiy sayti. Sifatli tibbiy xizmatlar va mutaxassis shifokorlar.' },
+        { name: 'twitter:image', content: '/screenshots/home-uz.png' },
+      ],
+      link: [
+        // Favicon
+        { rel: 'icon', type: 'image/png', href: '/favicon_io/favicon-16x16.png', sizes: '16x16' },
+
+        // Alternate hreflangs
+        { rel: 'alternate', hreflang: 'uz', href: 'https://www.smelioclinic.uz/' },
+        { rel: 'alternate', hreflang: 'ru', href: 'https://www.smelioclinic.uz/ru/' },
+        { rel: 'alternate', hreflang: 'en', href: 'https://www.smelioclinic.uz/en/' },
+        { rel: 'alternate', hreflang: 'x-default', href: 'https://www.smelioclinic.uz/' },
+
+        // Canonical
+        { rel: 'canonical', href: 'https://www.smelioclinic.uz/' },
+      ],
+    },
+  },
+
   modules: [
     '@nuxt/eslint',
     '@nuxt/fonts',

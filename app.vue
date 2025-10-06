@@ -42,51 +42,6 @@ if (!authStore.user) token.value = null;
 //   twitterImage: () => settings.value?.data?.imageUrl || defaultImage,
 // });
 
-const ogImages = {
-  uz: '/screenshots/home-uz.png',
-  ru: '/screenshots/home-ru.png',
-  en: '/screenshots/home-en.png'
-}
-
-useHead({
-  title: () => t('seo.title'),
-  meta: [
-    // General SEO
-    { name: 'description', content: t('seo.description') },
-    { name: 'keywords', content: t('seo.keywords') },
-    { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
-
-    // Open Graph
-    { property: 'og:title', content: t('seo.title') },
-    { property: 'og:description', content: t('seo.description') },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:url', content: `https://www.smelioclinic.uz${route.fullPath}` },
-    { property: 'og:image', content: ogImages[locale.value] || ogImages['uz'] },
-
-    // Twitter
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: t('seo.title') },
-    { name: 'twitter:description', content: t('seo.description') },
-    { name: 'twitter:image', content: ogImages[locale.value] || ogImages['uz'] },
-  ],
-  link: [
-    // Favicon
-    { rel: 'icon', href: '/favicon_io/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
-
-    // Alternate hreflangs
-    { rel: 'alternate', hreflang: 'uz', href: 'https://www.smelioclinic.uz/' },
-    { rel: 'alternate', hreflang: 'ru', href: 'https://www.smelioclinic.uz/ru/' },
-    { rel: 'alternate', hreflang: 'en', href: 'https://www.smelioclinic.uz/en/' },
-    { rel: 'alternate', hreflang: 'x-default', href: 'https://www.smelioclinic.uz/' },
-
-    // Canonical
-    { rel: 'canonical', href: `https://www.smelioclinic.uz${route.fullPath}` },
-  ],
-  htmlAttrs: {
-    lang: locale.value,
-  },
-})
-
 </script>
 
 <template>
