@@ -47,5 +47,10 @@
   "facebook": "Facebook",
   "twitter": "Twitter",
   "whatsapp": "WhatsApp",
-  "telegram": "Telegram"
+  "telegram": "Telegram",
+  "seo": {
+    "title": "Smelio Clinic - Tibbiy xizmatlar",
+    "description": "Smelio Clinic rasmiy sayti. Sifatli tibbiy xizmatlar va mutaxassis shifokorlar.",
+    "keywords": "klinik, tibbiyot, shifokor"
+  }
 }

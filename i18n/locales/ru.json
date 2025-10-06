@@ -47,5 +47,10 @@
   "facebook": "Facebook",
   "twitter": "Twitter",
   "whatsapp": "WhatsApp",
-  "telegram": "Telegram"
+  "telegram": "Telegram",
+  "seo": {
+    "title": "Smelio Clinic - Медицинские услуги",
+    "description": "Официальный сайт Smelio Clinic. Качественные медицинские услуги и опытные врачи.",
+    "keywords": "клиника, медицина, врач"
+  }
 }

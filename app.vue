@@ -3,7 +3,7 @@ import { useAuthStore } from "./store/auth.store";
 import Service from "~/service/Service";
 import urls from "~/service/urls";
 
-const { locale } = useI18n();
+const { locale , t } = useI18n();
 const token = useToken();
 const route = useRoute();
 const authStore = useAuthStore();
@@ -45,6 +45,58 @@ useSeoMeta({
   twitterDescription: () => metaData.value?.data?.description || defaultDescription,
   twitterImage: () => settings.value?.data?.imageUrl || defaultImage,
 });
+
+const ogImages = {
+  uz: '/screenshots/home-uz.png',
+  ru: '/screenshots/home-ru.png',
+  en: '/screenshots/home-en.png'
+}
+
+useSeoMeta({
+  // General
+  title: () => t('seo.title'),
+  description: () => t('seo.description'),
+  keywords: () => t('seo.keywords'),
+  robots: 'index, follow',
+
+  // Open Graph
+  ogTitle: () => t('seo.title'),
+  ogDescription: () => t('seo.description'),
+  ogType: 'website',
+  ogUrl: () => `https://www.smelioclinic.uz${route.fullPath}`,
+  ogImage: () => ogImages[locale.value] || ogImages['uz'],
+
+  // Twitter
+  twitterCard: 'summary_large_image',
+  twitterTitle: () => t('seo.title'),
+  twitterDescription: () => t('seo.description'),
+  twitterImage: () => ogImages[locale.value] || ogImages['uz']
+})
+useHead({
+})
+
+
+useHead({
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    {
+      name: 'robots',
+      content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'
+    },
+  ],
+  link: [
+    { rel: 'icon', href: '/favicon_io/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+    { rel: 'alternate', hreflang: 'uz', href: 'https://www.smelioclinic.uz/uz/' },
+    { rel: 'alternate', hreflang: 'ru', href: 'https://www.smelioclinic.uz/ru/' },
+    { rel: 'alternate', hreflang: 'en', href: 'https://www.smelioclinic.uz/en/' },
+    { rel: 'alternate', hreflang: 'x-default', href: 'https://www.smelioclinic.uz/' },
+    { rel: 'canonical', href: `https://smelioclinic.uz` },
+  ],
+  htmlAttrs: {
+    lang: 'uz'
+  },
+  
+})
 </script>
 
 <template>
