@@ -18,28 +18,28 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Smelio Clinic - Tibbiy xizmatlar',
+      title: 'Smelio Clinic — sizning sog‘lom tabassumingiz kafolati.',
       htmlAttrs: {
         lang: 'uz',
       },
       meta: [
         // General SEO
-        { name: 'description', content: 'Smelio Clinic rasmiy sayti. Sifatli tibbiy xizmatlar va mutaxassis shifokorlar.' },
-        { name: 'keywords', content: 'klinik, tibbiyot, shifokor' },
+        { name: 'description', content: 'Smelio Clinic — sizning sog‘lom tabassumingiz kafolati. Zamonaviy uskunalar va yuqori malakali shifokorlar jamoasi bilan xizmat ko‘rsatamiz. Klinikamizda tish davolash, oqartirish, implantatsiya va estetik xizmatlar mavjud.' },
+        { name: 'keywords', content: 'smelio, dental, clinic, fergana, Farg\'ona, Implant, best dental, stomatologiga, uzbekistan, plomba, tish, oqartirish' },
         { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' },
 
         // Open Graph
-        { property: 'og:title', content: 'Smelio Clinic - Tibbiy xizmatlar' },
-        { property: 'og:description', content: 'Smelio Clinic rasmiy sayti. Sifatli tibbiy xizmatlar va mutaxassis shifokorlar.' },
+        { property: 'og:title', content: 'Smelio Clinic — sizning sog‘lom tabassumingiz kafolati.' },
+        { property: 'og:description', content: 'Smelio Clinic — sizning sog‘lom tabassumingiz kafolati. Zamonaviy uskunalar va yuqori malakali shifokorlar jamoasi bilan xizmat ko‘rsatamiz. Klinikamizda tish davolash, oqartirish, implantatsiya va estetik xizmatlar mavjud.' },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://www.smelioclinic.uz/' },
-        { property: 'og:image', content: '/screenshots/home-uz.png' },
+        { property: 'og:image', content: '/screenshots/main.jpg' },
 
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'Smelio Clinic - Tibbiy xizmatlar' },
-        { name: 'twitter:description', content: 'Smelio Clinic rasmiy sayti. Sifatli tibbiy xizmatlar va mutaxassis shifokorlar.' },
-        { name: 'twitter:image', content: '/screenshots/home-uz.png' },
+        { name: 'twitter:title', content: 'Smelio Clinic — sizning sog‘lom tabassumingiz kafolati.' },
+        { name: 'twitter:description', content: 'Smelio Clinic — sizning sog‘lom tabassumingiz kafolati. Zamonaviy uskunalar va yuqori malakali shifokorlar jamoasi bilan xizmat ko‘rsatamiz. Klinikamizda tish davolash, oqartirish, implantatsiya va estetik xizmatlar mavjud.' },
+        { name: 'twitter:image', content: '/screenshots/main.jpg' },
       ],
       link: [
         // Favicon
