@@ -33,13 +33,13 @@ export default defineNuxtConfig({
         { property: 'og:description', content: 'Smelio Clinic — sizning sog‘lom tabassumingiz kafolati. Zamonaviy uskunalar va yuqori malakali shifokorlar jamoasi bilan xizmat ko‘rsatamiz. Klinikamizda tish davolash, oqartirish, implantatsiya va estetik xizmatlar mavjud.' },
         { property: 'og:type', content: 'website' },
         { property: 'og:url', content: 'https://www.smelioclinic.uz/' },
-        { property: 'og:image', content: '/screenshots/main.jpg' },
+        { property: 'og:image', content: '/screenshots/logo.jpg' },
 
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:title', content: 'Smelio Clinic — sizning sog‘lom tabassumingiz kafolati.' },
         { name: 'twitter:description', content: 'Smelio Clinic — sizning sog‘lom tabassumingiz kafolati. Zamonaviy uskunalar va yuqori malakali shifokorlar jamoasi bilan xizmat ko‘rsatamiz. Klinikamizda tish davolash, oqartirish, implantatsiya va estetik xizmatlar mavjud.' },
-        { name: 'twitter:image', content: '/screenshots/main.jpg' },
+        { name: 'twitter:image', content: '/screenshots/logo.jpg' },
       ],
       link: [
         // Favicon
